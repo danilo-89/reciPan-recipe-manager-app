@@ -1,0 +1,7 @@
+<template name="uploadFormProfile">
+  {{#with currentUpload}} Uploading <b>{{file.name}}</b>:
+  <span id="progress">{{progress.get}}%</span>
+  {{else}}
+  <input class="custom-file-input custom-file-input-1" id="fileInput" type="file" />
+  {{/with}}
+</template>

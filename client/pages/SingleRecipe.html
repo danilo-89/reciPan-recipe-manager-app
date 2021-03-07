@@ -1,0 +1,244 @@
+<template name="modalShareRecipe">
+    {{#modalBlock title=title}}
+        <div class="modal-body">
+            <!-- {{#each files}}
+                {{ name }} –– {{ date}}
+            {{/each}}
+            "AAAAAsfsfdsfdsfssssssssssssssss" -->
+            <p class="p-share-text mb10">Show Awesome pie recipe to your friends on reciPan app</p>
+            <div class="xy-center-flex mb20">
+                <input class="customInput share-in-app-input w-100" id="friendUsernameInput" type="text" placeholder="your friend's user name">
+                <div class="share-in-app-btn"><i class="fas fa-share"></i></div>
+            </div>
+            <hr class="mb15">
+            <p class="p-share-text mb10">...or share it on other apps and networks</p>
+            <div class="soc-share-container xy-center-flex">
+                <!-- {{#each files}}
+                {{link}}
+                {{/each}} -->
+                
+            <!-- {{#each files}}
+                {{ linkit }}
+                {{ name }} –– {{ date}}
+                {{ linkit }}
+            {{/each}} -->
+            {{#each files}}
+
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{linkit}}" target="_blank" class="soc-share-btn soc-fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="viber://forward?text={{linkit}}" target="_blank" class="soc-share-btn soc-viber"><i class="fab fa-viber"></i></a>
+                <a href="whatsapp://send?text={{linkit}}" target="_blank" class="soc-share-btn soc-wapp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.pinterest.com/pin/create/button?url={{linkit}}" target="_blank" class="soc-share-btn soc-pin"><i class="fab fa-pinterest-p"></i></a>
+                <a href="https://twitter.com/intent/tweet?url={{linkit}}" target="_blank" class="soc-share-btn soc-twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?url={{linkit}}" target="_blank" class="soc-share-btn soc-linkd"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:?&subject=&body={{linkit}}" target="_blank" class="soc-share-btn soc-mail"><i class="fas fa-at"></i></a>
+                <div class="soc-share-btn soc-link"><i class="fas fa-link"></i></div>
+                <input class="resetinput w-100" type="text" name="" id="addressLinkInput" value="{{linkit}}" readonly>
+            {{/each}}
+
+            </div>
+            
+        </div>
+    {{/modalBlock}}
+</template>
+
+<template name="SingleRecipe">
+    
+    <!-- {{> templateModal}} -->
+
+
+
+    
+
+
+
+    {{#if Template.subscriptionsReady}}
+
+        {{#if getSingleRecipe}}
+
+        {{> modal}}
+
+            <!-- quickForm is part of autoform package -->
+            <!-- Single -->
+        <div class="wrapper bg-color-white-1 h-100">
+            <div class="single-recipe-container back-default">
+
+                {{ #with getSingleRecipe }}
+
+                    <div class="swiper-container single-recipe-swiper-container" id="singleRecipeSwiperContainer">
+                        <div class="width-standard h-100 no-select">
+
+                            <p class="back-btn back-btn-1"><i class="fas fa-arrow-left"></i></p>
+
+                            <div class="single-recipe-settings"><i class="fas fa-ellipsis-h"></i>
+                                <div class="single-recipe-settings-menu color-gray">
+                                    <ul>
+                                        <!-- <li class=""><span class="span-1"><i class="far fa-calendar-alt"></i></span><span class="span-2">Plan</span></li> -->
+                                        <li class="share-recipe-btn"><span class="span-1"><i class="fas fa-share-alt"></i></span><span class="span-2">Share</span></li>
+                                        {{ #if isEqual owner currentUser._id}}
+                                        <li class="edit-recipe-btn"><span class="span-1"><i class="fas fa-edit"></i></span><span class="span-2">Edit</span></li>
+                                        <li class="delete-recipe-btn"><span class="span-1"><i class="far fa-trash-alt"></i></span><span class="span-2">Delete</span></li>
+                                        {{ /if }}
+                                        <li class=""><span class="span-1"><i class="far fa-flag"></i></span><span class="span-2">Report</span></li>
+                                    </ul>
+                                </div>
+                            </div>        
+                        </div>
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            {{#each images}}
+                            <div class="swiper-slide" style="background-image: url('{{this}}');">
+                                <!-- <img src="{{this}}" alt=""> -->
+                                <!-- <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> -->
+                            </div>
+                            {{/each}}
+                        </div>
+                        <!-- If we need pagination -->
+                        <!-- <div class="swiper-pagination"></div> -->
+                    
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev ml5"><i class="fas fa-chevron-circle-left"></i></div>
+                        <div class="swiper-button-next mr5"><i class="fas fa-chevron-circle-right"></i></div>
+                    
+                        <!-- If we need scrollbar -->
+                        <!-- <div class="swiper-scrollbar"></div> -->
+                    
+                    <div class="width-standard h-100">
+                        {{ #if time }}
+                        <p class="single-recipe-time"><i class="far fa-clock"></i>{{getTime time}}</p>
+                        {{ /if }}
+                        <p class="single-recipe-fav">
+                            {{#if getIfFav}}
+                            <span><i class="fas fa-heart color-orange"></i></span>
+                            {{else}}
+                            <span><i class="far fa-heart"></i></span>
+                            {{/if}}
+                            <!-- <div class="{{#if getIfFav}}color-blue{{else}}color-orange{{/if}}">test</div>
+                            <i class="{{#if getIfFav}}fas fa-heart color-orange{{else}}far fa-heart{{/if}}"></i>  -->
+                        </p>  
+                    </div>
+                </div>
+
+                <div class="width-default mx-auto bg-color-white">
+                    <div class="single-recipe-inside">
+                        
+                            <h3 class="single-recipe-title">{{name}}</h3>                
+                            <p class="single-recipe-category go">{{category}}</p>
+                            <!-- <p>{{username.profile.name}}</p>
+                            <p>Author: {{username}}</p>
+                            <p>{{owner}}</p> -->
+                            <!-- <div>{{ getAvg }}</div> -->
+
+                            <hr class="mb10">
+                            <div class="width-standard sr-sub-title-container no-select mb3">
+
+                                <p class="single-recipe-author color-gray">author: <span class="color-blue userNameLink go">{{username}}</span>
+                                    {{ #if private }}
+                                    <span class="color-gray"><i class="fas fa-user-secret"></i></span>
+                                    {{ /if }}
+                                </p>
+                                        
+                                <div class="stars-wrapper">
+                                    {{ #if getAvg }}
+                                    <span class="star-raters-count">({{getAvg.[1]}})</span>
+                                    {{ /if }}
+                                    <p data-star="5" class="p-star {{ checkStar (mathRound getAvg.[0]) 5 }}"><i class="fas fa-star"></i></p>
+                                    <p data-star="4" class="p-star {{ checkStar (mathRound getAvg.[0]) 4 }}"><i class="fas fa-star"></i></p>
+                                    <p data-star="3" class="p-star {{ checkStar (mathRound getAvg.[0]) 3 }}"><i class="fas fa-star"></i></p>
+                                    <p data-star="2" class="p-star {{ checkStar (mathRound getAvg.[0]) 2 }}"><i class="fas fa-star"></i></p>
+                                    <p data-star="1" class="p-star {{ checkStar (mathRound getAvg.[0]) 1 }}"><i class="fas fa-star"></i></p>
+                                    {{ #if getAvg }}
+                                    <span>{{roundTo1 getAvg.[0]}}</span>
+                                    {{ /if }}
+                                </div>
+                            </div>
+
+                            <p class="color-gray">posted: <span class="color-jet">{{formatDateWithoutTime createdAt}}</span></p>
+
+
+                            <!-- <div class="traderMy-swiper-wrapper">
+                                <div class="picture-swiper-web">
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            {{#each images}}
+                                            <div class="swiper-slide">
+                                                <img src="{{this}}" alt="">
+                                            </div>
+                                            {{/each}}
+
+                                        </div>
+                
+                                        <div class="swiper-scrollbar"></div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <hr class="mb10">
+                        <div id="sRInfo" class="href-effect">
+                            <div class="mb15 p15 single-recipe-description">{{description}}</div>
+                        </div>
+                        <div id="sRDirections" class="href-effect">
+                            {{ #each directions }}
+                            <div class="single-recipe-directions">
+                                <p><span class="directions-span-num">{{ increaseByOne @index }}</span> {{ this }}</p>
+                            </div>
+                            {{ /each }}
+                        </div>
+                        <div id="sRIngridients" class="href-effect">
+                            <div class="single-ingridients-list-container mb15">
+                                {{ #each ingridients }}
+                                <p class="single-ingridients-list">
+                                    <label class="check-custom-1">
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                        <p class="checkbox-text"><strong>{{ this.[1] }}</strong><span class="ml7">{{ this.[0] }}</span></p>
+                                    </label>
+                                </p>
+                                {{ /each }}
+                                <div class="d-flex space-center mx-auto">
+                                    <button class="btn btn-custom btn-custom-add fs-16px" id="addToShoplistBtn" type="button">Add to shoplist</button>
+                                    <input class="sr-input-multi" type="number" min="1" max="99" name="" id="multiplierInput" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        {{#if video}}
+                        <div id="sRVideo" class="sr-video-wrapper href-effect">
+                            <iframe width="420" height="345" src="{{video}}" allowfullscreen="true">
+                            </iframe>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+
+
+                {{ /with }}
+                
+            </div>
+        </div>
+    
+
+
+  
+
+        {{else}}
+        <img class="svg-holder-img-1 mx-auto mt20" src="/chef4.svg" alt="chef apologises">
+        <p class="mx-auto text-center holder-p-1">Sorry, this recipe either doesn't exist or it's private and you are not allowed to see it.</p>
+        <a href="">Go back or to Home page</a>
+        {{/if}}
+
+    {{else}}
+    
+    <div style="height: 100%;
+    height: calc(100% - 50px);
+    width: 100%;
+    background-image: linear-gradient(to right bottom, #fe7f2d, #ff8e24, #ff9d1a, #ffac0d, #ffbb00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;">
+        {{> loadingSecond}}
+    </div>
+
+    {{/if}}
+
+</template>

@@ -1,0 +1,44 @@
+<template name="inbox">
+
+{{#if isReady}}
+
+<div class="wrapper h-100">
+
+    <div class="container pt15">
+
+        <div class="">
+
+            <div class="inbox-cards-container">
+                
+                {{#each getInboxRecipes}}
+                <div class="inbox-card-wrapper">
+                    <div class="inbox-card">
+                        <div class="inbox-card-top">
+                            <span class="inbox-card-top-user go">{{sentByName}}</span>
+                            <span class="inbox-card-top-date">{{formatDateWithTime createdAt}}</span>
+                        </div>
+                        <div class="inbox-card-bottom break-long">shared "{{recipeName}}" recipe with you</div>
+                    </div>
+                </div>
+                {{/each}}
+                
+
+            </div>
+
+            <!-- {{#each getInboxRecipes}}
+
+
+            <div>{{recipeId}}</div>
+            <div>{{sentBy}}</div>
+            <div>{{sentByName}}</div>
+            <div>{{dateSent}}</div>
+            {{/each}} -->
+        </div>
+            
+    </div>
+</div>
+
+
+
+{{/if}}
+</template>

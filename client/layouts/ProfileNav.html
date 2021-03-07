@@ -1,0 +1,18 @@
+<template name="ProfileNav">
+    <nav class="profile-navigation mx-auto no-select">
+        <ul class="main-navigation-ul profile-navigation-ul mx-auto">
+            <a class="profile-nav profile-nav-info {{isActiveRoute 'profile'}}">
+               <span style="border-right: none;">Info</span> 
+            </a>
+            <!-- <a class="profile-nav">
+                Recipes
+            </a> -->
+            <a class="profile-nav profile-nav-inbox {{#if isReady}}{{#if getInboxNotice}}notice{{/if}}{{/if}} {{isActiveRoute 'inbox'}}">
+                <span><span>Inbox</span></span>
+            </a>
+            <!-- <a class="profile-nav">
+                Favs
+            </a> -->
+        </ul>
+    </nav>
+</template>

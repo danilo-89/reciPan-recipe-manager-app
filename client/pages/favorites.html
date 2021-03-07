@@ -1,0 +1,86 @@
+<template name="Favorites">
+
+
+    <div class="wrapper">
+        <div class="home-header-container xy-center-flex">
+            <div class="home-header-wrapper width-default">
+                <div class="d-flex space-between mx-auto pl10 pr10">
+                    <!-- <input class="home-header-search" type="text"> -->
+                        <span class="home-top-btn"><i class="far fa-arrow-alt-circle-up"></i></span>
+                        <span class="home-header-btn home-search-btn">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="broccoli soup pepper" class="home-header-search">
+                        </span>
+                        <span class="home-header-btn home-fav-btn"><i class="fas fa-heart"></i></span>
+                </div>
+            </div>            
+        </div>
+        <div class="behind-search-header">
+            <div class="orange-header-ribbon">
+                <img class="home-logo-img" src="/logo-simple.svg" alt="reciPan logo">
+            </div>
+        </div>
+
+        <!-- {{#if Template.subscriptionsReady}} -->
+
+        <div class="new-recipe-container container">
+
+            
+            <div>favorites</div>
+            {{getUserFavoritesCount}}
+            <div>search</div>
+            {{getSearchCount}}
+            
+            {{#unless getSearchVal}}
+                {{#unless getSearchCount}}
+                <div>nothing in here</div>
+                {{/unless}}
+            {{/unless}}
+
+
+
+            <div class="home-recipes-container">
+                {{ #each getRecipes }}
+                    <div class="home-recipe-container-wrapper">
+                        <div class="home-recipe-container" style="background-image: url({{images}});">
+                            <div class="home-recipe-header">
+                                <span>{{getTime time}}</span>
+                                {{#if private}}
+                                <span>private recipe</span>
+                                {{/if}}
+                            </div>
+                            <!-- {{ #if private }}
+                            <p class="color-gray home-recipe-private"><i class="fas fa-user-secret"></i></p>
+                            {{ /if }} -->
+                            <div class="home-recipe-title">
+                                <p class="p-title">{{name}}</p>
+                                <div class="home-recipe-container-bottom">
+                                    <p class="home-recipe-category go">{{category}}</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+                    <!-- <img src="{{images}}" alt=""> -->
+                {{ /each }}
+                <div class="home-recipe-container-wrapper ghostFiller" >
+                    <div class="home-recipe-container">
+                        <h3 class="home-recipe-title"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- {{else}}
+
+            <div>loading</div>
+
+        {{/if}} -->
+
+    </div>
+
+
+
+</template>

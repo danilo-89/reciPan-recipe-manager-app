@@ -1,0 +1,46 @@
+<template name="profile">
+
+    
+    <div class="wrapper h-100 back-secondary">
+        <div class="container mv-576 info-profile-container">
+            {{#if isReady}}
+            <div class="xy-center-flex flex-column">
+                <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
+                {{#if currentUser}}
+                {{> uploadFormProfile}}
+                {{/if}}
+                
+                <div class="info-profile-name mt10">
+                    <span>{{> loginButtons}}</span>
+                    <!-- <span><i class="far fa-edit"></i></span> -->
+                </div>
+            </div>
+
+            <hr class="my15">
+            <div class="xy-center-flex space-around">
+                <div class="xy-center-flex flex-column profile-3-colums">
+                    <div>
+                        <p class="profile-3-colums-p">{{getUserRecipesCount}}</p>
+                        <p>recipes</p>
+                    </div>
+                </div>
+                <div class="xy-center-flex flex-column profile-3-colums">
+                    <div class="{{#if getFriendNotice}}friends-info-div{{/if}}">
+                        <p class="profile-3-colums-p friends-info-btn">{{getFriendsActiveCount}}</p>
+                        <p class="friends-info-btn">friends</p>
+                    </div>
+                </div>
+                <div class="xy-center-flex flex-column profile-3-colums">
+                    <div>
+                        <p class="profile-3-colums-p">{{getUserFavoritesCount}}</p>
+                        <p>favorites</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="my15">
+
+            {{/if}}
+        </div>
+    </div>
+
+</template>

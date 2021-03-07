@@ -1,0 +1,34 @@
+<template name="friendsActive">
+
+  {{> FriendshipTabs}}
+
+  {{#if Template.subscriptionsReady}}
+  <div class="wrapper h-100">
+    <div class="container pt25">  
+      <div class=""> 
+        <div class="user-cards-container">
+        
+          {{#each getFriends}}
+          <div class="user-card-wrapper">
+            <div class="user-card">
+              <div class="d-flex align-items-center">
+                <div class="user-card-profile-img my-auto" style="{{#if getFriendsAvatar this}}background-image: url('{{getFriendsAvatar this}}'){{/if}}"></div>
+              </div>
+              <div class="w-100 d-flex flex-column space-between p5">
+                <div>{{getFriendsNames this}}</div>
+                <div class="ml-auto">
+                  <button class="btn btn-custom remove-friend-btn">UNFRIEND</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  
+
+</template>

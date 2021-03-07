@@ -1,0 +1,40 @@
+<!-- <template name="templateModal">
+    <div class="custom-modal">
+
+    </div>
+</template> -->
+
+<!-- A template to include in index.html that dynamically renders the a modal template -->
+<template name="modal">
+    {{#if modalData}}
+        {{> Template.dynamic template=modalData.template data=modalData}}
+    {{/if}}
+</template>
+
+<!-- A generic block to be used by our modals -->
+<template name="modalBlock">
+    <div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title no-select" id="myModalLabel">{{ title }}</h4>
+                </div>
+                {{> Template.contentBlock }}
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- A specific modal template -->
+<!-- <template name="modal-backups">
+    {{#modalBlock title=title}}
+        <div class="modal-body">
+            {{#each files}}
+                {{ name }} –– {{ date}}
+            {{/each}}
+        </div>
+    {{/modalBlock}}
+</template> -->

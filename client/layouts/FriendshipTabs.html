@@ -1,0 +1,9 @@
+<template name="FriendshipTabs">
+
+    <div class="friendship-tabs-wrapper d-flex mx-auto mt20">
+        <a href="/friends" class="ftw-friends {{isActiveRoute regex='friends'}} {{#if Template.subscriptionsReady}}{{#if getFriendAcceptNotice}}notice{{/if}}{{/if}}">friends</a> 
+        <a href="/receivedFriendRequests" class="ftw-requests {{isActiveRoute regex='receivedFriendRequests'}} {{#if Template.subscriptionsReady}}{{#if getFriendRequestNotice}}notice{{/if}}{{/if}}">requested</a>
+        <a href="/sentFriendRequests" class="ftw-sent {{isActiveRoute regex='sentFriendRequests'}}">sent</a>
+    </div>
+
+</template>

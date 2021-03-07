@@ -1,0 +1,279 @@
+<template name="Home">
+
+
+    <div class="wrapper h-100">
+        <div class="home-header-container xy-center-flex">
+            <div class="home-header-wrapper width-default">
+                <div class="d-flex space-between mx-auto pl10 pr10">
+                    <!-- <input class="home-header-search" type="text"> -->
+                        <span class="home-top-btn">
+                            <i class="far fa-arrow-alt-circle-up"></i>
+                        </span>
+                        <!-- <span class="home-header-btn home-search-btn">
+                            <i class="fas fa-search btn-icon"></i>
+                            <input type="text" placeholder="broccoli soup pepper" class="home-header-search">
+                        </span> -->
+                        <span class="d-flex my-auto color-white no-select">Home</span>
+                        <span class="home-header-btn home-fav-btn {{#if getSearchVal}}hide{{/if}}"><i class="fas fa-heart"></i></span>
+                        <!-- <span class="icon-clear-search {{#if getSearchVal}}show{{/if}}"><i class="fas fa-times-circle"></i></span> -->
+                </div>
+            </div>
+        </div>
+        <div class="behind-search-header mb0">
+            <div class="orange-header-ribbon">
+                <img class="home-logo-img" src="/logo-simple.svg" alt="reciPan logo">
+            </div>
+        </div>
+
+        <!-- {{#if Template.subscriptionsReady}} -->
+
+        {{#if isReady}}
+
+        <!-- {{getSearchCount}} -->
+        {{#unless getSearchCount}}
+            {{#if getNoSearchResultes}}
+            <div class="helper-container text-center">
+                <p class="mb10">Your search term <b>{{getSearchVal}}</b> - didn't match any recipes.<br>Keep searhing.</p>
+                <img class="svg-helper mb10" src="chef3.svg" alt="">
+                <div class="btn-standard btn-clear-search"><span>Clear search</span></div>
+            </div>
+            {{/if}}
+        {{/unless}}
+
+        <div class="new-recipe-container container">
+
+            {{#with getRandomRecipe}}
+            <div class="random-recipe-container">
+                <div class="random-recipe-img no-select" style="background-image: url('{{images.[0]}}');">
+                    <p class="random-recipe-ribbon xy-center-flex">
+                        <i class="fas fa-sync-alt"></i>
+                        <!-- <span class="ml2">random recipe</span> -->
+                    </p>
+                    <div class="random-recipe-footer"></div>
+                </div>
+
+                <div class="random-recipe-bottom p15 py10">
+                    <p class="p-category go">{{category}}</p>
+                    <h2 class="h-title">{{name}}</h2>
+                    <p class="random-description">{{description}}</p>
+                    <div class="random-bottom-footer xy-center-flex space-between px15">
+                        <span class="color-blue go userNameLink">{{username}}</span>
+                        {{#if favorite}}
+                        <span>
+                            <i class="far fa-heart"></i><span class="ml3">{{favorite}}</span>
+                        </span>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{/with}}
+
+            {{#unless Template.subscriptionsReady}}
+
+            {{#if isScrollOn}}
+            <!-- <div>scrolling on....</div> -->
+            <div class="post-loader"></div>
+            {{else}}
+            <!-- <div>loading.......</div> -->
+            {{/if}}
+
+            {{/unless}}
+
+            <!-- {{favorites}}
+            <div>{{this._id}}</div> -->
+            <!-- {{getUserFavorites.dSYZs9MXDfPrYwje9}} -->
+
+
+
+
+
+<p class="section-title clearfix">
+    <span class="section-title-main">Newest recipes</span>
+    <!-- <span><a href="/search" class="section-title-view-all go">view all</a></span> -->
+</p>
+<!-- Slider main container -->
+<div class="swiper-container new-recipes-swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper no-select">
+        <!-- Slides -->
+        {{ #each getNewRecipes }}
+        <div class="swiper-slide">
+            <div class="home-new-recipe-container-wrapper">
+                <div class="home-recipe-container" style="background-image: url('{{images.[0]}}');">
+
+                    <!-- {{ #if private }}
+                    <p class="color-gray home-recipe-private"><i class="fas fa-user-secret"></i></p>
+                    {{ /if }} -->
+                    <div class="home-recipe-title">
+                        <p class="p-title">{{name}}</p>
+                        <div class="home-recipe-container-bottom"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{ /each }}
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+</div>
+
+
+<!-- <div class="home-quote-wrapper">
+    <p class="home-quote">
+    And nearer as they came, a genial savour
+    Of certain stews, and roast-meats, and pilaus,
+    Things which in hungry mortals' eyes find favour.
+    </p>
+    <p class="home-quote-author">Lord Byron, Don Juan</p>
+</div> -->
+
+
+
+
+<!-- 
+<p class="section-title categories-title clearfix">
+    <span class="section-title-main">Categories</span>
+    <span><a href="/categories" class="section-title-view-all go">view all</a></span>
+</p> -->
+<!-- Slider main container -->
+<!-- <div class="category-swiper swiper-container">
+
+    <div class="swiper-wrapper no-select">
+
+    <div class="swiper-slide"><span>Dressings and Sauces</span></div>
+    <div class="swiper-slide"><span>Appetizers</span></div>
+    <div class="swiper-slide"><span>Salads and Sandwiches</span></div>
+    <div class="swiper-slide"><span>Soups and Stews</span></div>
+    <div class="swiper-slide"><span>Vegetables</span></div>
+    <div class="swiper-slide"><span>Vegan</span></div>
+    <div class="swiper-slide"><span>Glutten Free</span></div>
+    <div class="swiper-slide"><span>Dairy Free</span></div>
+    <div class="swiper-slide"><span>Rice, Grains and Beans</span></div>
+    <div class="swiper-slide"><span>Pasta</span></div>
+    <div class="swiper-slide"><span>Eggs and Breakfast</span></div>
+    <div class="swiper-slide"><span>Meat</span></div>
+    <div class="swiper-slide"><span>Slow Cooker/Pressure Cooker</span></div>
+    <div class="swiper-slide"><span>Bread and Pizza</span></div>
+    <div class="swiper-slide"><span>Quick Breads and Muffins</span></div>
+    <div class="swiper-slide"><span>Cookies</span></div>
+    <div class="swiper-slide"><span>Brownies and Bars</span></div>
+    <div class="swiper-slide"><span>Cakes</span></div>
+    <div class="swiper-slide"><span>Pies</span></div>
+    <div class="swiper-slide"><span>Fruit Desserts</span></div>
+    <div class="swiper-slide"><span>Drinks</span></div>
+    <div class="swiper-slide"><span>Preserving</span></div>
+    <div class="swiper-slide"><span>Freezer Meals</span></div>
+    <div class="swiper-slide"><span>Food Storage</span></div>
+    <div class="swiper-slide"><span>Kids in the Kitchen</span></div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-scrollbar"></div>
+</div> -->
+
+
+            <p class="section-title clearfix">
+                <span class="section-title-main">Top Favorited Recepies</span>
+                <!-- <span><a href="/search" class="section-title-view-all go">view all</a></span> -->
+            </p>
+            <div class="home-recipes-container">
+                {{ #each getRecipes }}
+                    <div class="home-recipe-container-wrapper">
+                        <div class="home-recipe-container" style="background-image: url('{{images.[0]}}');">
+                            <div class="home-recipe-header">
+                                <span>{{getTime time}}</span>
+                                {{#if private}}
+                                <span>private recipe</span>
+                                {{else}}
+                                <span>
+                                    <i class="far fa-star"></i><span class="ml2">{{roundTo1 (getRaiting starRatingByUser)}}</span>
+                                    <!-- {{getUserFavorites.dSYZs9MXDfPrYwje9}} -->
+                                    <!-- {{#if getUserFavorites.[this._id]}} -->
+                                    <!-- <i class="far fa-heart"></i> -->
+                                    <span class="ml2">
+                                        {{#if checkPostFavorites getUserFavorites this._id}}
+                                        <span><i class="fas fa-heart"></i></span>
+                                        {{else}}
+                                        <span><i class="far fa-heart"></i></span>
+                                        {{/if}}
+                                        <span class="">{{favorite}}</span>
+                                    </span>
+                                </span>
+                                {{/if}}
+                            </div>
+                            <!-- {{ #if private }}
+                            <p class="color-gray home-recipe-private"><i class="fas fa-user-secret"></i></p>
+                            {{ /if }} -->
+                            <div class="home-recipe-title">
+                                <p class="p-title">{{name}}</p>
+                                <div class="home-recipe-container-bottom">
+                                    <p class="home-recipe-category go">{{category}}</p>
+                                    <hr class="mt0">
+                                    <div class="home-recipe-description">
+                                        <p class="p-description">{{description}}</p>
+                                    </div>    
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+                    <!-- <img src="{{images}}" alt=""> -->
+                {{ /each }}
+            </div>
+            
+
+        </div>
+
+        {{else}}
+
+        <div style="height: 100%;
+        height: calc(100% - 50px);
+        width: 100%;
+        background-image: linear-gradient(to right bottom, #fe7f2d, #ff8e24, #ff9d1a, #ffac0d, #ffbb00);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;">
+            {{> loading}}
+        </div>
+
+
+        {{/if}}
+        <!-- {{else}}
+
+            <div>loading</div>
+
+        {{/if}} -->
+
+        {{#unless Template.subscriptionsReady}}
+
+            {{#if isScrollOn}}
+            <!-- <div>scrolling on....</div> -->
+            <div class="post-loader"></div>
+            {{else}}
+            <!-- <div>loading.......</div> -->
+            {{/if}}
+
+        {{/unless}}
+        <!-- {{#if isScrollOn}}
+            {{#unless Template.subscriptionsReady}}
+            <div>scrolling on....</div>
+            {{/unless}}
+        {{/if}} -->
+
+
+    </div>
+
+
+
+</template>

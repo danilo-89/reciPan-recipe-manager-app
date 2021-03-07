@@ -1,0 +1,243 @@
+<template name="ShoppingList">
+
+        
+
+        <div class="wrapper h-100 back-secondary">
+                <div class="container mv-576 px15 pt15">
+                        {{#if getFullShopList}} 
+                        <div class="shop-list-card mx-auto">
+
+                                <div class="recipe-tasks-menu-wrapper {{#if recipeMainMenu}}active{{/if}}">
+                                        <div class="recipe-tasks-menu text-center">
+                                                <div class="recipe-tasks-menu-header">
+                                                        <i class="fas fa-cog"></i>
+                                                        <span class="ml2">Shoplist settings</span> 
+                                                </div>
+                                                <div class="recipe-tasks-menu-main">
+                                                        <div class="recipe-tasks-menu-item d-flex space-center align-items-center py8">
+                                                                Change shoplist view
+                                                                <label class="switch ml5" id="switchBtn">
+                                                                        <input type="checkbox" checked="{{#if getShoplistMode}}checked{{/if}}">
+                                                                        <span class="slider round"></span>
+                                                                </label>
+                                                        </div>
+                                                        <div class="recipe-tasks-menu-item" id="emptyShoplistBtn">Empty shoplist</div>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+
+                                <div class="shop-list-card-header">
+                                        <span>Shoplist</span>
+                                        <div class="shop-list-settings-btn" id="shopListSettingsBtn">
+                                                <i class="fas fa-ellipsis-h"></i>
+                                        </div>
+                                </div>
+                                <div class="shop-list-card-content">
+
+                                        {{#unless getShoplistMode}}
+                                        {{#with getFullShopList}}
+                                        <!-- <div class="swiper-container new-recipes-swiper-container">
+
+                                                <div class="swiper-wrapper no-select">
+
+                                                        {{#each recipes}}
+                                                        <a href="#recipe{{@index}}" class="swiper-slide">
+                                                                <div class="home-new-recipe-container-wrapper">
+                                                                        <div class="home-recipe-container" style="background-image: url({{this.cover}});">
+                                                                        <div class="home-recipe-title">
+                                                                                <p class="p-title">
+                                                                                        {{this.name}}
+                                                                                </p>
+                                                                                <div class="home-recipe-container-bottom"></div>
+                                                                        </div>
+
+                                                                        </div>
+                                                                </div>
+                                                        </a>
+                                                        {{ /each }}
+                                                </div>
+
+                                                <div class="swiper-pagination"></div>
+                                                
+                                                <div class="swiper-scrollbar"></div>
+                                        </div> -->
+
+                                                
+                                                        <!-- {{owner}} -->
+                                                        <div class="w-100 d-flex flex-column">
+                                                        {{#each recipes}}
+                                                        <div class="shop-list-each-recipe w-100 {{#if getCount getFullShopList.counter this.recId}}b-incomplete{{else}}b-complete{{/if}}">
+                                                                <div class="shop-list-each-recipe-header" id="recipe{{@index}}" style="{{#if getCount getFullShopList.counter this.recId}}background-image: linear-gradient(to top left, rgba(255, 213, 187, 0.7), rgba(168, 198, 81, .95) 75%), url({{this.cover}});{{else}}background-image: linear-gradient(to top left, rgba(255, 213, 187, 0.7), rgba(143, 143, 143, 0.95) 75%), url({{this.cover}});{{/if}}">
+                                                                        <div class="d-flex flex-column space-between w-100">
+                                                                                <span class="mb10">
+                                                                                        <strong class="shop-list-small-title text-shadow-2">{{this.name}}</strong>
+                                                                                </span>
+                                                                                
+                                                                                <span class="text-right mb2">
+                                                                                        <span class="shop-list-small-subtitle">
+                                                                                        {{#if getCount getFullShopList.counter this.recId}}
+                                                                                        unfinished: {{getCount getFullShopList.counter this.recId}}
+                                                                                        {{else}}
+                                                                                        all finished
+                                                                                        {{/if}}
+                                                                                        <!-- {{getUnfinished getFullShopList.entries this.recId}} -->
+                                                                                        </span>
+                                                                                </span>
+                                                                        </div>
+                                                                </div>
+                                                                
+                                                                <div class="recipe-tasks-menu-wrapper {{#if recipeTaskMenu this.recId}}active{{/if}}">
+                                                                        <div class="recipe-tasks-menu text-center">
+                                                                                <div class="recipe-tasks-menu-header">
+                                                                                        Edit <strong>{{this.name}}</strong>
+                                                                                </div>
+                                                                                <div class="recipe-tasks-menu-main">
+                                                                                        <div class="recipe-tasks-menu-item remove-finished-from-recipe-btn">Remove finished</div>
+                                                                                        <div class="recipe-tasks-menu-item remove-from-shoplist-btn">Remove from shoplist</div>
+                                                                                        <div class="recipe-tasks-menu-item go-to-recipe">View recipe</div>
+                                                                                </div>
+                                                                        </div>
+                                                                        
+                                                                </div>
+                                                                
+                                                                <br>
+                                                                
+                                                                <div class="d-flex flex-column px15">
+                                                                        {{#each (getForEachRecipe this.recId)}}
+                                                                        <!-- style="{{#if this.checked}}{{else}}{{/if}} -->
+                                                                        <div class="d-flex space-between">
+                                                                                <label class="check-custom-2">
+                                                                                        <input class="check-ingridient" type="checkbox" checked="{{#if this.checked}}checked{{/if}}">
+                                                                                        <span class="checkmark"></span>
+                                                                                        <p class="checkbox-text"><strong>{{ this.name }}</strong> {{ this.amount }}
+                                                                                        {{#if ifMulti this.multi}}
+                                                                                        <span class="span-multi">x {{this.multi}}</span>
+                                                                                        {{/if}}
+                                                                                </p>
+
+                                                                                </label>
+                                                                                <div>
+                                                                                        <span class="edit-task-ingridient text-center">
+                                                                                                <i class="far fa-edit"></i>
+                                                                                        </span>
+                                                                                        
+                                                                                </div>
+                                                                                <div class="recipe-tasks-menu-wrapper {{#if recipeItemMenu this.recipe this.name}}active{{/if}}">
+                                                                                        <div class="recipe-tasks-menu text-center">
+                                                                                                <div class="recipe-tasks-menu-header {{#if this.checked}}checked-item-task{{/if}}">
+                                                                                                        <span>Edit: </span>
+                                                                                                        <strong>{{this.name}}</strong>
+                                                                                                        {{this.amount}}
+                                                                                                        {{#if ifMulti this.multi}}
+                                                                                                        <span class="span-multi-1">x {{this.multi}}</span>
+                                                                                                        {{/if}}
+                                                                                                </div>
+                                                                                                <div class="recipe-tasks-menu-main">
+                                                                                                        <form class="recipe-tasks-menu-item multi-task-item">
+                                                                                                                <span>x</span>
+                                                                                                                <input class="increase-multi-input text-center" type="number" name="" min="1" max="99" value="{{getMultiCurrentValue}}">
+                                                                                                                <input class="multi-task-item-btn" type="submit" value="Update">
+                                                                                                        </form>
+                                                                                                        <div class="recipe-tasks-menu-item delete-task-item">Delete</div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        
+                                                                                </div>
+                                                                        </div>
+                                                                        {{/each}}
+                                                                </div>
+                                                        </div>
+                                                        {{/each}}
+                                                        </div>
+
+                                                {{/with}}
+                                                {{else}}
+
+                                                {{#with getShopList}}
+                                                        <!-- {{owner}} -->
+                                                        
+                                                        <div class="d-flex flex-column px15">
+
+                                                        {{#each this}}
+
+
+                                                        <div class="d-flex space-between" style="{{#if this.checked}}order: 99;{{else}}order: unset;{{/if}}">
+                                                                <label class="check-custom-2">
+                                                                        <input class="check-ingridient" type="checkbox" checked="{{#if this.checked}}checked{{/if}}">
+                                                                        <span class="checkmark"></span>
+                                                                        <p class="checkbox-text"><strong>{{ this.name }}</strong> {{ this.amount }}
+                                                                        {{#if ifMulti this.multi}}
+                                                                        <span class="span-multi">x {{this.multi}}</span>
+                                                                        {{/if}}
+                                                                </p>
+
+                                                                </label>
+                                                                <div>
+                                                                        <span class="edit-task-ingridient text-center">
+                                                                                <i class="far fa-edit"></i>
+                                                                        </span>
+                                                                        
+                                                                </div>
+                                                                <div class="recipe-tasks-menu-wrapper {{#if recipeItemMenu this.recipe this.name}}active{{/if}}">
+                                                                        <div class="recipe-tasks-menu text-center">
+                                                                                <div class="recipe-tasks-menu-header {{#if this.checked}}checked-item-task{{/if}}">
+                                                                                        <span>Edit: </span>
+                                                                                        <strong>{{this.name}}</strong>
+                                                                                        {{this.amount}}
+                                                                                        {{#if ifMulti this.multi}}
+                                                                                        <span class="span-multi-1">x {{this.multi}}</span>
+                                                                                        {{/if}}
+                                                                                </div>
+                                                                                <div class="recipe-tasks-menu-main">
+                                                                                        <form class="recipe-tasks-menu-item multi-task-item">
+                                                                                                <span>x</span>
+                                                                                                <input class="increase-multi-input text-center" type="number" name="" min="1" max="99" value="{{getMultiCurrentValue}}">
+                                                                                                <input class="multi-task-item-btn" type="submit" value="Update">
+                                                                                        </form>
+                                                                                        <div class="recipe-tasks-menu-item delete-task-item">Delete</div>
+                                                                                </div>
+                                                                        </div>
+                                                                        
+                                                                </div>
+                                                        </div>
+
+
+                                                        {{/each}}
+
+                                                        </div>
+
+                                                {{/with}}
+                                                {{/unless}}
+
+
+
+                                </div>
+
+
+
+
+
+                        </div>
+                {{else}}
+                <!-- NO RESULTS -->
+                
+                        <p class="mx-auto text-center holder-p-1 mb10">You currently have no entries in your shoplist. To add some, open any recipe and press "Add to shoplist" button</p>
+                <div class="d-flex pos-relative svg-holder-img-2 mx-auto">
+                        <!-- <img class="svg-helper svg-holder-img-2 d-block mx-auto animate-in-circle" src="chef5.svg" alt=""> -->
+                        <img class="svg-helper d-block svg-holder-img-2-pos animate-in-circle" src="chef5b.svg" alt="">
+                        <img class="svg-helper d-block mx-auto" src="chef5a.svg" alt="">
+
+                </div>
+                {{/if}}
+                </div>
+
+                <br>
+
+        </div>
+
+
+        <!-- shopping lista
+        <img src="chef1.svg" alt="">
+        <img src="chef2.svg" alt=""> -->
+</template>

@@ -1,0 +1,16 @@
+<template name="SecondaryNav">
+    <nav class="secondary-navigation mx-auto no-select">
+        <ul class="main-navigation-ul secondary-navigation-ul mx-auto">
+            <a class="sec-nav-left back-btn"><i class="fas fa-arrow-left"></i></a>
+            <a class="sec-nav-title">
+                {{#if isEqual whatRoute 'create-recipe'}}
+                Create new recipe
+                {{/if}}
+                {{#if isEqual whatRoute 'categories'}}
+                Categories
+                {{/if}}
+            </a>
+            <a class="sec-nav-right"></a>
+        </ul>
+    </nav>
+</template>

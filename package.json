@@ -1,0 +1,22 @@
+{
+  "name": "recepy",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.3.4",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "bcrypt": "^5.0.0",
+    "dropbox": "^4.0.30",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
+    "meteor-node-stubs": "^0.4.1",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
+  }
+}

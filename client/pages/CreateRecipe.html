@@ -1,0 +1,129 @@
+<template name="CreateRecipe">
+    <div class="wrapper">
+        <div class="create-recipe-container">
+            <form action="">
+
+
+                <label for="inputRecipeName">Recipe name*</label>
+                <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value="Awesome Pie">
+
+                <hr>
+
+                <label>Preparation time</label>
+                <div class="mb25 xy-center-flex">
+                    <input type="number" class="input-time customInput w-100" id="inputPrepTimeHours" name="inputPrepTimeHours" value="0" min="0" max="59">
+                    <span class="px10">h</span>
+                    <input type="number" class="input-time customInput w-100" id="inputPrepTimeMins" name="inputPrepTimeMins" value="0" min="0" max="59">
+                    <span class="px10">min</span>
+                </div>
+
+                <hr>
+
+                <label for="inputRecipeCategory">Recipe category*</label>
+                <select class="customSelect w-100 mb25" name="inputRecipeCategory" id="inputRecipeCategory">
+                  <option value="Dressings and Sauces">Dressings and Sauces</option>
+                  <option value="Appetizers">Appetizers</option>
+                  <option value="Salads and Sandwiches">Salads and Sandwiches</option>
+                  <option value="Soups and Stews">Soups and Stews</option>
+                  <option value="Vegetables">Vegetables</option>
+                  <option value="Vegan">Vegan</option>
+                  <option value="Gluten Free">Glutten Free</option>
+                  <option value="Dairy Free">Dairy Free</option>
+                  <option value="Rice, Grains and Beans">Rice, Grains and Beans</option>
+                  <option value="Pasta">Pasta</option>
+                  <option value="Eggs and Breakfast">Eggs and Breakfast</option>
+                  <option value="Meat">Meat</option>
+                  <option value="Slow Cooker and Pressure Cooker">Slow Cooker and Pressure Cooker</option>
+                  <option value="Bread and Pizza">Bread and Pizza</option>
+                  <option value="Quick Breads and Muffins">Quick Breads and Muffins</option>
+                  <option value="Cookies">Cookies</option>
+                  <option value="Brownies and Bars">Brownies and Bars</option>
+                  <option value="Cakes">Cakes</option>
+                  <option value="Pies">Pies</option>
+                  <option value="Fruit Desserts">Fruit Desserts</option>
+                  <option value="Drinks">Drinks</option>
+                  <option value="Preserving">Preserving</option>
+                  <option value="Freezer Meals">Freezer Meals</option>
+                  <option value="Food Storage">Food Storage</option>
+                  <option value="Kids in the Kitchen">Kids in the Kitchen</option>
+                </select>
+
+                <hr>
+
+                <label for="#inputDescription">Recipe description*</label>
+                <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque!</textarea>
+
+                <hr>
+
+                <div id="inputsDirections">
+                    <label for="">Directions*</label>
+                    <textarea id="" class="input-directions customInput" name="" rows="7" cols="50">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque! Maiores maxime, voluptatum asperiores sint aliquam quia veniam quos molestias voluptatem provident deserunt blanditiis aperiam veritatis minima quae, possimus cupiditate itaque, doloribus sequi repellendus quaerat. Voluptas consequatur quam eum neque voluptate quaerat veniam ut vel ab, dignissimos blanditiis accusantium atque fuga dolores, rerum qui iste voluptatibus sint officia. Commodi, a obcaecati id iure et, neque tenetur debitis saepe deleniti vel beatae eveniet nisi quasi ad in doloremque quam. Quaerat voluptates dolorem facilis qui impedit repellat officia vero alias quod quia, non nihil, atque dignissimos iusto in voluptatibus inventore illo libero fugiat!</textarea>
+                </div>
+                <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
+
+                <hr>
+                <label>RECIPE INGRIDIENTS*</label>
+                <table class="table-create">
+                    <tbody id="tableCreateBody">
+                        <tr>
+                        <th>No.</th>
+                        <th>Ingridient</th>
+                        <th>Quantity</th>
+                        <th></th>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td><input type="text" name="" class="input-create inputIngridient" value="Strawberry"></td>
+                        <td><input type="text" name="" class="input-create inputIngridientAmount" value="350 grams"></td>
+                        <td></td>
+                        </tr>
+                        <!-- <tr>
+                        <td></td>
+                        <td><input type="text"  name="inputRecipeName" class="input-create"></td>
+                        <td><input type="text" name="inputRecipeName" class="input-create"></td>
+                        <td class="delete-row">&#10006;</td>
+                        </tr> -->
+                </tbody>
+                </table>
+                <button type="button" class="add-ingredient-fields btn-plus-create mt20 mb50">+</button>
+
+                <hr>
+
+                <label for="inputRecipeImg1">RECIPE PHOTOS*</label>
+                <!-- {{> uploadedFiles}} -->
+                <div class="mb20">
+                    {{> uploadForm}}
+                </div>
+
+                <div class="d-flex space-between">
+                    <figure id="crImg1" class="cr-uploaded-image-figure"></figure>
+                    <figure id="crImg2" class="cr-uploaded-image-figure"></figure>
+                    <figure id="crImg3" class="cr-uploaded-image-figure"></figure>
+                </div>
+
+                <hr>
+
+                <label for="inputVideo">Recipe video (YouTube only)</label>
+                <input class="customInput w-100" type="url" id="inputVideo">
+
+                <hr>
+
+                <div class="mb10">
+                    <input type="checkbox" id="inputPrivate" name="inputPrivate" value="private">
+                    <label class="label-private" for="inputPrivate">Make private recipe</label>
+                </div>
+
+                <hr>
+
+
+                <input class="btn btn-custom d-block mx-auto" type="submit" value="SUBMIT">
+
+
+                <br>
+                <button type="reset" value="Reset">Reset</button>
+                <br>
+            </form>
+        </div>
+    </div>
+
+</template>

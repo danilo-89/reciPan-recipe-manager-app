@@ -1,0 +1,14 @@
+<template name="user">
+    <div class="wrapper">
+        <div class="container">
+
+            {{#with getUserProfile}}
+            <p>{{username}}</p>
+            <p>{{_id}}</p>
+            
+            <button class="send-friend-request-btn">Send friend request</button>
+            {{/with}}
+            
+        </div>
+    </div>
+</template>
