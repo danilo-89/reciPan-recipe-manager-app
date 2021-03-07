@@ -130,6 +130,10 @@ Meteor.methods({
     return Recipes.find().count();
   },
 
+  postsCategoryTotal: function (categoryName) {
+    return Recipes.find({ category: categoryName }).count();
+  },
+
   getUserPostsTotal: function () {
     return Recipes.find({ owner: this.userId }).count();
   },
@@ -137,7 +141,7 @@ Meteor.methods({
   getUserFavoritesCount: () => {
     // return Meteor.users.find({ _id: Meteor.userId() }).fetch()[0].public.favorites.count();
     if (Meteor.userId()) {
-      return Meteor.user().public.favorites;
+      return Meteor.user().public?.favorites;
     }
   },
 
@@ -149,7 +153,7 @@ Meteor.methods({
       "Soups and Stews",
       "Vegetables",
       "Vegan",
-      "Glutten Free",
+      "Gluten Free",
       "Dairy Free",
       "Rice, Grains and Beans",
       "Pasta",

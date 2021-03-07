@@ -3,7 +3,7 @@
     
     <div class="wrapper h-100 back-secondary">
         <div class="container mv-576 info-profile-container">
-            {{#if isReady}}
+            {{#if Template.subscriptionsReady}}
             <div class="xy-center-flex flex-column">
                 <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
                 {{#if currentUser}}
@@ -16,6 +16,7 @@
                 </div>
             </div>
 
+            {{#if currentUser}}
             <hr class="my15">
             <div class="xy-center-flex space-around">
                 <div class="xy-center-flex flex-column profile-3-colums">
@@ -32,13 +33,13 @@
                 </div>
                 <div class="xy-center-flex flex-column profile-3-colums">
                     <div>
-                        <p class="profile-3-colums-p">{{getUserFavoritesCount}}</p>
-                        <p>favorites</p>
+                        <p class="profile-3-colums-p go-to-favorites-btn">{{getUserFavoritesCount}}</p>
+                        <p class="go-to-favorites-btn">favorites</p>
                     </div>
                 </div>
             </div>
             <hr class="my15">
-
+            {{/if}}
             {{/if}}
         </div>
     </div>

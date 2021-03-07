@@ -5,7 +5,7 @@
             <a class="a-nav-footer a-nav-planner {{isActiveRoute 'categories'}}" href="/categories"><i class="fas fa-search"></i><span>Search</span></a>
             <a class="a-nav-footer a-nav-shlist {{isActiveRoute 'create-recipe'}}" href="/create-recipe"><i class="fas fa-plus-circle"></i><span>Create</span></a>
             <a class="a-nav-footer a-nav-shlist {{isActiveRoute 'shopping-list'}}" href="/shopping-list"><i class="fas fa-tasks"></i><span>Shoplist</span></a>
-            <a class="a-nav-footer a-nav-profile {{isActiveRoute regex='profile|inbox'}} {{#if Template.subscriptionsReady}}{{#if getNotice}}notice{{/if}}{{/if}}" href="/profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
+            <a class="a-nav-footer a-nav-profile {{isActiveRoute regex='profile|inbox'}} {{#if currentUser}}{{#if Template.subscriptionsReady}}{{#if getNotice}}notice{{/if}}{{/if}}{{/if}}" href="/profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
         </ul>
     </nav>
 

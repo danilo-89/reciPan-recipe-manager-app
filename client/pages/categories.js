@@ -12,16 +12,15 @@ Template.Categories.onCreated(function () {
     this.autorun(() => {
         const limit = Session.get("limit");
         const searchArray = Session.get("searchArray");
-        this.subscribe('recipesFav', limit, searchArray);
 
-        Meteor.call('getCategoryImg', (err, res) => {
-            if (err) {
-                console.log(err);
-            } else {
-                Session.set('catImages', res);
-                console.log(res, "this is ok");
-            }
-        })
+        // Meteor.call('getCategoryImg', (err, res) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         Session.set('catImages', res);
+        //         console.log(res, "this is ok");
+        //     }
+        // })
     })
     
 
@@ -62,10 +61,7 @@ Template.Categories.helpers({
         return Recipes.find({}, {sort: {createdAt: -1}});
     },
     getCatImg: (cat) => {
-
-        Session.get('catImages');
-        return Session.get('catImages')[cat]||"/logo-img-holder.svg";
-        
+        return "/categories/" + cat +".jpg" || "/logo-img-holder.svg";
     },
     getSearchCount: function() {
         const countIt = Recipes.find().count();

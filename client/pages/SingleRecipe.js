@@ -112,6 +112,7 @@ Template.SingleRecipe.onDestroyed(function() {
 Template.SingleRecipe.helpers({
     getSingleRecipe: () => {
         console.log("test");
+        console.log(Recipes.find().fetch()[0]);
         return Recipes.find().fetch()[0];
     },
     getTime: (time) => {

@@ -28,7 +28,7 @@ Template.inbox.onRendered(function () {
         if (ready) {
             Session.set("ready", true);
            
-            if (Meteor.user().notice.inbox) {
+            if (Meteor.user()?.notice?.inbox) {
                 Meteor.call('read.inbox', (err, res) => {
                     if (err) {
                         Bert.alert(err.reason, 'danger');

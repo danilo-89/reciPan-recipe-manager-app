@@ -79,7 +79,7 @@ Template.SingleCategory.onRendered(function () {
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
 
                 
-                Meteor.call('postsTotal', function(error, result){
+                Meteor.call('postsCategoryTotal', FlowRouter.getParam("categoryName"), function(error, result){
                     console.log("REAL total posts:", result);
                     countTotal = result;
                 });

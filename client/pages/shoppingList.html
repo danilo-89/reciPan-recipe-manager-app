@@ -1,8 +1,9 @@
 <template name="ShoppingList">
 
         
-
+{{#if Template.subscriptionsReady}}
         <div class="wrapper h-100 back-secondary">
+                
                 <div class="container mv-576 px15 pt15">
                         {{#if getFullShopList}} 
                         <div class="shop-list-card mx-auto">
@@ -236,6 +237,21 @@
 
         </div>
 
+{{else}}
+
+<div style="height: 100%;
+height: calc(100% - 50px);
+width: 100%;
+background-image: linear-gradient(to right bottom, #fe7f2d, #ff8e24, #ff9d1a, #ffac0d, #ffbb00);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;">
+        {{> loading}}
+</div>
+
+
+{{/if}}
 
         <!-- shopping lista
         <img src="chef1.svg" alt="">

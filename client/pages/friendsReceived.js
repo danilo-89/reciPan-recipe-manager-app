@@ -10,7 +10,7 @@ Template.receivedFriendRequests.onRendered(function () {
     this.autorun(() => {
         const ready = this.subscriptionsReady();
         if (ready) {
-            if (Meteor.user().notice.friendRequest) {
+            if (Meteor.user().notice?.friendRequest) {
                 Meteor.call('read.received', (err, res) => {
                     if (err) {
                         Bert.alert(err.reason, 'danger');
@@ -66,7 +66,7 @@ Template.receivedFriendRequests.helpers({
               // return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
         // return Meteor.users.find({},{fields: {'public.friends.received': 1}});
         // return Meteor.user().fetch()[0];
-        return Meteor.user().public.friends.received;
+        return Meteor.user().public?.friends?.received ?? false;
     },
     getFriendsNames: (friendId) => {
         return Meteor.users.findOne({_id: friendId}).username;

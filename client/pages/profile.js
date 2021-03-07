@@ -40,10 +40,11 @@ Template.profile.helpers({
         return Meteor.user().username;
     },
     getAvatarImg: () => {
-        return Meteor.user().profile.profilePhotoUrl;
+        return Meteor.user()?.profile?.profilePhotoUrl ?? false;
     },
     getFriendsActiveCount: () => {
-        if (Meteor.user().public.friends.active) {
+        const checkAll = Meteor.user()?.public?.friends?.active;
+        if (checkAll) {
             return Meteor.user().public.friends.active.length;
         } else {
             return "0";
@@ -64,7 +65,7 @@ Template.profile.helpers({
     },
     getFriendNotice: () => {
         console.log("check friend notice");
-        return Meteor.user().notice.friendAccept || Meteor.user().notice.friendRequest;
+        return (Meteor.user()?.notice?.friendAccept) || (Meteor.user()?.notice?.friendRequest);
     },
 });
 
@@ -72,6 +73,10 @@ Template.profile.events({
     "click .friends-info-btn"() {
         // console.log(this._id);
         FlowRouter.go(`/friends`);
+    },
+    "click .go-to-favorites-btn"() {
+        // console.log(this._id);
+        FlowRouter.go(`/favorites`);
     },
 });
 

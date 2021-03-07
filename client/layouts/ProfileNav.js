@@ -31,6 +31,6 @@ Template.ProfileNav.helpers({
     },
     getInboxNotice: () => {
         console.log("check inbox notice");
-        return Meteor.user().notice.inbox;
+        return Meteor.user()?.notice?.inbox ?? false;
     },
 });

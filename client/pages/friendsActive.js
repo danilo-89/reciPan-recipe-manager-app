@@ -14,7 +14,7 @@ Template.friendsActive.onRendered(function () {
     this.autorun(() => {
         const ready = this.subscriptionsReady();
         if (ready) {
-            if (Meteor.user().notice.friendAccept) {
+            if (Meteor.user().notice?.friendAccept) {
                 Meteor.call('read.accepted', (err, res) => {
                     if (err) {
                         Bert.alert(err.reason, 'danger');
@@ -73,7 +73,7 @@ Template.friendsActive.helpers({
               // return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
         // return Meteor.users.find({},{fields: {'public.friends.received': 1}});
         // return Meteor.user().fetch()[0];
-        return Meteor.user().public.friends.active;
+        return Meteor.user().public?.friends?.active ?? false;
     },
     getFriendsNames: (friendId) => {
         console.log({friendId});

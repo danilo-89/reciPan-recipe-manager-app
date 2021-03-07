@@ -381,6 +381,11 @@ margin-bottom: 2px;
     filter: drop-shadow(0 2px 1px rgba(0,0,0,.2));
 }
 
+.text-shadow-3 {
+    text-shadow: 0 1px 1px rgb(0 0 0 / 50%);
+}
+
+
 .d-flex {
     display: flex;
 }
@@ -892,7 +897,18 @@ btn.active, .btn-standard.active:focus, .btn-standard.focus, .btn-standard:activ
 /* CUSTOM FILE INPUT END*/
 
 
-
+.custom-placeholder::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(212, 212, 212);
+    opacity: 1; /* Firefox */
+}
+  
+.custom-placeholder:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(212, 212, 212);
+}
+  
+.custom-placeholder::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(212, 212, 212);
+}
 
 
 

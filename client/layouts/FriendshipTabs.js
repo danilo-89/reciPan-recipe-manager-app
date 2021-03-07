@@ -19,9 +19,9 @@ Template.FriendshipTabs.helpers({
         return Session.get("ready");
     },
     getFriendRequestNotice: () => {
-        return Meteor.user().notice.friendRequest;
+        return Meteor.user()?.notice?.friendRequest ?? false;
     },
     getFriendAcceptNotice: () => {
-        return Meteor.user().notice.friendAccept;
+        return Meteor.user()?.notice?.friendAccept ?? false;
     },
 });

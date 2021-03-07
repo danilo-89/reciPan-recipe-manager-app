@@ -7,7 +7,7 @@
             <!-- <a class="profile-nav">
                 Recipes
             </a> -->
-            <a class="profile-nav profile-nav-inbox {{#if isReady}}{{#if getInboxNotice}}notice{{/if}}{{/if}} {{isActiveRoute 'inbox'}}">
+            <a class="profile-nav profile-nav-inbox {{#if currentUser}}{{#if isReady}}{{#if getInboxNotice}}notice{{/if}}{{/if}}{{/if}} {{isActiveRoute 'inbox'}}">
                 <span><span>Inbox</span></span>
             </a>
             <!-- <a class="profile-nav">

@@ -48,7 +48,7 @@ Template.sentFriendRequests.helpers({
               // return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
         // return Meteor.users.find({},{fields: {'public.friends.received': 1}});
         // return Meteor.user().fetch()[0];
-        return Meteor.user().public.friends.sent;
+        return Meteor.user().public?.friends?.sent ?? false;
     },
     getFriendsNames: (friendId) => {
         return Meteor.users.findOne({_id: friendId}).username;

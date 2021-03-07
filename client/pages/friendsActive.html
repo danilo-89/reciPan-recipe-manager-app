@@ -1,8 +1,7 @@
 <template name="friendsActive">
-
+{{#if Template.subscriptionsReady}}
   {{> FriendshipTabs}}
 
-  {{#if Template.subscriptionsReady}}
   <div class="wrapper h-100">
     <div class="container pt25">  
       <div class=""> 
@@ -28,7 +27,5 @@
       </div>
     </div>
   </div>
-  {{/if}}
-  
-
+{{/if}}
 </template>
