@@ -5,49 +5,68 @@
                 <form action="">
                     
                     <label for="inputRecipeName">Recipe name</label>
-                    <input type="text" id="inputRecipeName" name="inputRecipeName" value={{name}}>
+                    <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value={{name}}>
                     
-                    <br>
+                    <hr>
+
                     <label>Prep time</label>
-                    <input type="number" class="input-time" id="inputPrepTimeHours" name="inputPrepTimeHours" value="{{getHours}}" min="0" max="24">
-                    <span>h</span>
-                    <input type="number" class="input-time" id="inputPrepTimeMins" name="inputPrepTimeMins" value="{{getMinutes}}" min="0" max="59">
-                    <span>min</span>
-                    <br>
+                    <div class="mb25 xy-center-flex">
+                        <input type="number" class="input-time customInput w-100" id="inputPrepTimeHours" name="inputPrepTimeHours" value="{{getHours}}" min="0" max="24">
+                        <span class="px10">h</span>
+                        <input type="number" class="input-time customInput w-100" id="inputPrepTimeMins" name="inputPrepTimeMins" value="{{getMinutes}}" min="0" max="59">
+                        <span class="px10">min</span>
+                    </div>
+
+                    <hr>
+
                     <label for="inputRecipeCategory">Recipe category</label>
-                    <select name="inputRecipeCategory" id="inputRecipeCategory">
-                    <option value="Dressings & Sauces" selected="{{getInputCategory 'Dressings & Sauces'}}">Dressings & Sauces</option>
-                    <option value="Appetizers" selected="{{getInputCategory 'Appetizers'}}">Appetizers</option>
-                    <option value="Salads & Sandwiches" selected="{{getInputCategory 'Salads & Sandwiches'}}">Salads & Sandwiches</option>
-                    <option value="Soups & Stews" selected="{{getInputCategory 'Soups & Stews'}}">Soups & Stews</option>
-                    <option value="Vegetables" selected="{{getInputCategory 'Vegetables'}}">Vegetables</option>
-                    <option value="Rice, Grains, & Beans" selected="{{getInputCategory 'Rice, Grains, & Beans'}}">Rice, Grains, & Beans</option>
-                    <option value="Pasta" selected="{{getInputCategory 'Pasta'}}">Pasta</option>
-                    <option value="Eggs & Breakfast" selected="{{getInputCategory 'Eggs & Breakfast'}}">Eggs & Breakfast</option>
-                    <option value="Meat" selected="{{getInputCategory 'Meat'}}">Meat</option>
-                    <option value="Slow Cooker/Pressure Cooker" selected="{{getInputCategory 'Slow Cooker/Pressure Cooker'}}">Slow Cooker/Pressure Cooker</option>
-                    <option value="Bread & Pizza" selected="{{getInputCategory 'Bread & Pizza'}}">Bread & Pizza</option>
-                    <option value="Quick Breads & Muffins" selected="{{getInputCategory 'Quick Breads & Muffins'}}">Quick Breads & Muffins</option>
-                    <option value="Cookies" selected="{{getInputCategory 'Cookies'}}">Cookies</option>
-                    <option value="Brownies & Bars" selected="{{getInputCategory 'Brownies & Bars'}}">Brownies & Bars</option>
-                    <option value="Cakes" selected="{{getInputCategory 'Cakes'}}">Cakes</option>
-                    <option value="Pies" selected="{{getInputCategory 'Pies'}}">Pies</option>
-                    <option value="Fruit Desserts" selected="{{getInputCategory 'Fruit Desserts'}}">Fruit Desserts</option>
-                    <option value="Drinks" selected="{{getInputCategory 'Drinks'}}">Drinks</option>
-                    <option value="Preserving" selected="{{getInputCategory 'Preserving'}}">Preserving</option>
-                    <option value="Freezer Meals" selected="{{getInputCategory 'Freezer Meals'}}">Freezer Meals</option>
-                    <option value="Food Storage" selected="{{getInputCategory 'Food Storage'}}">Food Storage</option>
-                    <option value="Kids in the Kitchen" selected="{{getInputCategory 'Kids in the Kitchen'}}">Kids in the Kitchen</option>
+                    <select class="customSelect w-100 mb25" name="inputRecipeCategory" id="inputRecipeCategory">
+                        <option value="Dressings and Sauces">Dressings and Sauces</option>
+                        <option value="Appetizers">Appetizers</option>
+                        <option value="Salads and Sandwiches">Salads and Sandwiches</option>
+                        <option value="Soups and Stews">Soups and Stews</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Gluten Free">Gluten Free</option>
+                        <option value="Dairy Free">Dairy Free</option>
+                        <option value="Rice, Grains and Beans">Rice, Grains and Beans</option>
+                        <option value="Pasta">Pasta</option>
+                        <option value="Eggs and Breakfast">Eggs and Breakfast</option>
+                        <option value="Meat">Meat</option>
+                        <option value="Slow Cooker and Pressure Cooker">Slow Cooker and Pressure Cooker</option>
+                        <option value="Bread and Pizza">Bread and Pizza</option>
+                        <option value="Quick Breads and Muffins">Quick Breads and Muffins</option>
+                        <option value="Cookies">Cookies</option>
+                        <option value="Brownies and Bars">Brownies and Bars</option>
+                        <option value="Cakes">Cakes</option>
+                        <option value="Pies">Pies</option>
+                        <option value="Fruit Desserts">Fruit Desserts</option>
+                        <option value="Drinks">Drinks</option>
+                        <option value="Preserving">Preserving</option>
+                        <option value="Freezer Meals">Freezer Meals</option>
+                        <option value="Food Storage">Food Storage</option>
+                        <option value="Kids in the Kitchen">Kids in the Kitchen</option>
                     </select>
-                    <br>
+
+                    <hr>
+
+                    <label for="#inputDescription">Recipe description*</label>
+                    <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50"></textarea>
+    
+                    <hr>
+
                     <div id="inputsDirections">
                         <label for="">Directions:</label>
                         {{ #each directions }}
-                        <textarea id="" class="input-directions" name="" rows="7" cols="50">{{this}}</textarea>
+                        <textarea id="" class="input-directions customInput" name="" rows="7" cols="50">{{this}}</textarea>
                         {{ /each }}
+                        <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
                     </div>
                     <button type="button" class="add-direction-fields">+</button>
-        
+
+                    <hr>
+                
+                    <label>RECIPE INGRIDIENTS*</label>
                     <table class="table-create">
                         <tbody id="tableCreateBody">
                             <tr>
@@ -77,12 +96,37 @@
                                 <span>{{this.[0]}}</span>
                                 <span>{{this.[1]}}</span>
                         {{ /each }} -->
+                        
+                        <button type="button" class="add-ingredient-fields btn-plus-create mt20 mb50">+</button>
 
+                    <hr>
 
-                    <br>
                     <button type="button" class="add-ingredient-fields">+</button>
                     <button type="reset" value="Reset">Reset</button>
-                    <br>
+
+
+                    <hr>
+
+                    <label for="inputRecipeImg1">RECIPE PHOTOS*</label>
+                    <!-- {{> uploadedFiles}} -->
+                    <div class="mb20">
+                        {{> uploadForm}}
+                    </div>
+    
+                    <div class="d-flex space-between mb25">
+                        <figure id="crImg1" class="cr-uploaded-image-figure"></figure>
+                        <figure id="crImg2" class="cr-uploaded-image-figure"></figure>
+                        <figure id="crImg3" class="cr-uploaded-image-figure"></figure>
+                    </div>
+    
+                    <hr>
+
+                    <label for="inputVideo">Recipe video (YouTube link only)</label>
+                    <input class="customInput w-100 mb25" type="url" id="inputVideo">
+    
+                    <hr>
+
+
                     <label for="inputRecipeImg1">1. Image</label>
                     <input type="text" id="inputRecipeImg1" name="inputRecipeImg1" value="https://images.unsplash.com/photo-1592113899382-b8752d364001?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fHBpZXxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=500&q=60"><br>
                     {{ #each images }}

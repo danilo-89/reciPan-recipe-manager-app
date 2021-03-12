@@ -914,12 +914,12 @@ a.sec-nav-left, a.sec-nav-right {
 a.sec-nav-title {
     width: 60%;
     cursor: default;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 a.profile-nav {
     width: 100%;
-    font-size: 16px;
+    font-size: 18px;
     position: relative;
     transition: all 0.4s ease-in;
 }
