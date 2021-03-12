@@ -37,11 +37,21 @@ Template.Search.onRendered(function () {
 
 
     setTimeout(() => {
-        $(".home-search-btn").trigger("click");
+        const searchString = FlowRouter.getQueryParam("search");
+        if (searchString && searchString.length > 2) {
+            $("#homeHeaderSearch").val(searchString);
+            $("#homeHeaderSearch").trigger("keyup");
+            $(".home-search-btn").trigger("click");
+        }
     }, 0)
 
     let countTotal = 0;
     let countDiscovered = 0;
+
+    Meteor.call('postsTotal', function(error, result){
+        console.log("REAL total posts:", result);
+        countTotal = result;
+    });
 
     $(".wrapper").on('scroll', function(e) {
         // console.log(topPos, "element position");
@@ -75,12 +85,6 @@ Template.Search.onRendered(function () {
             // );
 
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
-
-                
-                Meteor.call('postsTotal', function(error, result){
-                    console.log("REAL total posts:", result);
-                    countTotal = result;
-                });
 
                 countDiscovered =  Session.get("limit") + Session.get("skip");
                 if (countDiscovered<countTotal) {

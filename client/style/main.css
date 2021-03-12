@@ -125,27 +125,12 @@ img {
 
 .holder-p-1 {
     position: relative;
-    width: 290px;
+    width: 285px;
     max-width: 95%;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 8px 5px;
+    padding: 12px 14px;
     box-shadow: 6px 6px 6px -5px #dfe1e5;
-}
-
-.holder-p-1::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-top-color: #ffffff;
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -10px;
-	margin-bottom: -20px;
 }
 
 hr {
@@ -488,8 +473,8 @@ hr {
     color: white;
     right: 13px;
     cursor: pointer;
-    width: 41px;
-    height: 41px;
+    width: 50px;
+    height: 50px;
 }
 
 .random-recipe-ribbon:hover {

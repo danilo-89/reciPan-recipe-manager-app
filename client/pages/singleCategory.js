@@ -45,6 +45,11 @@ Template.SingleCategory.onRendered(function () {
     let countTotal = 0;
     let countDiscovered = 0;
 
+    Meteor.call('postsCategoryTotal', FlowRouter.getParam("categoryName"), function(error, result){
+        console.log("REAL total posts:", result);
+        countTotal = result;
+    });
+
     $(".wrapper").on('scroll', function(e) {
         // console.log(topPos, "element position");
          // console.log($('.behind-search-header').outerHeight(), "element height");
@@ -79,10 +84,7 @@ Template.SingleCategory.onRendered(function () {
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
 
                 
-                Meteor.call('postsCategoryTotal', FlowRouter.getParam("categoryName"), function(error, result){
-                    console.log("REAL total posts:", result);
-                    countTotal = result;
-                });
+
 
                 countDiscovered =  Session.get("limit") + Session.get("skip");
                 if (countDiscovered<countTotal) {

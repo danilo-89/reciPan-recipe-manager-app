@@ -1,5 +1,6 @@
 <template name="SingleRecipeNav">
     <nav class="main-navigation">
+        {{#if getSingleRecipe}}
         <ul class="main-navigation-ul mx-auto no-select">
             <a class="a-nav-info" href="#sRInfo"><span>Info</span></a>
             <a href="#sRDirections"><span>Directions</span></a>
@@ -7,5 +8,6 @@
             <a class="a-nav-video" href="#sRVideo"><span>Video</span></a>
             <!-- <li>{{> loginButtons}}</li> -->
         </ul>
+        {{/if}}
     </nav>
 </template>

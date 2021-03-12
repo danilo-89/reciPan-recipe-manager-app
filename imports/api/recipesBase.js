@@ -127,11 +127,16 @@ Meteor.methods({
   
 
   postsTotal: function () {
-    return Recipes.find().count();
+    return Recipes.find({ $or: [ { private: { $ne: true } }, { owner: this.userId } ] }).count();
   },
 
   postsCategoryTotal: function (categoryName) {
-    return Recipes.find({ category: categoryName }).count();
+    return Recipes.find(
+      {$and: [
+        { category: categoryName },
+        { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
+      ]}
+    ).count();
   },
 
   getUserPostsTotal: function () {

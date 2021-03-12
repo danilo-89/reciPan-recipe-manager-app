@@ -126,14 +126,6 @@ Template.Categories.events({
         // console.log(this._id);
         FlowRouter.go(`/favorites`);
     },
-    "click .home-top-btn"() {
-        $(".wrapper").animate({scrollTop: 0}, 1000);
-    },
-    'click .icon-clear-search' () {
-        console.log("wiiiiiiiiiiiiiiiiiiii")
-        $('.home-header-search').val("");
-        $('.home-header-search').keyup();
-    },
     "click .home-search-btn"() {
             $(".home-search-btn").addClass("active");
             $( ".home-header-search" ).trigger('focus');
@@ -144,9 +136,13 @@ Template.Categories.events({
     'click .home-recipe-category' (event) {
         event.stopPropagation();
     },
-    'click .btn-clear-search' () {
-        $('.home-header-search').val("");
-        $('.home-header-search').keyup();
+    'click #mainSearchBtn' () {
+        const searchString = $('#mainSearch').val();
+        if (searchString && searchString.length > 2) {
+            FlowRouter.go(`/search?search=${searchString}`)
+        } else {
+            FlowRouter.go('/search')
+        }
     },
     'click .category-card-wrapper' (event) {
         const sCat = $(event.currentTarget).attr("data-category");

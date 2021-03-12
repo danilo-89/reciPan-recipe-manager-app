@@ -31,26 +31,6 @@ Template.Home.onRendered(function () {
         }
 
         setTimeout(() => {
-            // const mySwiper = new Swiper('.swiper-container.category-swiper', {
-            //     slidesPerView: "auto",
-            //     freeMode: true,
-            //     loop: false,
-            //     loopedSlides: 10,
-            //     mousewheel: {
-            //         releaseOnEdges: true,
-            //     },
-            //     navigation: {
-            //         nextEl: '.swiper-button-next',
-            //         prevEl: '.swiper-button-prev',
-            //     },
-            //     scrollbar: {
-            //         el: '.swiper-scrollbar',
-            //         draggable: true,
-            //         dragSize: 25,
-            //     },
-
-            // });
-
             if (
                 !document.querySelector(".swiper-container.new-recipes-swiper-container").mySwiper1
             ) {
@@ -103,19 +83,7 @@ Template.Home.onRendered(function () {
 
             }
 
-            
-            // mySwiper.init();
-
-            // const mySwiper1 = document.querySelector(".swiper-container").swiper;
-            // console.log("swiper", mySwiper);
         }, 0)
-
-        // function reinitSwiper(swiper) {
-        //     setTimeout(function () {
-        //      swiper.update();
-        //     }, 500);
-        // }
-
 
     });
 
@@ -131,42 +99,15 @@ Template.Home.onRendered(function () {
 
         if (topPos < (-15)) {
             if (!targetElem.hasClass( "home-header-effect" )) {
-                console.log("set it");
+                // console.log("set it");
                 targetElem.addClass("home-header-effect");
             }
         } else {
             if (targetElem.hasClass( "home-header-effect" )) {
                 targetElem.removeClass("home-header-effect");
             }
-        };
-
-
-            // console.log("position:", $(".wrapper").scrollTop());
-            // console.log("height:", $(".wrapper").outerHeight(true));
-            // console.log("total:", $(".wrapper").prop('scrollHeight'));
-
-            // console.log(
-            //     (
-            //         $(".wrapper").prop('scrollHeight')
-            //     ), 
-            //     (
-            //         $(".wrapper").scrollTop() + $(".wrapper").outerHeight(true)
-            //     )
-            // );
-
-
-        
-            console.log("posts curently visible: ", Recipes.find().count());
-            // if($(".wrapper").scrollTop() + $(".wrapper").height() == window.innerHeight-200) {
-            //     alert("bottom!");
-            // }
-
-        // if ($('#box-in-shadow').scrollTop() + $(window).height() > $('#box-in-shadow > div').height() + 96) {
-        //     // show spinner
-        //     const spinnerWrapper = document.querySelector(".pag-spinner-blue");
-        //     spinnerWrapper.style.display = "block";
-        //     Session.set("clubPostsLimit", Session.get("clubPostsLimit") + 6); // when it reaches the end, add another 9 elements
-        // }
+        }; 
+            // console.log("posts curently visible: ", Recipes.find().count());
     })
 
 
@@ -207,21 +148,6 @@ Template.Home.helpers({
             return false
         }
     },
-    // getSearchCount: function() {
-    //     const countIt = Recipes.find().count();
-    //     if (countIt===0) {
-    //         Session.set("noSearchResults", true);
-    //     } else {
-    //         Session.set("noSearchResults", false);
-    //     }
-    //     return countIt;
-    // },
-    // getNoSearchResultes: () => {
-    //     return Session.get("noSearchResults");
-    // },
-    // getSearchVal: () => {
-    //     return Session.get("searchArray");
-    // },
     getTime: (time) => {
         let hours = (Math.floor(time / 60)) || "";
         if (hours) { hours = hours + " hr"};
@@ -243,19 +169,6 @@ Template.Home.helpers({
             return 0;
         }
     },
-    // replaceSpaceWithUnderscore: (e) => {
-    //     return e.split(' ').join('_');
-    // },
-    // returnSector: () => {
-    //     return FlowRouter.getQueryParam('sector');
-    // },
-    // getSector: (btnSector, flowSector) => {
-    //     if(btnSector === flowSector) {
-    //         return 'btn-shc-active';
-    //     } else {
-    //         return;
-    //     }
-    // }
 
 });
 
@@ -276,15 +189,12 @@ Template.Home.events({
         }
     },
     "click .random-recipe-img, click .random-recipe-bottom"() {
-        // console.log(this._id);
         FlowRouter.go(`/single-recipe/${this._id}`);
     },
     "click .home-recipe-container"() {
-        // console.log(this._id);
         FlowRouter.go(`/single-recipe/${this._id}`);
     },
     "click .home-fav-btn"() {
-        // console.log(this._id);
         FlowRouter.go(`/favorites`);
     },
     "click .home-top-btn"() {
@@ -301,14 +211,9 @@ Template.Home.events({
         $('.home-header-search').trigger('keyup');
     },
     "click .go-to-search"() {
-            // $(".home-search-btn").addClass("active");
-            // $( ".home-header-search" ).trigger('focus');
             FlowRouter.go(`/search`);
     },
     "click .home-logo-img"() {
-            // $(".home-search-btn").addClass("active");
-            // $( ".home-header-search" ).trigger('focus');
-            console.log("testtt");
             FlowRouter.go(`/home`);
     },
     'focusout .home-search-btn' () {

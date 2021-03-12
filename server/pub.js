@@ -179,7 +179,14 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
             {$and: [
                 { _id: { $in: favoriteIds } },
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
-                { $or: [ { private: { $ne: true } }, { owner: this.userId } ] },
+                { $or: [ 
+                    { private: { $ne: true } }, 
+                    { owner: this.userId },  
+                    {$and: [ 
+                        {privateAllow: {$exists: true}},
+                        {privateAllow: { $in: [this.userId] }} 
+                    ]} 
+                ]}
             ]},
             { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit }
         );
@@ -190,7 +197,14 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
         { _id: { $in: favoriteIds } },
         { searchIndex: { $all: searchArray } },
         // { searchIndex: { $all: {$elemMatch: { searchArray }}     } },
-        { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
+        { $or: [ 
+            { private: { $ne: true } }, 
+            { owner: this.userId },  
+            {$and: [ 
+                {privateAllow: {$exists: true}},
+                {privateAllow: { $in: [this.userId] }} 
+            ]} 
+        ] }
     ]},
     { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit }
         );
