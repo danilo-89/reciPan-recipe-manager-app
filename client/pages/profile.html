@@ -2,8 +2,8 @@
 
     
     <div class="wrapper h-100 back-secondary">
+        {{#if Template.subscriptionsReady}}
         <div class="container mv-576 info-profile-container">
-            {{#if Template.subscriptionsReady}}
             <div class="xy-center-flex flex-column">
                 <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
                 {{#if currentUser}}
@@ -40,8 +40,22 @@
             </div>
             <hr class="my15">
             {{/if}}
-            {{/if}}
+
         </div>
+
+        {{else}}
+
+        <div style="height: 100%;
+        width: 100%;
+        background-image: linear-gradient(to right bottom, #fe7f2d, #ff8e24, #ff9d1a, #ffac0d, #ffbb00);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;">
+            {{> loading}}
+        </div>
+
+        {{/if}}
     </div>
 
 </template>

@@ -1,4 +1,7 @@
 <template name="EditRecipe">
+
+    {{#if getRecipeAuthor}}
+
     <div class="wrapper">
         <div class="create-recipe-container">
             {{ #with getSingleRecipe }}
@@ -146,5 +149,11 @@
             
         </div>
     </div>
+
+    {{else}}
+    <div class="btn-standard back-btn mt20"><span>Go back</span></div>
+    <img class="svg-holder-img-1 mx-auto mt20" src="/chef4.svg" alt="chef apologises">
+    <p class="mx-auto text-center holder-p-1">Sorry, this recipe either doesn't exist or you're not its author and you are not allowed to edit it.</p>
+    {{/if}}
 
 </template>

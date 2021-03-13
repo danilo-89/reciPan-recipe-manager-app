@@ -350,7 +350,7 @@ Meteor.methods({
         );
         return { isError: false };
       } else {
-        throw new Meteor.Error("not-logged-in", "Log in to add to rate recipe");
+        throw new Meteor.Error("not-logged-in", "Log in to rate recipe");
       }
     } catch (err) {
       return { isError: true, err };

@@ -184,6 +184,9 @@ Template.SingleCategory.helpers({
             return 0;
         }
     },
+    getCategoryName: () => {
+        return FlowRouter.getParam("categoryName").replace(/_/g, ' ');
+    },
     // replaceSpaceWithUnderscore: (e) => {
     //     return e.split(' ').join('_');
     // },

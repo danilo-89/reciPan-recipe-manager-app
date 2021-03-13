@@ -64,4 +64,12 @@ Template.inbox.events({
     "click .inbox-card-bottom"() {
         FlowRouter.go('/single-recipe/' + this.recipeId);
     },
+    "click .userNameLink"(event) {
+        const userProfileName = event.currentTarget.textContent;
+        if (Meteor.user().username === userProfileName) {
+            FlowRouter.go('/profile');
+        } else {
+            FlowRouter.go(`/user/${userProfileName}`);
+        }
+    },
 });

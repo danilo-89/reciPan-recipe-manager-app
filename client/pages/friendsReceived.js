@@ -43,6 +43,14 @@ Template.receivedFriendRequests.events({
             }
         })
     },
+    "click .userNameLink"(event) {
+        const userProfileName = Meteor.users.findOne({_id: this.toString()}).username;
+        if (Meteor.user().username === userProfileName) {
+            FlowRouter.go('/profile');
+        } else {
+            FlowRouter.go(`/user/${userProfileName}`);
+        }
+    },
 });
 // Template.friendsReceived.onCreated(function (){
 //     this.formattedData = new ReactiveVar([]);

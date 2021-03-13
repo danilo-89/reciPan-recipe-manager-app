@@ -8,6 +8,9 @@ Template.EditRecipe.onCreated(function() {
 });
 
 Template.EditRecipe.helpers({
+    getRecipeAuthor: () => {
+        return Recipes.find().fetch()[0].owner===Meteor.userId();
+    },
     getSingleRecipe: () => {
         console.log("test");
         return Recipes.find().fetch()[0];
