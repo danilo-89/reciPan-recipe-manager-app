@@ -146,7 +146,10 @@ Template.SingleRecipe.helpers({
     getWebAddress: () => {
         console.log("dsfsfsd");
         return window.location.href;
-    }
+    },
+    getCategoryLink: (categoryName) => {
+        return "/categories/"+ categoryName.replace(/ /g, '_');
+    },
     // getStarRating: () => {
     //     const starRating = Recipes.find().fetch()[0].starRating;
     //     return starRating;

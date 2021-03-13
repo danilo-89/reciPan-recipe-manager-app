@@ -1476,7 +1476,7 @@ a.profile-nav {
 }
 
 
-.home-recipe-category {
+.home-recipe-category, a.home-recipe-category {
     padding: 5px 10px 5px 0;
     color: #fe7f2d;
     cursor: pointer;
@@ -1746,7 +1746,7 @@ a.profile-nav {
     margin-bottom: 4px;
 }
 
-.single-recipe-category {
+.single-recipe-category, a.single-recipe-category {
     margin-bottom: 3px;
     color: #fe7f2d;
     cursor: pointer;

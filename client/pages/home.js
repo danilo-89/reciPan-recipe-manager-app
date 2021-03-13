@@ -155,6 +155,9 @@ Template.Home.helpers({
         if (mins) { mins = mins + " min"};
         return hours + " " + mins;
     },
+    getCategoryLink: (categoryName) => {
+        return "/categories/"+ categoryName.replace(/ /g, '_');
+    },
     getRaiting: (a) => {
         if (a) {
             let sum = 0;

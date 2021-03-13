@@ -22,7 +22,10 @@
                                                                         <span class="slider round"></span>
                                                                 </label>
                                                         </div>
-                                                        <div class="recipe-tasks-menu-item" id="emptyShoplistBtn">Empty shoplist</div>
+                                                        <div class="recipe-tasks-menu-item" id="emptyShoplistBtn">
+                                                                <i class="far fa-trash-alt"></i>
+                                                                <span class="ml5">Empty shoplist</span>
+                                                        </div>
                                                 </div>
                                         </div>
                                         
@@ -69,11 +72,12 @@
                                                         <div class="w-100 d-flex flex-column">
                                                         {{#each recipes}}
                                                         <div class="shop-list-each-recipe w-100 {{#if getCount getFullShopList.counter this.recId}}b-incomplete{{else}}b-complete{{/if}}">
-                                                                <div class="shop-list-each-recipe-header" id="recipe{{@index}}" style="{{#if getCount getFullShopList.counter this.recId}}background-image: linear-gradient(to top left, rgba(255, 213, 187, 0.7), rgba(168, 198, 81, .95) 75%), url({{this.cover}});{{else}}background-image: linear-gradient(to top left, rgba(255, 213, 187, 0.7), rgba(143, 143, 143, 0.95) 75%), url({{this.cover}});{{/if}}">
+                                                                <div class="shop-list-each-recipe-header" id="recipe{{@index}}" style="{{#if getCount getFullShopList.counter this.recId}}background-image: linear-gradient(to top left, rgba(255, 213, 187, 0.5), rgba(168, 198, 81, .95) 75%), url({{this.cover}});{{else}}background-image: linear-gradient(to top left, rgba(255, 213, 187, 0.7), rgba(143, 143, 143, 0.95) 75%), url({{this.cover}});{{/if}}">
                                                                         <div class="d-flex flex-column space-between w-100">
-                                                                                <span class="mb10">
+                                                                                <div class="mb10 d-flex space-between w-100">
                                                                                         <strong class="shop-list-small-title text-shadow-2">{{this.name}}</strong>
-                                                                                </span>
+                                                                                        <span class="color-white-1"><i class="fas fa-ellipsis-h"></i></span>
+                                                                                </div>
                                                                                 
                                                                                 <span class="text-right mb2">
                                                                                         <span class="shop-list-small-subtitle">
@@ -94,9 +98,18 @@
                                                                                         Edit <strong>{{this.name}}</strong>
                                                                                 </div>
                                                                                 <div class="recipe-tasks-menu-main">
-                                                                                        <div class="recipe-tasks-menu-item remove-finished-from-recipe-btn">Remove finished</div>
-                                                                                        <div class="recipe-tasks-menu-item remove-from-shoplist-btn">Remove from shoplist</div>
-                                                                                        <div class="recipe-tasks-menu-item go-to-recipe">View recipe</div>
+                                                                                        <div class="recipe-tasks-menu-item remove-finished-from-recipe-btn">
+                                                                                                <i class="far fa-calendar-times"></i>
+                                                                                                <span class="ml5">Remove finished tasks</span>
+                                                                                        </div>
+                                                                                        <div class="recipe-tasks-menu-item remove-from-shoplist-btn">
+                                                                                                <i class="fas fa-times"></i>
+                                                                                                <span class="ml5">Remove this recipe from shoplist</span>
+                                                                                        </div>
+                                                                                        <div class="recipe-tasks-menu-item go-to-recipe">
+                                                                                                <i class="far fa-eye"></i>
+                                                                                                <span class="ml5">View this recipe</span>
+                                                                                        </div>
                                                                                 </div>
                                                                         </div>
                                                                         
@@ -140,7 +153,10 @@
                                                                                                                 <input class="increase-multi-input text-center" type="number" name="" min="1" max="99" value="{{getMultiCurrentValue}}">
                                                                                                                 <input class="multi-task-item-btn" type="submit" value="Update">
                                                                                                         </form>
-                                                                                                        <div class="recipe-tasks-menu-item delete-task-item">Delete</div>
+                                                                                                        <div class="recipe-tasks-menu-item delete-task-item">
+                                                                                                                <i class="far fa-minus-square"></i>
+                                                                                                                <span class="ml5">Delete</span> 
+                                                                                                        </div>
                                                                                                 </div>
                                                                                         </div>
                                                                                         

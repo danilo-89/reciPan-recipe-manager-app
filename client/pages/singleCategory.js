@@ -39,7 +39,7 @@ Template.SingleCategory.onRendered(function () {
 
 
     setTimeout(() => {
-        $(".home-search-btn").trigger("click");
+        // $(".home-search-btn").trigger("click");
     }, 0)
 
     let countTotal = 0;
@@ -233,9 +233,9 @@ Template.SingleCategory.events({
     'focusout .home-search-btn' () {
         $(".home-search-btn").removeClass("active");
     },
-    'click .home-recipe-category' (event) {
-        event.stopPropagation();
-    },
+    // 'click .home-recipe-category' (event) {
+    //     event.stopPropagation();
+    // },
     'click .btn-clear-search' () {
         $('.home-header-search').val("");
         Session.set("limit", 12);
