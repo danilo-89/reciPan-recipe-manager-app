@@ -100,7 +100,14 @@ Template.CreateRecipe.events({
             ingridients.push([$(element).val(), $(ingridientsAmountAll).eq(index).val()]);
         });
     
-        console.log(ingridients);
+        if (ingridients.length < 1) {
+            Bert.alert('Please add at least one ingridient!', 'danger');
+            throw new Meteor.Error("error-ingridient", "At least one ingridient required!");
+        } else if (ingridients.length > 25) {
+            Bert.alert('Please add no more than 25 ingridients!', 'danger');
+            throw new Meteor.Error("error-ingridient", "No more than 25 ingridients allowed!");
+        }
+         console.log(ingridients);
         console.log(ingridients.length);
 
         // GET RECIPE IMAGES
