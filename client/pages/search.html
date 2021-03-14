@@ -26,20 +26,20 @@
 
         {{#if isReady}}
 
+        <div class="text-center mb15">
+            <span class="name-holder">All recipes</span>
+        </div>
+
         <!-- {{getSearchCount}} -->
         {{#unless getSearchCount}}
             {{#if getNoSearchResultes}}
             <div class="helper-container text-center">
                 <p class="mb10">Your search term <b>{{getSearchVal}}</b> - didn't match any recipes.<br>Keep searhing.</p>
-                <img class="svg-helper mb10" src="chef3.svg" alt="">
+                <img class="svg-helper mb10" src="/chef3.svg" alt="">
                 <div class="btn-standard btn-clear-search"><span>Clear search</span></div>
             </div>
             {{/if}}
         {{/unless}}
-
-        <div class="text-center mb10">
-            <span class="color-silver">All recipes</span>
-        </div>
 
         <div class="new-recipe-container container">
             {{#unless Template.subscriptionsReady}}
@@ -99,8 +99,9 @@
         </div>
 
         {{else}}
-
-        <div>session ready</div>
+        
+        <!-- session not ready -->
+        <div class="post-loader"></div>
 
         {{/if}}
         <!-- {{else}}

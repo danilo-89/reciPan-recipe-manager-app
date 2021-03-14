@@ -111,8 +111,6 @@ Template.SingleRecipe.onDestroyed(function() {
 
 Template.SingleRecipe.helpers({
     getSingleRecipe: () => {
-        console.log("test");
-        console.log(Recipes.find().fetch()[0]);
         return Recipes.find().fetch()[0];
     },
     getTime: (time) => {
@@ -154,6 +152,23 @@ Template.SingleRecipe.helpers({
     //     const starRating = Recipes.find().fetch()[0].starRating;
     //     return starRating;
     // },
+});
+
+Template.modalShareRecipe.onCreated(function () {
+    this.autorun(() => {
+        this.subscribe('friends.friendsActive');
+    })
+});
+
+
+Template.modalShareRecipe.helpers({
+    getFriends: () => {
+        console.log("inside");
+        return Meteor.user().public?.friends?.active;
+    },
+    getFriendsNames: (friendId) => {
+        return Meteor.users.findOne({_id: friendId}).username;
+    },
 });
 
 Template.SingleRecipe.events({

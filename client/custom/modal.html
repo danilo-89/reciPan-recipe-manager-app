@@ -6,9 +6,11 @@
 
 <!-- A template to include in index.html that dynamically renders the a modal template -->
 <template name="modal">
+
     {{#if modalData}}
         {{> Template.dynamic template=modalData.template data=modalData}}
     {{/if}}
+
 </template>
 
 <!-- A generic block to be used by our modals -->

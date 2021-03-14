@@ -6,10 +6,19 @@
             {{/each}}
             "AAAAAsfsfdsfdsfssssssssssssssss" -->
             <p class="p-share-text mb10">Show Awesome pie recipe to your friends on reciPan app</p>
-            <div class="xy-center-flex mb20">
-                <input class="customInput share-in-app-input w-100" id="friendUsernameInput" type="text" placeholder="your friend's user name">
+            {{#if Template.subscriptionsReady}}
+            <div class="xy-center-flex mb20 user-send-input-holder" id="userSendInputHolder">
+                <input class="customInput share-in-app-input w-100" id="friendUsernameInput" list="friendUsernameInputs" placeholder="your friend's user name" autocomplete="off">
+
+                <datalist id="friendUsernameInputs">
+                    {{#each getFriends}}
+                    <option value="{{getFriendsNames this}}">{{getFriendsNames this}}</option>
+                    {{/each}}
+                </datalist>
+
                 <div class="share-in-app-btn"><i class="fas fa-share"></i></div>
             </div>
+            {{/if}}
             <hr class="mb15">
             <p class="p-share-text mb10">...or share it on other apps and networks</p>
             <div class="soc-share-container xy-center-flex">
@@ -34,6 +43,7 @@
                 <div class="soc-share-btn soc-link"><i class="fas fa-link"></i></div>
                 <input class="resetinput w-100" type="text" name="" id="addressLinkInput" value="{{linkit}}" readonly>
             {{/each}}
+
 
             </div>
             

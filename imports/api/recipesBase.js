@@ -954,6 +954,15 @@ Meteor.methods({
     }
   },
 
+  // getUserModalList: function () {
+  //   if (Meteor.userId()) {
+  //     console.log("inside method");
+  //     return Meteor.user().public?.friends?.active;
+  //   }
+  // },
+
+
+
 });
 
 

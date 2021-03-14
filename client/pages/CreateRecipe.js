@@ -23,14 +23,29 @@ Template.CreateRecipe.events({
         // Prevent default browser form submit
         event.preventDefault();
 
+        const checkString = str => typeof str === 'string';
+        const checkNumber = value => typeof value === 'number' && value === value;
+        const checkInteger = value => typeof value === 'number' && value === value && value%1 == 0;
+        const checkNegative = value => typeof value === 'number' && value === value && value <  0;
+        const checkMinMax = (value, min, max) => typeof value === 'number' && value === value && value >= min && value <= max;
+        const checkStringLength = (str, min, max) => typeof str === 'string' && str.length >= min && str.length <= max;
+
         // GET RECIPE NAME
         const name = $( "#inputRecipeName" ).val();
+        if (checkStringLength(name, 3, 95)) {} else {
+            Bert.alert('Recipe name must be between 3 and 95 characters', 'danger');
+            throw new Meteor.Error("bad-name","Invalid recipe name");
+        }
 
         // GET RECIPE CATEGORY
         const category = $( "#inputRecipeCategory" ).val();
 
         // GET RECIPE DESCRIPTION
         const description = $( "#inputDescription" ).val();
+        if (checkStringLength(description, 15, 500)) {} else {
+            Bert.alert('Recipe description must be between 15 and 500 characters', 'danger');
+            throw new Meteor.Error("bad-description","Invalid description");
+        }
 
         // GET VIDEO LINK
         let video = $( "#inputVideo" ).val().replace(/\s+/g, '');
@@ -54,17 +69,6 @@ Template.CreateRecipe.events({
             }
         }
 
-        // GET RECIPE IMAGES
-        const images = [];
-        $(".cr-uploaded-image").each(function(index, element){
-            // push all images into the array
-            images.push($(element).data("img"));
-        });
-        if (images.length < 1) {
-            Bert.alert('Please add at least one recipe photo!', 'danger');
-            throw new Meteor.Error("error-photos", "Please add at least one recipe photo!");
-        }
-        
         // GET PREPARATION TIME
         let mins = 0;
         if (+($( "#inputPrepTimeHours" ).val()) > 0) {
@@ -74,7 +78,10 @@ Template.CreateRecipe.events({
             mins = mins + +$( "#inputPrepTimeMins" ).val();
         }
         const time = mins;
-
+        if (checkNumber(time) && checkInteger(time) && !checkNegative(time)) { } else {
+            Bert.alert('Please add at least one recipe photo!', 'danger');
+            throw new Meteor.Error("error-time", "Number must be integer, and zero or positive");
+        }
         // CHECK IF RECIPE IS SET AS PRIVATE
         const private = $( "#inputPrivate" ).is(':checked');
 
@@ -93,18 +100,33 @@ Template.CreateRecipe.events({
             ingridients.push([$(element).val(), $(ingridientsAmountAll).eq(index).val()]);
         });
     
-        // CALL RECIPE CREATION METHOD
-        Meteor.call('recipes.insert', name, category, description, directions, ingridients, images, time, private, video, (err, res) => {
-            if (err) {
-                Bert.alert(err.reason, 'danger');
-            } else {
-                if (res.isError) {
-                    Bert.alert(res.err.reason, 'danger');
-                } else {
-                    Bert.alert('Recipe posted successfully', 'success');
-                }
-            }
+        console.log(ingridients);
+        console.log(ingridients.length);
+
+        // GET RECIPE IMAGES
+        const images = [];
+        $(".cr-uploaded-image").each(function(index, element){
+            // push all images into the array
+            images.push($(element).data("img"));
         });
+        if (images.length < 1) {
+            Bert.alert('Please add at least one recipe photo!', 'danger');
+            throw new Meteor.Error("error-photos", "Please add at least one recipe photo!");
+        }
+
+
+        // CALL RECIPE CREATION METHOD
+        // Meteor.call('recipes.insert', name, category, description, directions, ingridients, images, time, private, video, (err, res) => {
+        //     if (err) {
+        //         Bert.alert(err.reason, 'danger');
+        //     } else {
+        //         if (res.isError) {
+        //             Bert.alert(res.err.reason, 'danger');
+        //         } else {
+        //             Bert.alert('Recipe posted successfully', 'success');
+        //         }
+        //     }
+        // });
 
         console.log("posting successful")
         // Clear form

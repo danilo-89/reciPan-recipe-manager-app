@@ -5,22 +5,23 @@
 
 
                 <label for="inputRecipeName">Recipe name*</label>
-                <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value="Awesome Pie">
+                <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value="Awesome Pie" placeholder="Lasagne alla Bolognese" required>
 
                 <hr>
 
                 <label>Preparation time</label>
                 <div class="mb25 xy-center-flex">
-                    <input type="number" class="input-time customInput w-100" id="inputPrepTimeHours" name="inputPrepTimeHours" value="0" min="0" max="59">
+                    <input type="number" class="input-time customInput w-100" id="inputPrepTimeHours" name="inputPrepTimeHours" min="0" max="48" placeholder="1">
                     <span class="px10">h</span>
-                    <input type="number" class="input-time customInput w-100" id="inputPrepTimeMins" name="inputPrepTimeMins" value="0" min="0" max="59">
+                    <input type="number" class="input-time customInput w-100" id="inputPrepTimeMins" name="inputPrepTimeMins" min="0" max="59" placeholder="30">
                     <span class="px10">min</span>
                 </div>
 
                 <hr>
 
                 <label for="inputRecipeCategory">Recipe category*</label>
-                <select class="customSelect w-100 mb25" name="inputRecipeCategory" id="inputRecipeCategory">
+                <select class="customSelect w-100 mb25" name="inputRecipeCategory" id="inputRecipeCategory" required>
+                  <option value="" disabled selected>Select your recipe category</option>
                   <option value="Dressings and Sauces">Dressings and Sauces</option>
                   <option value="Appetizers">Appetizers</option>
                   <option value="Salads and Sandwiches">Salads and Sandwiches</option>
@@ -51,13 +52,13 @@
                 <hr>
 
                 <label for="#inputDescription">Recipe description*</label>
-                <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque!</textarea>
+                <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50" required>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque!</textarea>
 
                 <hr>
 
                 <div id="inputsDirections">
                     <label for="">Directions*</label>
-                    <textarea id="" class="input-directions customInput" name="" rows="7" cols="50">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque! Maiores maxime, voluptatum asperiores sint aliquam quia veniam quos molestias voluptatem provident deserunt blanditiis aperiam veritatis minima quae, possimus cupiditate itaque, doloribus sequi repellendus quaerat. Voluptas consequatur quam eum neque voluptate quaerat veniam ut vel ab, dignissimos blanditiis accusantium atque fuga dolores, rerum qui iste voluptatibus sint officia. Commodi, a obcaecati id iure et, neque tenetur debitis saepe deleniti vel beatae eveniet nisi quasi ad in doloremque quam. Quaerat voluptates dolorem facilis qui impedit repellat officia vero alias quod quia, non nihil, atque dignissimos iusto in voluptatibus inventore illo libero fugiat!</textarea>
+                    <textarea id="" class="input-directions customInput" name="" rows="7" cols="50" required>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque! Maiores maxime, voluptatum asperiores sint aliquam quia veniam quos molestias voluptatem provident deserunt blanditiis aperiam veritatis minima quae, possimus cupiditate itaque, doloribus sequi repellendus quaerat. Voluptas consequatur quam eum neque voluptate quaerat veniam ut vel ab, dignissimos blanditiis accusantium atque fuga dolores, rerum qui iste voluptatibus sint officia. Commodi, a obcaecati id iure et, neque tenetur debitis saepe deleniti vel beatae eveniet nisi quasi ad in doloremque quam. Quaerat voluptates dolorem facilis qui impedit repellat officia vero alias quod quia, non nihil, atque dignissimos iusto in voluptatibus inventore illo libero fugiat!</textarea>
                 </div>
                 <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
 
@@ -74,8 +75,8 @@
                         </tr>
                         <tr>
                         <td></td>
-                        <td><input type="text" name="" class="input-create inputIngridient" value="Strawberry"></td>
-                        <td><input type="text" name="" class="input-create inputIngridientAmount" value="350 grams"></td>
+                        <td><input type="text" name="" class="input-create inputIngridient" value="Strawberry" required></td>
+                        <td><input type="text" name="" class="input-create inputIngridientAmount" value="350 grams" required></td>
                         <td></td>
                         </tr>
                         <!-- <tr>

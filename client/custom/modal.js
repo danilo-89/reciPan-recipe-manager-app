@@ -1,7 +1,12 @@
 Template.modal.helpers({
     modalData: function() {
         return Session.get('modalData')
-    }
+    },
+});
+
+
+Template.modalBlock.helpers({
+
 });
 
 Template.modal.events({

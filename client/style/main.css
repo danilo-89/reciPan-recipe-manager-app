@@ -919,6 +919,11 @@ a.sec-nav-title {
     filter: drop-shadow(0 2px 1px rgba(0,0,0,.2));
 }
 
+a.friends-nav-title {
+    -webkit-filter: none;
+    filter: none;  
+}
+
 a.profile-nav {
     width: 100%;
     font-size: 18px;
@@ -2490,6 +2495,26 @@ cursor: default;
     background-image: url(avatar.svg);
     background-position: center;
     background-size: cover;
+}
+
+.name-holder {
+    padding: 8px 16px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    position: relative;
+    color: #aba8b2;
+}
+
+.name-holder::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 30px;
+    box-shadow: -1px -1px 1px 0px #dfe4eaaf inset, -1px -1px 0px 0px #ffffffa6 inset;
+    overflow: hidden;
 }
 
 
