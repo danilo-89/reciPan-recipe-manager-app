@@ -24,6 +24,7 @@ Template.CreateRecipe.events({
         event.preventDefault();
 
         const checkString = str => typeof str === 'string';
+        const checkStringAndNotEmpty = str => typeof str === 'string' && str.trim() !== '';
         const checkNumber = value => typeof value === 'number' && value === value;
         const checkInteger = value => typeof value === 'number' && value === value && value%1 == 0;
         const checkNegative = value => typeof value === 'number' && value === value && value <  0;
@@ -46,6 +47,14 @@ Template.CreateRecipe.events({
             Bert.alert('Recipe description must be between 15 and 500 characters', 'danger');
             throw new Meteor.Error("bad-description","Invalid description");
         }
+
+
+        // GET RECIPE DIRECTIONS
+        const directions = [];
+        $(".input-directions").each(function(index, element){
+            // push all ingridients with their amount into the array
+            directions.push($(element).val());
+        });
 
         // GET VIDEO LINK
         let video = $( "#inputVideo" ).val().replace(/\s+/g, '');
@@ -78,28 +87,50 @@ Template.CreateRecipe.events({
             mins = mins + +$( "#inputPrepTimeMins" ).val();
         }
         const time = mins;
-        if (checkNumber(time) && checkInteger(time) && !checkNegative(time)) { } else {
+        if (checkInteger(time) && !checkNegative(time)) { } else {
             Bert.alert('Please add at least one recipe photo!', 'danger');
             throw new Meteor.Error("error-time", "Number must be integer, and zero or positive");
         }
         // CHECK IF RECIPE IS SET AS PRIVATE
         const private = $( "#inputPrivate" ).is(':checked');
 
-        // Get all directions with their amount
-        const directions = [];
-        $(".input-directions").each(function(index, element){
-            // push all ingridients with their amount into the array
-            directions.push($(element).val());
-        });
+        // Push all ingrident names into array and check for duplicates
+        var inputIngridientNames = $('.inputIngridient').map(function() {
+            return $(this).val();
+        }).toArray();
+        const checkForDuplicates = function hasDuplicates(arr) {
+            return arr.some( function(item) {
+                return arr.indexOf(item) !== arr.lastIndexOf(item);
+            });
+        }
+        if ( checkForDuplicates(inputIngridientNames) ) {
+            Bert.alert('There are more occurrences of same ingredient', 'danger');
+            throw new Meteor.Error("error-ingridient", "Same ingridient name error");
+        }
 
         // Get all ingridents with their amount
         const ingridients = [];
         const ingridientsAmountAll = $(".inputIngridientAmount");
-        $(".inputIngridient").each(function(index, element){
+        $(inputIngridientNames).each(function(index, element){
             // push all ingridients with their amount into the array
-            ingridients.push([$(element).val(), $(ingridientsAmountAll).eq(index).val()]);
+            if ( checkStringAndNotEmpty( element ) && checkStringAndNotEmpty( $(ingridientsAmountAll).eq(index).val() ) ) {
+                ingridients.push([element, $(ingridientsAmountAll).eq(index).val()]);
+            } else {
+                Bert.alert('Ingridient names and quantity must not be empty!', 'danger');
+                throw new Meteor.Error("error-ingridient", "Ingridient must have value");
+            }
         });
-    
+
+        // ^[\u00BF-\u1FFF\u2C00-\uD7FF\w \\r\\n\\r\n]+$
+
+        // <script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi
+
+        // /<script(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/script>/gi
+
+        // zameni tri ili više uzastopnih returna sa dva
+
+
+        // Min 1, max 25 ingridients
         if (ingridients.length < 1) {
             Bert.alert('Please add at least one ingridient!', 'danger');
             throw new Meteor.Error("error-ingridient", "At least one ingridient required!");
@@ -107,8 +138,8 @@ Template.CreateRecipe.events({
             Bert.alert('Please add no more than 25 ingridients!', 'danger');
             throw new Meteor.Error("error-ingridient", "No more than 25 ingridients allowed!");
         }
-         console.log(ingridients);
-        console.log(ingridients.length);
+
+        console.log(ingridients);
 
         // GET RECIPE IMAGES
         const images = [];
@@ -142,15 +173,15 @@ Template.CreateRecipe.events({
     "click .add-direction-fields"() {
         $("#inputsDirections").append(`
         <div class="tx-div-before"></div>
-        <textarea id="" class="input-directions customInput" name="" rows="7" cols="50"></textarea>
+        <textarea id="" class="input-directions customInput" name="" rows="7" cols="50" required></textarea>
         `);
     },
     "click .add-ingredient-fields"() {
         $("#tableCreateBody").append(`
         <tr>
         <td></td>
-        <td><input type="text"  name="" class="input-create inputIngridient"></td>
-        <td><input type="text" name="" class="input-create inputIngridientAmount"></td>
+        <td><input type="text"  name="" class="input-create inputIngridient" required></td>
+        <td><input type="text" name="" class="input-create inputIngridientAmount" required></td>
         <td class="delete-row">&#10006;</td>
         </tr>
         `);
