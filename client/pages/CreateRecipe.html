@@ -1,6 +1,7 @@
 <template name="CreateRecipe">
     <div class="wrapper">
         <div class="create-recipe-container">
+            {{#if getFormReady}}
             <form action="">
 
 
@@ -122,9 +123,10 @@
 
 
                 <br>
-                <button type="reset" value="Reset">Reset</button>
+                <div id="resetForm">Reset</div>
                 <br>
             </form>
+            {{/if}}
         </div>
     </div>
 

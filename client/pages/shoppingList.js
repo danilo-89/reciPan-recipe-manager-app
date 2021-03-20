@@ -187,6 +187,7 @@ Template.ShoppingList.events({
         FlowRouter.go(`/single-recipe/${this.recId}`);
     },
     "click .remove-from-shoplist-btn"() {
+        console.log("deleting shoplist");
         Meteor.call('shoplist.deleteRecipe', this.recId, (err, res) => {
             if (err) {
                 Bert.alert(err.reason, 'danger');
@@ -227,7 +228,7 @@ Template.ShoppingList.events({
             });
         }
     },
-    "click #emptyShoplistBtn"() {
+    "click .recipe-tasks-menu-wrapper.active #emptyShoplistBtn"() {
         Meteor.call('shoplist.deleteList', this.recId, (err, res) => {
             if (err) {
                 Bert.alert(err.reason, 'danger');

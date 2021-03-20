@@ -4,9 +4,9 @@ import { Recipes } from '../../imports/api/recipesBase.js';
 import '../../imports/startup/accounts-config.js';
 
 
-// Template.CreateRecipe.onRendered(function () {
-   
-// })
+Template.CreateRecipe.onRendered(function () {
+    Session.set('formReady', true);
+})
 
 Template.CreateRecipe.onDestroyed( function(event) {
     // confirm("54645654");
@@ -15,6 +15,11 @@ Template.CreateRecipe.onDestroyed( function(event) {
 });
 
 
+Template.CreateRecipe.helpers({
+    getFormReady: () => {
+        return Session.get('formReady');
+    },
+});
 
 
 Template.CreateRecipe.events({
@@ -30,6 +35,8 @@ Template.CreateRecipe.events({
         const checkNegative = value => typeof value === 'number' && value === value && value <  0;
         const checkMinMax = (value, min, max) => typeof value === 'number' && value === value && value >= min && value <= max;
         const checkStringLength = (str, min, max) => typeof str === 'string' && str.length >= min && str.length <= max;
+        const regexSanitiser = /<script(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/script>/gi;
+        const sanitiseString = value => value.replace(regexSanitiser, ' ');
 
         // GET RECIPE NAME
         const name = $( "#inputRecipeName" ).val();
@@ -42,19 +49,31 @@ Template.CreateRecipe.events({
         const category = $( "#inputRecipeCategory" ).val();
 
         // GET RECIPE DESCRIPTION
-        const description = $( "#inputDescription" ).val();
-        if (checkStringLength(description, 15, 500)) {} else {
-            Bert.alert('Recipe description must be between 15 and 500 characters', 'danger');
+        const description = sanitiseString($( "#inputDescription" ).val());
+        if (checkStringLength(description, 15, 750)) {} else {
+            Bert.alert('Recipe description must be between 15 and 750 characters', 'danger');
             throw new Meteor.Error("bad-description","Invalid description");
         }
-
 
         // GET RECIPE DIRECTIONS
         const directions = [];
         $(".input-directions").each(function(index, element){
-            // push all ingridients with their amount into the array
-            directions.push($(element).val());
+            // push all recipe directions into the array
+            const directionEntry = $(element).val();
+            if (checkStringLength(directionEntry, 5, 1500)) {} else {
+                Bert.alert('Recipe direction must be between 5 and 1500 characters', 'danger');
+                throw new Meteor.Error("bad-description","Invalid direction");
+            }
+            directions.push(sanitiseString(directionEntry));
         });
+
+        if (directions < 1) {
+            Bert.alert('Please add at least one recipe direction!', 'danger');
+            throw new Meteor.Error("error-ingridient", "At least one direction required!");
+        } else if (directions > 25) {
+            Bert.alert('Please add no more than 25 recipe directions!', 'danger');
+            throw new Meteor.Error("error-ingridient", "No more than 25 directions allowed!");
+        }
 
         // GET VIDEO LINK
         let video = $( "#inputVideo" ).val().replace(/\s+/g, '');
@@ -88,13 +107,13 @@ Template.CreateRecipe.events({
         }
         const time = mins;
         if (checkInteger(time) && !checkNegative(time)) { } else {
-            Bert.alert('Please add at least one recipe photo!', 'danger');
+            Bert.alert('Invalid time value', 'danger');
             throw new Meteor.Error("error-time", "Number must be integer, and zero or positive");
         }
         // CHECK IF RECIPE IS SET AS PRIVATE
         const private = $( "#inputPrivate" ).is(':checked');
 
-        // Push all ingrident names into array and check for duplicates
+        // Push all INGRIDIENT names into array and check for duplicates
         var inputIngridientNames = $('.inputIngridient').map(function() {
             return $(this).val();
         }).toArray();
@@ -120,15 +139,6 @@ Template.CreateRecipe.events({
                 throw new Meteor.Error("error-ingridient", "Ingridient must have value");
             }
         });
-
-        // ^[\u00BF-\u1FFF\u2C00-\uD7FF\w \\r\\n\\r\n]+$
-
-        // <script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi
-
-        // /<script(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/script>/gi
-
-        // zameni tri ili više uzastopnih returna sa dva
-
 
         // Min 1, max 25 ingridients
         if (ingridients.length < 1) {
@@ -197,8 +207,19 @@ Template.CreateRecipe.events({
         $( e.target ).next(".input-directions").remove();
         $( e.target ).remove();
     },
+    "click #resetForm"() {
+        
+        resetForm();
+    },
 });
 
+const resetForm = function() {
+    Session.set('formReady', null);
+    setTimeout(() => {
+        Session.set('formReady', true);
+    }, 0)
+
+}
 
 // window.addEventListener('beforeunload', function (e) {
 //     alert("test");

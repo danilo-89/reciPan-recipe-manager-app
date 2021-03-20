@@ -2321,6 +2321,7 @@ form.recipe-tasks-menu-item {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .inbox-card-wrapper {
@@ -2351,7 +2352,7 @@ form.recipe-tasks-menu-item {
     padding: 10px 10px;
     width: 100%;
     background-color: #aba8b2;
-    border-radius: 10px 0 10px 0;
+    border-radius: 10px 0 0 0;
 }
 
 .inbox-card-top-user {
