@@ -13,20 +13,22 @@ Template.profile.onRendered(function () {
         const ready = this.subscriptionsReady();
         if (ready) {
             Session.set("ready", true);
-            Meteor.call('getUserFavoritesCount', (err, res) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    Session.set('userFavoritesCount', res);
-                }
-            });
-            Meteor.call('getUserPostsTotal', (err, res) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    Session.set('userRecipesCount', res);
-                }
-            })
+            if (Meteor.user()) {
+                Meteor.call('getUserFavoritesCount', (err, res) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        Session.set('userFavoritesCount', res);
+                    }
+                });
+                Meteor.call('getUserPostsTotal', (err, res) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        Session.set('userRecipesCount', res);
+                    }
+                })
+            }
         }
     })
 
@@ -70,12 +72,13 @@ Template.profile.helpers({
 });
 
 Template.profile.events({
+    "click .go-to-my-recipes-btn"() {
+        FlowRouter.go(`/myRecipes`);
+    },
     "click .friends-info-btn"() {
-        // console.log(this._id);
         FlowRouter.go(`/friends`);
     },
     "click .go-to-favorites-btn"() {
-        // console.log(this._id);
         FlowRouter.go(`/favorites`);
     },
 });

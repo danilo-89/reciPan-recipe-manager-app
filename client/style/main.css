@@ -2249,6 +2249,7 @@ form.recipe-tasks-menu-item {
     background-image: url("avatar.svg");
     background-position: center;
     background-size: cover;
+    border: 1px solid #939495;
 }
 
 .info-profile-name {

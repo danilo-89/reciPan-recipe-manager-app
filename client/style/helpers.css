@@ -360,6 +360,14 @@ margin-bottom: 2px;
     padding-top: 25px;
 }
 
+.pr3 {
+    padding-right: 3px;
+}
+
+.pr5 {
+    padding-right: 5px;
+}
+
 .pr10 {
     padding-right: 10px;
 }

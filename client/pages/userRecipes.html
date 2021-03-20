@@ -1,0 +1,130 @@
+<template name="userRecipes">
+    <div class="wrapper h-100">
+        <div class="home-header-container xy-center-flex">
+            <div class="home-header-wrapper width-default">
+                <div class="d-flex space-between mx-auto pl10 pr10">
+                    <!-- <input class="home-header-search" type="text"> -->
+                        <span class="home-top-btn"><i class="far fa-arrow-alt-circle-up"></i></span>
+                        <span class="home-header-btn home-search-btn">
+                            <i class="fas fa-search btn-icon"></i>
+                            <input type="text" placeholder="broccoli soup pepper" class="home-header-search" id="homeHeaderSearch">
+                        </span>
+                        <span class="home-header-btn home-fav-btn {{#if getSearchVal}}hide{{/if}}"><i class="fas fa-heart"></i></span>
+                        <span class="icon-clear-search {{#if getSearchVal}}show{{/if}}"><i class="fas fa-times-circle"></i></span>
+                </div>
+            </div>            
+        </div>
+        <div class="behind-search-header mb20">
+            <div class="orange-header-ribbon">
+                <img class="home-logo-img" src="/logo-simple.svg" alt="reciPan logo">
+            </div>
+        </div>
+
+        <!-- {{#if Template.subscriptionsReady}} -->
+
+        {{#if isReady}}
+
+        <div class="text-center mb15">
+            <span class="name-holder"><span class="pr5"><i class="far fa-user"></i></span>{{getUserProfile.username}}'s recipes</span>
+        </div>
+
+        <!-- {{getSearchCount}} -->
+        {{#unless getSearchCount}}
+            {{#if getNoSearchResultes}}
+            <div class="helper-container text-center">
+                <p class="mb10">Your search term <b>{{getSearchVal}}</b> - didn't match any recipes.<br>Keep searhing.</p>
+                <img class="svg-helper mb10" src="/chef3.svg" alt="">
+                <div class="btn-standard btn-clear-search"><span>Clear search</span></div>
+            </div>
+            {{/if}}
+        {{/unless}}
+
+        <div class="new-recipe-container container">
+            {{#unless Template.subscriptionsReady}}
+
+            {{#if isScrollOn}}
+            <!-- <div>scrolling on....</div> -->
+            <div class="post-loader"></div>
+            {{else}}
+            <!-- <div>loading.......</div> -->
+            {{/if}}
+
+            {{/unless}}
+
+            <div class="home-recipes-container">
+                {{ #each getRecipes }}
+                
+                    <div class="home-recipe-container-wrapper">
+                        <div class="home-recipe-container" style="background-image: url({{images}});">
+                            <div class="home-recipe-header">
+                                <span>{{getTime time}}</span>
+                                {{#if private}}
+                                <span>private recipe</span>
+                                {{else}}
+                                <span>
+                                    <i class="far fa-star"></i><span>{{roundTo1 (getRaiting starRatingByUser)}}</span>
+                                    <i class="fas fa-heart"></i><span class="ml3">{{favorite}}</span>
+                                </span>
+                                {{/if}}
+                            </div>
+                            <!-- {{ #if private }}
+                            <p class="color-gray home-recipe-private"><i class="fas fa-user-secret"></i></p>
+                            {{ /if }} -->
+                            <div class="home-recipe-title">
+                                <p class="p-title">{{name}}</p>
+                                <div class="home-recipe-container-bottom">
+                                    <p class="home-recipe-category go">{{category}}</p>
+                                    <hr class="mt0">
+                                    <div class="home-recipe-description">
+                                        <p class="p-description">{{description}}</p>
+                                    </div>    
+                                </div>
+                            </div>
+
+                        </div>
+                    
+                    </div>
+                    <!-- <img src="{{images}}" alt=""> -->
+                {{ /each }}
+                <!-- <div class="home-recipe-container-wrapper ghostFiller" >
+                    <div class="home-recipe-container">
+                        <h3 class="home-recipe-title"></h3>
+                    </div>
+                </div> -->
+            </div>
+            
+
+        </div>
+
+        {{else}}
+        
+        <!-- session not ready -->
+        <div class="post-loader"></div>
+
+        {{/if}}
+        <!-- {{else}}
+
+            <div>loading</div>
+
+        {{/if}} -->
+
+        {{#unless Template.subscriptionsReady}}
+
+            {{#if isScrollOn}}
+            <!-- <div>scrolling on....</div> -->
+            <div class="post-loader"></div>
+            {{else}}
+            <!-- <div>loading.......</div> -->
+            {{/if}}
+
+        {{/unless}}
+        <br>
+        <!-- {{#if isScrollOn}}
+            {{#unless Template.subscriptionsReady}}
+            <div>scrolling on....</div>
+            {{/unless}}
+        {{/if}} -->
+
+
+    </div>
+</template>

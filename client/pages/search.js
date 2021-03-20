@@ -54,8 +54,7 @@ Template.Search.onRendered(function () {
     });
 
     $(".wrapper").on('scroll', function(e) {
-        // console.log(topPos, "element position");
-         // console.log($('.behind-search-header').outerHeight(), "element height");
+
         
         topPos = headerElem.offset().top;
 
@@ -69,20 +68,6 @@ Template.Search.onRendered(function () {
                 targetElem.removeClass("home-header-effect");
             }
         };
-
-
-            // console.log("position:", $(".wrapper").scrollTop());
-            // console.log("height:", $(".wrapper").outerHeight(true));
-            // console.log("total:", $(".wrapper").prop('scrollHeight'));
-
-            // console.log(
-            //     (
-            //         $(".wrapper").prop('scrollHeight')
-            //     ), 
-            //     (
-            //         $(".wrapper").scrollTop() + $(".wrapper").outerHeight(true)
-            //     )
-            // );
 
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
 
@@ -112,22 +97,8 @@ Template.Search.onRendered(function () {
 
             }
             console.log("posts curently visible: ", Recipes.find().count());
-            // if($(".wrapper").scrollTop() + $(".wrapper").height() == window.innerHeight-200) {
-            //     alert("bottom!");
-            // }
 
-        // if ($('#box-in-shadow').scrollTop() + $(window).height() > $('#box-in-shadow > div').height() + 96) {
-        //     // show spinner
-        //     const spinnerWrapper = document.querySelector(".pag-spinner-blue");
-        //     spinnerWrapper.style.display = "block";
-        //     Session.set("clubPostsLimit", Session.get("clubPostsLimit") + 6); // when it reaches the end, add another 9 elements
-        // }
     })
-
-
-
-
-
 
 
 });
@@ -182,19 +153,6 @@ Template.Search.helpers({
             return 0;
         }
     },
-    // replaceSpaceWithUnderscore: (e) => {
-    //     return e.split(' ').join('_');
-    // },
-    // returnSector: () => {
-    //     return FlowRouter.getQueryParam('sector');
-    // },
-    // getSector: (btnSector, flowSector) => {
-    //     if(btnSector === flowSector) {
-    //         return 'btn-shc-active';
-    //     } else {
-    //         return;
-    //     }
-    // }
 
 });
 
@@ -214,7 +172,6 @@ Template.Search.events({
         $(".wrapper").animate({scrollTop: 0}, 1000);
     },
     'click .icon-clear-search' () {
-        console.log("wiiiiiiiiiiiiiiiiiiii")
         $('.home-header-search').val("");
         Session.set("limit", 12);
         Session.set("skip", 0);
@@ -244,26 +201,15 @@ Template.Search.events({
             var cleanArray = inputValue.filter(function(x) {
                 return x.length > 2
             });
-
-            // cleanArray = cleanArray.map( function( val ){ 
-            //     return new RegExp(val); 
-            // });
             if(inputValue.length > 2) {
                 Session.set("limit", 12);
                 Session.set("skip", 0);
                 $('.wrapper').animate({scrollTop: 0}, 100);
                 $(window).scrollTop();
             }
-
-
             Session.set("searchArray", cleanArray);
             $('.wrapper').animate({scrollTop: 0}, 0);
-            // Session.set("noSearchResults", true);
             console.log(cleanArray);
         }
     },
 });
-
-// "click .on-club-post"() {
-//     FlowRouter.go(`/clubMy/${this._id}`);
-// },

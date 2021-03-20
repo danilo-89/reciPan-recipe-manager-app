@@ -128,24 +128,7 @@ Meteor.publish('users.friendsActive', function() {
 
 Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArray) {
     check(skip, Number);
-    // if(!this.userId) {
-    //     return this.ready()
-    // }
-    // const myClubs = Clubs.find({ verified: true, 'mainSubs.userId': this.userId, _id: clubId }, { fields: { vendorGroup: 1 }}).fetch();
-    // const limit = myClubs.length * 10;
-    // const myClubsArr = []
-    // myClubs.forEach(c => {
-    //     myClubsArr.push(c.vendorGroup);
-    // })
-
-
-
-    // var positiveIntegerCheck = Match.Where(function(x) {
-    //     check(x, Match.Integer);
-    //     return x >= 0;
-    //   });
-    //   check(skipCount, positiveIntegerCheck);
-
+    check(limit, Number);
     if(searchArray == false) {
         return Recipes.find(
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
@@ -153,13 +136,70 @@ Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArra
             { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     } else {
-        return Recipes.find(
-    //         // { private: 'active', postType: 'clubPost', vendorGroup: clubName, hashtags: { $in: hashtags } }, 
+        return Recipes.find( 
     {$and: [
         { searchIndex: { $all: searchArray } },
-        // { searchIndex: { $all: {$elemMatch: { searchArray }}     } },
         { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
     ]},
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+        );
+    }
+});
+
+Meteor.publish("recipesMy", function publishRecipesHome(limit, skip, searchArray) {
+    check(skip, Number);
+    check(limit, Number);
+    if(searchArray == false) {
+        return Recipes.find(
+            // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
+            { owner: this.userId },
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+        );
+    } else {
+        return Recipes.find( 
+    {$and: [
+        { searchIndex: { $all: searchArray } },
+        { owner: this.userId }
+    ]},
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+        );
+    }
+});
+
+
+Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip, searchArray) {
+    check(skip, Number);
+    check(limit, Number);
+    check(currUser, String);
+
+    const profileUser = Meteor.users.find({ username: currUser }).fetch()[0];
+    if(searchArray == false) {
+        return Recipes.find(
+            {$and: [
+                { owner: profileUser._id },
+                { $or: [ 
+                    { private: { $ne: true } },
+                    {$and: [ 
+                        {privateAllow: {$exists: true}},
+                        {privateAllow: { $in: [this.userId] }} 
+                    ]} 
+                ]}
+            ]},
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+        );
+    } else {
+        return Recipes.find( 
+            {$and: [
+                { searchIndex: { $all: searchArray } },
+                { owner: profileUser._id },
+                { $or: [ 
+                    { private: { $ne: true } },
+                    {$and: [ 
+                        {privateAllow: {$exists: true}},
+                        {privateAllow: { $in: [this.userId] }} 
+                    ]} 
+                ]}
+            ]},
     { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     }
@@ -168,6 +208,8 @@ Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArra
 
 Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
 
+    check(limit, Number);
+    
     const favorited = Meteor.users.find({ _id: this.userId }).fetch()[0].public.favorites;
     if(favorited===false) {
         return this.ready()
@@ -178,7 +220,6 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
         return Recipes.find(
             {$and: [
                 { _id: { $in: favoriteIds } },
-            // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
                 { $or: [ 
                     { private: { $ne: true } }, 
                     { owner: this.userId },  
@@ -191,12 +232,10 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
             { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit }
         );
     } else {
-        return Recipes.find(
-    //         // { private: 'active', postType: 'clubPost', vendorGroup: clubName, hashtags: { $in: hashtags } }, 
+        return Recipes.find( 
     {$and: [
         { _id: { $in: favoriteIds } },
         { searchIndex: { $all: searchArray } },
-        // { searchIndex: { $all: {$elemMatch: { searchArray }}     } },
         { $or: [ 
             { private: { $ne: true } }, 
             { owner: this.userId },  

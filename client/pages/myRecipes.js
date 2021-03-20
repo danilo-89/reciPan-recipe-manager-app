@@ -1,24 +1,25 @@
 import { Recipes } from '../../imports/api/recipesBase.js';
 
 
-Template.Favorites.onCreated(function () {
+Template.myRecipes.onCreated(function () {
 
     Session.set("ready", false);
     Session.set("scrollOn", false);
     Session.set("limit", 12);
+    Session.set("skip", 0);
     Session.set("searchArray", "");
 
     this.autorun(() => {
         const limit = Session.get("limit");
+        const skip = Session.get("skip");
         const searchArray = Session.get("searchArray");
-        this.subscribe('users.favoritesList');
-        this.subscribe('recipesFav', limit, searchArray);
+        this.subscribe('recipesMy', limit, skip, searchArray);
     })
     
 });
 
 
-Template.Favorites.onRendered(function () {
+Template.myRecipes.onRendered(function () {
 
     let headerElem = $('.behind-search-header');
     let targetElem = $('.home-header-container');
@@ -31,6 +32,7 @@ Template.Favorites.onRendered(function () {
         if (ready) {
             Session.set("ready", true);
         }
+
     });
 
 
@@ -43,10 +45,13 @@ Template.Favorites.onRendered(function () {
         }
     }, 0)
 
-
-
-    let countTotal = 15;
+    let countTotal = 0;
     let countDiscovered = 0;
+
+    Meteor.call('postsTotal', function(error, result){
+        console.log("REAL total posts:", result);
+        countTotal = result;
+    });
 
     $(".wrapper").on('scroll', function(e) {
 
@@ -65,17 +70,33 @@ Template.Favorites.onRendered(function () {
         };
 
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
-                countDiscovered =  Session.get("limit");
+
+                countDiscovered =  Session.get("limit") + Session.get("skip");
                 if (countDiscovered<countTotal) {
                     Session.set("scrollOn", true);
                     console.log("trigger");
-                    Session.set("limit", Session.get("limit") + 4);
+                    // Session.set("limit", Session.get("limit") + 4);
+                    // Session.set("limit", 12);
+                    Session.set("skip", Session.get("skip") + 4);
+    
+                    console.log("limit+skip=", Session.get("limit")+Session.get("skip"));
                 }
+
+
+                
             } 
             
+            if ($(".wrapper").scrollTop() < 5 && Session.get("skip")!==0) {
+                Session.set("scrollOn", true);
+                $('.wrapper').animate({scrollTop: 30}, 100);
+                if (Session.get("skip")<=3) {
+                    Session.set("skip", 4);
+                } else {
+                    Session.set("skip", Session.get("skip") - 4);
+                }
+
+            }
             console.log("posts curently visible: ", Recipes.find().count());
-
-
 
     })
 
@@ -86,7 +107,7 @@ Template.Favorites.onRendered(function () {
 
 
 
-Template.Favorites.helpers({
+Template.myRecipes.helpers({
     isReady: () => {
         return Session.get("ready");
     },
@@ -136,7 +157,7 @@ Template.Favorites.helpers({
 });
 
 
-Template.Favorites.events({
+Template.myRecipes.events({
     "click .home-recipe-container"() {
         // console.log(this._id);
         FlowRouter.go(`/single-recipe/${this._id}`);

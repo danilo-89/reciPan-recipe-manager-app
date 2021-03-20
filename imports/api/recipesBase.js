@@ -62,7 +62,7 @@ Meteor.methods({
 
       // check if link(s) is(are) propper
       const checkLinkUrl = Meteor.absoluteUrl();
-      const isPropper = (currentValue) => currentValue.startsWith("..");
+      const isPropper = (currentValue) => currentValue.startsWith("../");
       if (images.every(isPropper)===false) {
         throw new Meteor.Error("error-photos", "Bad photo link(s)");
       }
@@ -140,7 +140,9 @@ Meteor.methods({
   },
 
   getUserPostsTotal: function () {
+    if (Meteor.userId()) {
     return Recipes.find({ owner: this.userId }).count();
+    }
   },
 
   getUserFavoritesCount: () => {

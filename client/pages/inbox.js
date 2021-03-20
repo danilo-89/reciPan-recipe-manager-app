@@ -65,7 +65,7 @@ Template.inbox.events({
         FlowRouter.go('/single-recipe/' + this.recipeId);
     },
     "click .userNameLink"(event) {
-        const userProfileName = event.currentTarget.textContent;
+        const userProfileName = $(event.currentTarget).find( ".spanGoName" ).text();
         if (Meteor.user().username === userProfileName) {
             FlowRouter.go('/profile');
         } else {
