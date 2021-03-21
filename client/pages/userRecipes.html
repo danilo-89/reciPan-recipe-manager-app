@@ -58,7 +58,7 @@
                 {{ #each getRecipes }}
                 
                     <div class="home-recipe-container-wrapper">
-                        <div class="home-recipe-container" style="background-image: url({{images}});">
+                        <div class="home-recipe-container" style="background-image: url({{images.[0]}});">
                             <div class="home-recipe-header">
                                 <span>{{getTime time}}</span>
                                 {{#if private}}

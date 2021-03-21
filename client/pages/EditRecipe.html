@@ -1,5 +1,5 @@
 <template name="EditRecipe">
-
+    {{#if Template.subscriptionsReady}}
     {{#if getRecipeAuthor}}
 
     <div class="wrapper">
@@ -54,18 +54,20 @@
                     <hr>
 
                     <label for="#inputDescription">Recipe description*</label>
-                    <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50"></textarea>
+                    <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50">{{description}}</textarea>
     
                     <hr>
 
                     <div id="inputsDirections">
                         <label for="">Directions:</label>
-                        {{ #each directions }}
-                        <textarea id="" class="input-directions customInput" name="" rows="7" cols="50">{{this}}</textarea>
-                        {{ /each }}
-                        <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
+                        {{#each directions}}
+                            {{#unless isEqual @index 0}}
+                            <div class="tx-div-before"></div>
+                            {{/unless}}
+                            <textarea id="" class="input-directions customInput" name="" rows="7" cols="50">{{this}}</textarea>
+                        {{/each}}
                     </div>
-                    <button type="button" class="add-direction-fields">+</button>
+                    <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
 
                     <hr>
                 
@@ -81,32 +83,20 @@
                             {{ #each ingridients }}
                             <tr>
                             <td></td>
-                            <td><input type="text" name="" class="input-create inputIngridient" value="{{ this.[0] }}"></td>
-                            <td><input type="text" name="" class="input-create inputIngridientAmount" value="{{ this.[1] }}"></td>
-                            <td class="delete-row">&#10006;</td>
-                            </tr>
-                            {{ /each }}
-                            <!-- <tr>
+                            <td><input type="text" name="" class="input-create inputIngridient" value="{{ this.[0] }}" required></td>
+                            <td><input type="text" name="" class="input-create inputIngridientAmount" value="{{ this.[1] }}" required></td>
+                            {{#if isEqual @index 0}}
                             <td></td>
-                            <td><input type="text"  name="inputRecipeName" class="input-create"></td>
-                            <td><input type="text" name="inputRecipeName" class="input-create"></td>
+                            {{else}}
                             <td class="delete-row">&#10006;</td>
-                            </tr> -->
+                            {{/if}}
+                            </tr>
+                            
+                            {{ /each }}
                         </tbody>
                         </table>
-        
-                        <!-- {{ #each ingridients }}
-                                <span>{{this.[0]}}</span>
-                                <span>{{this.[1]}}</span>
-                        {{ /each }} -->
-                        
+
                         <button type="button" class="add-ingredient-fields btn-plus-create mt20 mb50">+</button>
-
-                    <hr>
-
-                    <button type="button" class="add-ingredient-fields">+</button>
-                    <button type="reset" value="Reset">Reset</button>
-
 
                     <hr>
 
@@ -117,33 +107,25 @@
                     </div>
     
                     <div class="d-flex space-between mb25">
-                        <figure id="crImg1" class="cr-uploaded-image-figure"></figure>
-                        <figure id="crImg2" class="cr-uploaded-image-figure"></figure>
-                        <figure id="crImg3" class="cr-uploaded-image-figure"></figure>
+                        <figure id="crImg1" class="cr-uploaded-image-figure">{{#if images.[0]}}<div class="cr-uploaded-image" style="background-image: url('{{images.[0]}}');" data-img="{{images.[0]}}"></div><span class="cr-clear-image-btn">X</span>{{/if}}</figure>
+                        <figure id="crImg2" class="cr-uploaded-image-figure">{{#if images.[1]}}<div class="cr-uploaded-image" style="background-image: url('{{images.[1]}}');" data-img="{{images.[1]}}"></div><span class="cr-clear-image-btn">X</span>{{/if}}</figure>
+                        <figure id="crImg3" class="cr-uploaded-image-figure">{{#if images.[2]}}<div class="cr-uploaded-image" style="background-image: url('{{images.[2]}}');" data-img="{{images.[2]}}"></div><span class="cr-clear-image-btn">X</span>{{/if}}</figure>
                     </div>
     
                     <hr>
 
                     <label for="inputVideo">Recipe video (YouTube link only)</label>
-                    <input class="customInput w-100 mb25" type="url" id="inputVideo">
+                    <input class="customInput w-100 mb25" type="url" id="inputVideo" value="{{video}}">
     
                     <hr>
-
-
-                    <label for="inputRecipeImg1">1. Image</label>
-                    <input type="text" id="inputRecipeImg1" name="inputRecipeImg1" value="https://images.unsplash.com/photo-1592113899382-b8752d364001?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fHBpZXxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=500&q=60"><br>
-                    {{ #each images }}
-                    <div>{{this}}</div>
-                    {{ /each }}
 
                     {{ #if checkIfPrivate }}
                     <input type="checkbox" id="inputPrivate" name="inputPrivate" value="private" checked="true">
                     <label for="inputPrivate">Private recipe</label><br>
                     {{ /if }}
 
-                    <button type="button" class="test">test</button>
 
-                    <input type="submit" value="Submit">
+                    <input class="btn btn-custom d-block fs-16px mx-auto mt20 mb20" type="submit" value="SUBMIT">
                 </form>
             {{ /with }}
             
@@ -154,6 +136,7 @@
     <div class="btn-standard back-btn mt20"><span>Go back</span></div>
     <img class="svg-holder-img-1 mx-auto mt20" src="/chef4.svg" alt="chef apologises">
     <p class="mx-auto text-center holder-p-1">Sorry, this recipe either doesn't exist or you're not its author and you are not allowed to edit it.</p>
+    {{/if}}
     {{/if}}
 
 </template>

@@ -1,3 +1,5 @@
+import { Recipes } from '../../imports/api/recipesBase.js';
+
 Template.SingleRecipeNav.onCreated(function () {
     // $(window).on('scroll', function(e) {
     //     // ... event processing stuff; 
@@ -51,6 +53,13 @@ Template.SingleRecipeNav.onRendered(function(){
 //       $('#message').text('');
 //     }
 // });
+
+Template.SingleRecipeNav.helpers({
+    getSingleRecipe: () => {
+        return Recipes.find().fetch()[0];
+    },
+})
+
 
 Template.SingleRecipeNav.events({
     "click a"(event) {

@@ -96,6 +96,92 @@ Meteor.methods({
       
   },
 
+      // EDIT RECIPE
+      "recipes.edit"(
+        editId,
+        name,
+        category,
+        description,
+        directions,
+        ingridients,
+        images,
+        time,
+        private,
+        video
+    ) {
+        
+        check(name, String);
+        check(category, String);
+        check(description, String);
+        check(directions, Array);
+        check(time, Number);
+        check(images, Array);
+        check(ingridients, Array);
+        check(private, Boolean);
+        check(video, String);
+  
+        const part1Arr = ingridients
+            .map(function (x) {
+                return x[0].toLowerCase();
+            })
+            .filter(function (x) {
+                return x.length > 2;
+            });
+        const part2Arr = name
+            .toLowerCase()
+            .split(" ")
+            .filter(function (x) {
+                return x.length > 2;
+            });
+        const allPartsArr = part1Arr.concat(part2Arr);
+        const searchIndex = allPartsArr.filter((item, index) => {
+            return allPartsArr.indexOf(item) == index;
+        });
+        check(searchIndex, Array);
+  
+  
+        if (images.length < 1 || images.length > 3) {
+            throw new Meteor.Error("error-photos", "Please add at least one recipe photo!");
+        }
+  
+        // check if link(s) is(are) propper
+        const checkLinkUrl = Meteor.absoluteUrl();
+        const isPropper = (currentValue) => currentValue.startsWith("../");
+        if (images.every(isPropper)===false) {
+          throw new Meteor.Error("error-photos", "Bad photo link(s)");
+        }
+  
+        try {
+          if (Meteor.userId()) {
+  
+            Recipes.update(
+              { _id: editId, owner: Meteor.userId() },
+              { $set: {
+                name,
+                category,
+                description,
+                directions,
+                ingridients,
+                searchIndex,
+                images,
+                time,
+                private,
+                video,
+                createdAt: new Date(), // current time
+                owner: Meteor.userId(),
+                username: Meteor.user().username
+              }});
+  
+            return { isError: false };
+          } else {
+            throw new Meteor.Error("not-logged-in", "You are not logged in");
+          }
+        } catch (err) {
+          return { isError: true, err };
+        }
+        
+    },
+
   // DELETE RECIPE
   "recipes.remove"(recipeId) {
       check(recipeId, String);
