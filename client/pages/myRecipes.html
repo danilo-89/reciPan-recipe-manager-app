@@ -33,9 +33,12 @@
         <!-- {{getSearchCount}} -->
         {{#unless getSearchCount}}
             {{#if getNoSearchResultes}}
-            <div class="helper-container text-center">
-                <p class="mb10">Your search term <b>{{getSearchVal}}</b> - didn't match any recipes.<br>Keep searhing.</p>
-                <img class="svg-helper mb10" src="/chef3.svg" alt="">
+            <div class="helper-container-search clearfix text-center mt30 mb20">
+                <img class="svg-helper svg-no-result" src="/chef3.svg" alt="">
+                <p class="">Your search term <b>{{getSearchVal}}</b> - didn't match any recipes.<br>Keep searching.</p>
+            </div>
+    
+            <div class="text-center">
                 <div class="btn-standard btn-clear-search"><span>Clear search</span></div>
             </div>
             {{/if}}
