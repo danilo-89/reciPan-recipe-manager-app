@@ -87,5 +87,8 @@ Template.profile.events({
     "click .go-to-favorites-btn"() {
         FlowRouter.go(`/favorites`);
     },
+    // "click .latest-user-recipe-content"() {
+    //     FlowRouter.go(`/single-recipe/${this._id}`);
+    // },
 });
 

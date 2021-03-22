@@ -1,15 +1,15 @@
 
 import { Template } from 'meteor/templating'
-
+import { Recipes } from '../../imports/api/recipesBase.js';
 
 Template.user.onCreated(function() {
     
     this.autorun(() => {
         const userProfileName = FlowRouter.getParam("userProfileName");
         this.subscribe("userProfile", userProfileName);
+        this.subscribe("recipesUser9", userProfileName);
         Session.set('userProfileName', userProfileName);
         // console.log(userId);
-        
     })
     
 });
@@ -49,6 +49,9 @@ Template.user.helpers({
     getUserProfile: () => {
         // Session.set('usr', Meteor.users.find({ _id: 'AtYGJ5WdcvH6nsBwt' }).fetch()[0]);
         return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
+    },
+    getRecipes: () => {
+        return Recipes.find({}, {sort: {createdAt: -1}});
     },
 });
 

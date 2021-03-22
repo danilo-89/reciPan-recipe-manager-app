@@ -173,6 +173,16 @@ Meteor.publish("recipesMy9", function publishRecipesMy() {
     );
 });
 
+Meteor.publish("recipesUser9", function publishRecipesUser(currUserName) {
+    return Recipes.find(
+        {$and: [
+            { username: currUserName },
+            { private: { $ne: true } }
+        ]},
+        { fields: { _id: 1, private: 1, name: 1, images: 1 }, sort: { createdAt: -1 }, limit: 9}
+    );
+});
+
 Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip, searchArray) {
     check(skip, Number);
     check(limit, Number);

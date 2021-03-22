@@ -164,17 +164,17 @@ Template.CreateRecipe.events({
 
 
         // CALL RECIPE CREATION METHOD
-        // Meteor.call('recipes.insert', name, category, description, directions, ingridients, images, time, private, video, (err, res) => {
-        //     if (err) {
-        //         Bert.alert(err.reason, 'danger');
-        //     } else {
-        //         if (res.isError) {
-        //             Bert.alert(res.err.reason, 'danger');
-        //         } else {
-        //             Bert.alert('Recipe posted successfully', 'success');
-        //         }
-        //     }
-        // });
+        Meteor.call('recipes.insert', name, category, description, directions, ingridients, images, time, private, video, (err, res) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                if (res.isError) {
+                    Bert.alert(res.err.reason, 'danger');
+                } else {
+                    Bert.alert('Recipe posted successfully', 'success');
+                }
+            }
+        });
 
         console.log("posting successful")
         // Clear form
