@@ -14,7 +14,7 @@ Meteor.publish('recipes', function recipesPublication() {
         $or: [
             { private: { $ne: true } },
             { owner: this.userId },
-          ],
+        ],
     });
 });
 
@@ -166,6 +166,12 @@ Meteor.publish("recipesMy", function publishRecipesHome(limit, skip, searchArray
     }
 });
 
+Meteor.publish("recipesMy9", function publishRecipesMy() {
+    return Recipes.find(
+        { owner: this.userId },
+        { fields: { _id: 1, private: 1, name: 1, images: 1 }, sort: { createdAt: -1 }, limit: 9}
+    );
+});
 
 Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip, searchArray) {
     check(skip, Number);

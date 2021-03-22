@@ -5,7 +5,6 @@
         <div class="home-header-container xy-center-flex">
             <div class="home-header-wrapper width-default">
                 <div class="d-flex space-between mx-auto pl10 pr10">
-                    <!-- <input class="home-header-search" type="text"> -->
                         <span class="home-top-btn"><i class="far fa-arrow-alt-circle-up"></i></span>
                         <span class="home-header-btn home-search-btn">
                             <i class="fas fa-search"></i>
@@ -21,6 +20,7 @@
             </div>
         </div>
 
+        {{#if Template.subscriptionsReady}}
 
         <div class="text-center mb20">
             <span class="name-holder">Favorites</span>
@@ -40,9 +40,6 @@
 
         {{/if}}
         {{/unless}}
-
-
-        <!-- {{#if Template.subscriptionsReady}} -->
 
         <div class="new-recipe-container container">
 
@@ -84,16 +81,13 @@
                         </div>
                        
                     </div>
-                    <!-- <img src="{{images}}" alt=""> -->
                 {{ /each }}
             </div>
         </div>
 
-        <!-- {{else}}
-
-            <div>loading</div>
-
-        {{/if}} -->
+        {{else}}
+        <div class="post-loader"></div>
+        {{/if}}
 
     </div>
 

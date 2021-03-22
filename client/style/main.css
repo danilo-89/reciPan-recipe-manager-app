@@ -2337,6 +2337,30 @@ form.recipe-tasks-menu-item {
     box-shadow: -1px 1px 1px 1px #ffffff;
 }
 
+
+.latest-user-recipes-wrapper {
+    display: flex;
+    /* width: 381px; */
+    flex-wrap: wrap;
+}
+
+.latest-user-recipe-container {
+    width: 33.33%;
+    padding: 2px;
+}
+
+.latest-user-recipe-content {
+    background-size: cover;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.latest-user-recipe-content:hover {
+    box-shadow: 0 1px 2px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 20%);
+}
+
 /* INBOX */
 
 .inbox-cards-container {

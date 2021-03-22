@@ -171,6 +171,9 @@ Template.userRecipes.helpers({
         console.log(Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0]);
         return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
     },
+    getCategoryLink: (categoryName) => {
+        return "/categories/"+ categoryName.replace(/ /g, '_');
+    },
 });
 
 Template.userRecipes.events({

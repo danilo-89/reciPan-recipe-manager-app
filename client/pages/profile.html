@@ -38,7 +38,14 @@
                     </div>
                 </div>
             </div>
-            <hr class="my15">
+            <hr class="mt15 mb2">
+            <div class="latest-user-recipes-wrapper">
+                {{#each getRecipes}}
+                <div class="latest-user-recipe-container">
+                    <div class="latest-user-recipe-content" style="background-image: url({{images.[0]}});"></div>
+                </div>
+                {{/each}}
+            </div>
             {{/if}}
 
         </div>

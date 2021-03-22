@@ -153,6 +153,9 @@ Template.myRecipes.helpers({
             return 0;
         }
     },
+    getCategoryLink: (categoryName) => {
+        return "/categories/"+ categoryName.replace(/ /g, '_');
+    },
 
 });
 

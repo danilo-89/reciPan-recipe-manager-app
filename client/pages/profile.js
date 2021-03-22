@@ -1,9 +1,12 @@
+import { Recipes } from '../../imports/api/recipesBase.js';
+
 Template.profile.onCreated(function () {
     Session.set("ready", false);
     this.autorun(() => {
         // this.subscribe('usersConfirmation.user');
         this.subscribe('users.user');
         this.subscribe("users.user.notice");
+        this.subscribe("recipesMy9");
     })
 });
 
@@ -68,6 +71,9 @@ Template.profile.helpers({
     getFriendNotice: () => {
         console.log("check friend notice");
         return (Meteor.user()?.notice?.friendAccept) || (Meteor.user()?.notice?.friendRequest);
+    },
+    getRecipes: () => {
+        return Recipes.find({}, {sort: {createdAt: -1}});
     },
 });
 
