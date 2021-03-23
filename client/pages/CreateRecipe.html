@@ -2,11 +2,16 @@
     <div class="wrapper">
         <div class="create-recipe-container">
             {{#if getFormReady}}
+
+            <div class="helper-container-custom clearfix text-center mt20 mb20">
+                <img class="svg-helper svg-no-result" src="/chef2.svg" alt="">
+                <p class="">Here you can write down your awesome recipe.<br><br>Have fun!</p>
+            </div>
             <form action="">
 
 
                 <label for="inputRecipeName">Recipe name*</label>
-                <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value="Awesome Pie" placeholder="Lasagne alla Bolognese" required>
+                <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value="Awesome Pie" placeholder="E.g. Lasagne alla Bolognese" required>
 
                 <hr>
 
@@ -53,13 +58,13 @@
                 <hr>
 
                 <label for="#inputDescription">Recipe description*</label>
-                <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50" required>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque!</textarea>
+                <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50" required placeholder="E.g. One of the most popular traditional Italian recipes. You will enjoy every bite.">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque!</textarea>
 
                 <hr>
 
                 <div id="inputsDirections">
                     <label for="">Directions*</label>
-                    <textarea id="" class="input-directions customInput" name="" rows="7" cols="50" required>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque! Maiores maxime, voluptatum asperiores sint aliquam quia veniam quos molestias voluptatem provident deserunt blanditiis aperiam veritatis minima quae, possimus cupiditate itaque, doloribus sequi repellendus quaerat. Voluptas consequatur quam eum neque voluptate quaerat veniam ut vel ab, dignissimos blanditiis accusantium atque fuga dolores, rerum qui iste voluptatibus sint officia. Commodi, a obcaecati id iure et, neque tenetur debitis saepe deleniti vel beatae eveniet nisi quasi ad in doloremque quam. Quaerat voluptates dolorem facilis qui impedit repellat officia vero alias quod quia, non nihil, atque dignissimos iusto in voluptatibus inventore illo libero fugiat!</textarea>
+                    <textarea id="" class="input-directions customInput" name="" rows="7" cols="50" required placeholder="E.g. Mix zucchini, mushrooms, onions, and garlic with tomato sauce and seasonings in a saucepan. Cover; cook 15 minutes and set aside.">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis cupiditate nobis nisi facere, dolorem sequi vel inventore molestias dicta totam iure, quo vero eius perspiciatis necessitatibus ipsa debitis voluptate voluptatem nulla nemo accusantium laboriosam. Quis, tempore sapiente quos beatae veniam aliquid atque non minima incidunt velit similique corrupti voluptatibus accusamus at dolorum impedit, sint aperiam placeat fugiat doloremque! Maiores maxime, voluptatum asperiores sint aliquam quia veniam quos molestias voluptatem provident deserunt blanditiis aperiam veritatis minima quae, possimus cupiditate itaque, doloribus sequi repellendus quaerat. Voluptas consequatur quam eum neque voluptate quaerat veniam ut vel ab, dignissimos blanditiis accusantium atque fuga dolores, rerum qui iste voluptatibus sint officia. Commodi, a obcaecati id iure et, neque tenetur debitis saepe deleniti vel beatae eveniet nisi quasi ad in doloremque quam. Quaerat voluptates dolorem facilis qui impedit repellat officia vero alias quod quia, non nihil, atque dignissimos iusto in voluptatibus inventore illo libero fugiat!</textarea>
                 </div>
                 <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
 
@@ -76,8 +81,8 @@
                         </tr>
                         <tr>
                         <td></td>
-                        <td><input type="text" name="" class="input-create inputIngridient" value="Strawberry" required></td>
-                        <td><input type="text" name="" class="input-create inputIngridientAmount" value="350 grams" required></td>
+                        <td><input type="text" name="" class="input-create inputIngridient" value="Strawberry" required placeholder="E.g. olive oil"></td>
+                        <td><input type="text" name="" class="input-create inputIngridientAmount" value="350 grams" required placeholder="E.g. 2 tbsp"></td>
                         <td></td>
                         </tr>
                         <!-- <tr>
@@ -107,24 +112,24 @@
                 <hr>
 
                 <label for="inputVideo">Recipe video (YouTube link only)</label>
-                <input class="customInput w-100 mb25" type="url" id="inputVideo">
+                <input class="customInput w-100 mb25" type="url" id="inputVideo" placeholder="E.g. https://www.youtube.com/watch?v=NpEaa2P7qZI">
 
                 <hr>
 
                 <div class="mb20">
-                    <input type="checkbox" id="inputPrivate" name="inputPrivate" value="private">
-                    <label class="label-private" for="inputPrivate">Make private recipe</label>
+                    <input class="cursor-pointer" type="checkbox" id="inputPrivate" name="inputPrivate" value="private">
+                    <label class="label-private cursor-pointer" for="inputPrivate">Make private recipe</label>
+                    <div class="helper-container-custom clearfix text-center mt15 mb20">
+                        <p class="">If you want to make recipe only visible to you and be able to share it only with selected people, check this box.<br><b class="text-bold">Once published, a public recipe cannot later be edited into a private one.</b></p>
+                    </div>
                 </div>
 
-                <hr class="mb25">
+                <hr class="mb15">
 
+                <button class="btn btn-custom-2 d-block fs-16px mx-auto mb30" id="resetForm">Reset fields</button>
 
-                <input class="btn btn-custom d-block fs-16px mx-auto" type="submit" value="SUBMIT">
+                <input class="btn btn-custom d-block fs-16px mx-auto mb20" type="submit" value="SUBMIT" style="min-width: 125px;">
 
-
-                <br>
-                <div id="resetForm">Reset</div>
-                <br>
             </form>
             {{/if}}
         </div>

@@ -410,6 +410,21 @@ hr {
     overflow-wrap: break-word;
 }
 
+.helper-container-custom {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fffaf3;
+    border: 2px solid #ffd49e;
+    padding: 11px 12px;
+    border-radius: 12px;
+}
+
+.helper-container-custom > p {
+    font-size: 16px;
+    overflow-wrap: break-word;
+}
+
 .svg-no-result {
     max-width: 30%;
     float: right;

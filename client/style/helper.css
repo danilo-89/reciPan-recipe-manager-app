@@ -46,18 +46,21 @@
 
 
 .customInput::placeholder,
-.customSelect::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.customSelect::placeholder,
+.input-create::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: rgb(212, 212, 212);
     opacity: 1; /* Firefox */
 }
 
 .customInput::placeholder,
-.customSelect::placeholder { /* Internet Explorer 10-11 */
+.customSelect::placeholder,
+.input-create::placeholder { /* Internet Explorer 10-11 */
     color: rgb(212, 212, 212);
 }
 
 .customInput::placeholder,
-.customSelect::placeholder { /* Microsoft Edge */
+.customSelect::placeholder,
+.input-create::placeholder { /* Microsoft Edge */
     color: rgb(212, 212, 212);
 }
 
@@ -454,6 +457,10 @@ margin-bottom: 2px;
     display: block;
 }
 
+.d-i-block {
+    display: inline-block !important;
+}
+
 .xy-center-flex {
     display: flex;
     align-items: center;
@@ -597,6 +604,10 @@ margin-bottom: 2px;
     pointer-events: none;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .btn-custom {
     padding: 7px 20px;
     border-radius: 50px;
@@ -614,6 +625,21 @@ margin-bottom: 2px;
 
 .btn-custom-1 {
     border-radius: 0 50px 50px 0;
+}
+
+.btn-custom-2 {
+    padding: 7px 20px;
+    border-radius: 50px;
+    border: 1px solid #d4d3d3;
+    background-color: #ffffff;
+    color: #373737;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.btn-custom-2:hover {
+    background-color: #f9f8f8;
+    color: #373737;
 }
 
 .btn-standard {
