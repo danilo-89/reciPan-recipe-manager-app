@@ -297,7 +297,7 @@ Meteor.publish('userProfile', function publishUserProfile(uName) {
     const profileUser = Meteor.users.find({ username: uName }).fetch()[0];
     return Meteor.users.find(
         { _id: profileUser._id },
-        { fields: { _id: 1, username: 1}}
+        { fields: { _id: 1, username: 1, 'profile.profilePhotoUrl': 1}}
     );
 });
 

@@ -53,6 +53,9 @@ Template.user.helpers({
     getRecipes: () => {
         return Recipes.find({}, {sort: {createdAt: -1}});
     },
+    getAvatarImg: () => {
+        return Meteor.users.findOne({ username: Session.get('userProfileName') })?.profile?.profilePhotoUrl ?? false;
+    },
 });
 
 Template.user.events({

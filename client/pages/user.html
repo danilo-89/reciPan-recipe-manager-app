@@ -1,4 +1,16 @@
 <template name="user">
+
+    <div class="wrapper h-100 back-secondary">
+        {{#if Template.subscriptionsReady}}
+        <div class="container mv-576 info-profile-container">
+            <div class="xy-center-flex flex-column">
+                <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+
+
     <div class="wrapper">
         <div class="container">
 
