@@ -48,7 +48,7 @@ Template.myRecipes.onRendered(function () {
     let countTotal = 0;
     let countDiscovered = 0;
 
-    Meteor.call('postsTotal', function(error, result){
+    Meteor.call('postsMyTotal', function(error, result){
         console.log("REAL total posts:", result);
         countTotal = result;
     });
