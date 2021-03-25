@@ -153,7 +153,9 @@ Template.Search.helpers({
             return 0;
         }
     },
-
+    getCategoryLink: (categoryName) => {
+        return "/categories/"+ categoryName.replace(/ /g, '_');
+    },
 });
 
 

@@ -126,6 +126,10 @@ Template.ShoppingList.helpers({
     getShoplistMode: (a) => {
         return Session.get('getShoplistMode');
     },
+    getConfirmModal: () => {
+        return Session.get('confirmModal');
+        Session.set('confirmModal', true);
+    }
 });
 
 
@@ -171,7 +175,8 @@ Template.ShoppingList.events({
         event.stopPropagation();
     },
     "click .delete-task-item"(event) {
-        Meteor.call('delete.ingridient', this.name, this.recipe, this.checked);
+        Session.set('confirmModal', this);
+        // Meteor.call('delete.ingridient', this.name, this.recipe, this.checked);
     },
     "click .increase-multi-input"(event) {
         event.stopPropagation();
@@ -258,6 +263,12 @@ Template.ShoppingList.events({
             }, 0)
             console.log('set simple');
             return true;
+        }
+    },
+    "click #confirmModal"(event) {
+        // close modal if clicked outside .confirm-modal-inside element
+        if (event.target===event.currentTarget) {
+            Session.set('confirmModal', false);
         }
     },
 });

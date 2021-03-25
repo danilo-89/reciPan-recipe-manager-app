@@ -2,9 +2,26 @@
 
         
 {{#if Template.subscriptionsReady}}
+
+{{#if getConfirmModal}}
+<div id="confirmModal">
+        <div class="confirm-modal-inside">
+                test
+                <button>yes</button>
+                <button>no</button>
+        </div>
+</div>
+{{/if}}
+
         <div class="wrapper h-100 back-secondary">
+
+
+
                 
                 <div class="container mv-576 px15 pt15">
+
+
+
                         {{#if getFullShopList}} 
                         <div class="shop-list-card mx-auto">
 

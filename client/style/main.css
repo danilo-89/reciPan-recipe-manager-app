@@ -2579,6 +2579,24 @@ cursor: default;
     overflow: hidden;
 }
 
+#confirmModal {
+    z-index: 99999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #ffffff;
+    background-color: rgba(167, 167, 167, 0.5);
+    display: flex;
+}
+
+#confirmModal .confirm-modal-inside {
+    margin: auto;
+    background-color: blanchedalmond;
+    padding: 50px;
+}
+
 
 
 @media all and (min-width: 576px) {
