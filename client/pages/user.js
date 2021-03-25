@@ -8,6 +8,7 @@ Template.user.onCreated(function() {
         const userProfileName = FlowRouter.getParam("userProfileName");
         this.subscribe("userProfile", userProfileName);
         this.subscribe("recipesUser9", userProfileName);
+        this.subscribe("users.friendsActive");
         Session.set('userProfileName', userProfileName);
         // console.log(userId);
     })
@@ -51,7 +52,7 @@ Template.user.helpers({
         return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
     },
     getRecipes: () => {
-        return Recipes.find({}, {sort: {createdAt: -1}});
+        return Recipes.find({}, {sort: {createdAt: -1}}).fetch({});
     },
     getAvatarImg: () => {
         return Meteor.users.findOne({ username: Session.get('userProfileName') })?.profile?.profilePhotoUrl ?? false;
@@ -60,8 +61,6 @@ Template.user.helpers({
 
 Template.user.events({
     "click .send-friend-request-btn"() {
-        console.log(this);
-        // FlowRouter.go(`/edit-recipe/${this._id}`);
         Meteor.call('sendFriendRequest', this._id, (err, res) => {
             if (err) {
                 Bert.alert(err.reason, 'danger');

@@ -4,7 +4,7 @@ import { Template } from 'meteor/templating'
 
 Template.userRecipes.onCreated(function() {
     
-    Session.set("ready", false);
+    // Session.set("ready", false);
     Session.set("scrollOn", false);
     Session.set("limit", 12);
     Session.set("skip", 0);

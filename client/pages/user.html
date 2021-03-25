@@ -6,22 +6,32 @@
             <div class="xy-center-flex flex-column">
                 <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
             </div>
-        </div>
-        {{/if}}
-    </div>
+        
 
+        {{#with getUserProfile}}
+        <div class="container text-center">
 
-    <div class="wrapper">
-        <div class="container">
-
-            {{#with getUserProfile}}
-            <p>{{username}}</p>
-            <p>{{_id}}</p>
             
-            <button class="send-friend-request-btn">Send friend request</button>
-            {{/with}}
+            <span class="d-block text-bold text-center mb5">{{username}}</span>
             
+            
+            <button class="btn btn-custom send-friend-request-btn mx-auto">Send friend request</button>
+            
+
+            <hr class="my15">
+            <div class="xy-center-flex space-around">
+                <div class="xy-center-flex flex-column profile-3-colums">
+                    <div>
+                        {{#if getRecipes}}
+                        <a href="/recipes/{{username}}" class="go-to-my-recipes-btn" id="goToMyRecipesBtn">See all {{username}}'s recipes</a>
+                        {{else}}
+                        <p class="">{{username}} has no public recipes currently</p>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
         </div>
+        {{/with}}
 
         <hr class="mt15 mb2">
         <div class="latest-user-recipes-wrapper">
@@ -32,7 +42,8 @@
             {{/each}}
         </div>
 
-
+    </div>
+    {{/if}}
 
     </div>
 </template>

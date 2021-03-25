@@ -120,10 +120,14 @@
                     <hr>
 
                     {{ #if checkIfPrivate }}
-                    <input type="checkbox cursor-pointer" id="inputPrivate" name="inputPrivate" value="private" checked="true">
-                    <label class="d-i-block cursor-pointer" for="inputPrivate">Private recipe</label><br>
+                    <input class="cursor-pointer" type="checkbox" id="inputPrivate" name="inputPrivate" value="private" checked="true">
+                    <label class="d-i-block cursor-pointer" for="inputPrivate">Private recipe</label>
+                    <div class="helper-container-custom clearfix text-center mt15 mb20">
+                        <p class="">If you want to make recipe only visible to you and to be able to share it only with selected people, leave the PRIVATE RECIPE checked.<br><b class="text-bold">Once changed to public, recipe can not later be changed back into a private one.</b></p>
+                    </div>
                     {{ /if }}
-
+                    
+                    <hr class="mb15">
 
                     <input class="btn btn-custom d-block fs-16px mx-auto mt20 mb20" type="submit" value="SUBMIT">
                 </form>

@@ -29,7 +29,7 @@ Meteor.publish("recipesForCategory", function publishRecipesCategory(categoryNam
                 { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
             ]},
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
-            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     } else {
         return Recipes.find(
@@ -40,7 +40,7 @@ Meteor.publish("recipesForCategory", function publishRecipesCategory(categoryNam
         // { searchIndex: { $all: {$elemMatch: { searchArray }}     } },
         { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
     ]},
-    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     }
 });
@@ -133,7 +133,7 @@ Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArra
         return Recipes.find(
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
             { $or: [ { private: { $ne: true } }, { owner: this.userId } ] },
-            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     } else {
         return Recipes.find( 
@@ -141,7 +141,7 @@ Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArra
         { searchIndex: { $all: searchArray } },
         { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
     ]},
-    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     }
 });
@@ -153,7 +153,7 @@ Meteor.publish("recipesMy", function publishRecipesHome(limit, skip, searchArray
         return Recipes.find(
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
             { owner: this.userId },
-            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     } else {
         return Recipes.find( 
@@ -161,7 +161,7 @@ Meteor.publish("recipesMy", function publishRecipesHome(limit, skip, searchArray
         { searchIndex: { $all: searchArray } },
         { owner: this.userId }
     ]},
-    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     }
 });
@@ -169,7 +169,7 @@ Meteor.publish("recipesMy", function publishRecipesHome(limit, skip, searchArray
 Meteor.publish("recipesMy9", function publishRecipesMy() {
     return Recipes.find(
         { owner: this.userId },
-        { fields: { _id: 1, private: 1, name: 1, images: 1 }, sort: { createdAt: -1 }, limit: 9}
+        { fields: { _id: 1, private: 1, name: 1, images: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: 9}
     );
 });
 
@@ -179,7 +179,7 @@ Meteor.publish("recipesUser9", function publishRecipesUser(currUserName) {
             { username: currUserName },
             { private: { $ne: true } }
         ]},
-        { fields: { _id: 1, private: 1, name: 1, images: 1 }, sort: { createdAt: -1 }, limit: 9}
+        { fields: { _id: 1, private: 1, name: 1, images: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: 9}
     );
 });
 
@@ -201,7 +201,7 @@ Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip,
                     ]} 
                 ]}
             ]},
-            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     } else {
         return Recipes.find( 
@@ -216,7 +216,7 @@ Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip,
                     ]} 
                 ]}
             ]},
-    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit, skip: skip }
         );
     }
 });
@@ -245,7 +245,7 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
                     ]} 
                 ]}
             ]},
-            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit }
+            { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit }
         );
     } else {
         return Recipes.find( 
@@ -261,7 +261,7 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
             ]} 
         ] }
     ]},
-    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { createdAt: -1 }, limit: limit }
+    { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit }
         );
     }
 });
@@ -272,7 +272,7 @@ Meteor.publish("recipesFav12", function publishRecipesFav() {
     return Recipes.find(
         // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
         { $or: [ { private: { $ne: true } }, { owner: this.userId } ] },
-        { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1 }, sort: { favorite: -1 }, limit: 12}
+        { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { favorite: -1 }, limit: 12}
     );
 
 });
@@ -290,7 +290,7 @@ Meteor.publish("recipesNew8", function publishRecipesNew() {
 Meteor.publish('sharedToUser.recipes', function publishSharedToUserRecipes(limit) {
     return SharedRecipes.find(
         { sentTo: this.userId },
-        { fields: { _id: 1, recipeId: 1, recipeName: 1, createdAt: 1, sentTo: 1, sentBy: 1, sentByName: 1 }, sort: { createdAt: -1 }, limit: limit});
+        { fields: { _id: 1, recipeId: 1, recipeName: 1, createdAt: 1, sentTo: 1, sentBy: 1, sentByName: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit});
 });
 
 Meteor.publish('userProfile', function publishUserProfile(uName) {
