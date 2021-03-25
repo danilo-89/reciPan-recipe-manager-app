@@ -207,14 +207,16 @@ Template.CreateRecipe.events({
         $( e.target ).next(".input-directions").remove();
         $( e.target ).remove();
     },
-    "click #resetForm"() {
-        
+    "click #resetForm"(event) {
+        event.preventDefault();
         resetForm();
     },
 });
 
 const resetForm = function() {
+
     Session.set('formReady', null);
+    
     setTimeout(() => {
         Session.set('formReady', true);
     }, 0)
