@@ -2,22 +2,24 @@
 
     <div class="wrapper h-100 back-secondary">
         {{#if Template.subscriptionsReady}}
+        {{#with getUserProfile}}
         <div class="container mv-576 info-profile-container">
             <div class="xy-center-flex flex-column">
-                <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
+                <div class="info-profile-img mb10" style="{{#if profile.profilePhotoUrl}}background-image: url('{{profile.profilePhotoUrl}}'){{/if}}"></div>
             </div>
         
 
-        {{#with getUserProfile}}
+        
         <div class="container text-center">
-
             
             <span class="d-block text-bold text-center mb5">{{username}}</span>
             
+            {{#if getFriendship _id}}
+            <button class="btn btn-custom remove-friend-btn mx-auto">UNFRIEND</button>
+            {{else}}
+            <button class="btn btn-custom send-friend-request-btn mx-auto">SEND FRIEND REQUEST</button>
+            {{/if}}
             
-            <button class="btn btn-custom send-friend-request-btn mx-auto">Send friend request</button>
-            
-
             <hr class="my15">
             <div class="xy-center-flex space-around">
                 <div class="xy-center-flex flex-column profile-3-colums">
@@ -31,7 +33,7 @@
                 </div>
             </div>
         </div>
-        {{/with}}
+        
 
         <hr class="mt15 mb2">
         <div class="latest-user-recipes-wrapper">
@@ -43,6 +45,7 @@
         </div>
 
     </div>
+    {{/with}}
     {{/if}}
 
     </div>

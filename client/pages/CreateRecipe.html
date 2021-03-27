@@ -1,12 +1,15 @@
 <template name="CreateRecipe">
+
+    {{#if currentUser}}
     <div class="wrapper">
         <div class="create-recipe-container">
-            {{#if getFormReady}}
+            
 
-            <div class="helper-container-custom clearfix text-center mt20 mb20">
-                <img class="svg-helper svg-no-result" src="/chef2.svg" alt="">
-                <p class="">Here you can publish recipe of your favourite dish. Rewrite your draft notes into recipe form. Once it's published, you can always edit it later. <br><b>Have fun!</b></p>
+            <div class="helper-container-custom-1 text-center mt20 mb20">
+                <p class="w-100 p5">Here you can publish recipe of your favourite dish. Rewrite your draft notes into recipe form. Once it's published, you can always edit it later.</p>
+                <img class="max-w-30" src="/chef2.svg" alt="">
             </div>
+
             <form action="">
 
 
@@ -143,8 +146,17 @@
                     style="min-width: 125px;">
 
             </form>
-            {{/if}}
+
         </div>
     </div>
+
+    {{else}}
+    <div class="max-w-400-px-95 mx-auto">
+        <div class="helper-container-custom-1 text-center mt20 mb20">
+            <img class="max-w-30" src="/chef_girl.svg" alt="">
+            <p class="w-100 p10">Here you can publish recipe of your favourite dish. <br> Please log in to view this content.</p>
+        </div>
+    </div>
+    {{/if}}
 
 </template>

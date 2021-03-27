@@ -1,44 +1,68 @@
 <template name="inbox">
 
-{{#if isReady}}
 
-<div class="wrapper h-100">
 
-    <div class="container pt15">
 
-        <div class="">
+{{#if Template.subscriptionsReady}}
 
-            <div class="inbox-cards-container">
-                
-                {{#each getInboxRecipes}}
-                <div class="inbox-card-wrapper">
-                    <div class="inbox-card">
-                        <div class="inbox-card-top">
-                            <span class="inbox-card-top-user userNameLink go"><span class="pr3"><i class="far fa-user"></i></span><span class="spanGoName">{{sentByName}}</span></span>
-                            <span class="inbox-card-top-date">{{formatDateWithTime createdAt}}</span>
+    {{#if currentUser}}
+    <div class="wrapper h-100">
+
+        <div class="container pt15">
+
+            <div class="">
+
+                <div class="inbox-cards-container">
+                    
+                    {{#each getInboxRecipes}}
+                    <div class="inbox-card-wrapper">
+                        <div class="inbox-card">
+                            <div class="inbox-card-top">
+                                <span class="inbox-card-top-user userNameLink go"><span class="pr3"><i class="far fa-user"></i></span><span class="spanGoName">{{sentByName}}</span></span>
+                                <span class="inbox-card-top-date">{{formatDateWithTime createdAt}}</span>
+                            </div>
+                            <div class="inbox-card-bottom break-long">shared "{{recipeName}}" recipe with you</div>
                         </div>
-                        <div class="inbox-card-bottom break-long">shared "{{recipeName}}" recipe with you</div>
                     </div>
+                    {{/each}}
+                    
+
                 </div>
-                {{/each}}
-                
 
+                <!-- {{#each getInboxRecipes}}
+
+
+                <div>{{recipeId}}</div>
+                <div>{{sentBy}}</div>
+                <div>{{sentByName}}</div>
+                <div>{{dateSent}}</div>
+                {{/each}} -->
             </div>
-
-            <!-- {{#each getInboxRecipes}}
-
-
-            <div>{{recipeId}}</div>
-            <div>{{sentBy}}</div>
-            <div>{{sentByName}}</div>
-            <div>{{dateSent}}</div>
-            {{/each}} -->
+                
         </div>
-            
     </div>
+    {{else}}
+    <div class="max-w-400-px-95 mx-auto">
+        <div class="helper-container-custom-1 text-center mt20 mb20">
+            <img class="max-w-30" src="/chef_girl.svg" alt="">
+            <p class="w-100 p10">Please log in to view this content.</p>
+        </div>
+    </div>
+    {{/if}}
+
+
+
+{{else}}
+
+<div style="height: 100%;
+width: 100%;
+background-image: linear-gradient(to right bottom, #fe7f2d, #ff8e24, #ff9d1a, #ffac0d, #ffbb00);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;">
+    {{> loading}}
 </div>
-
-
 
 {{/if}}
 </template>

@@ -540,8 +540,18 @@ margin-bottom: 2px;
     max-width: 95%;
 }
 
+.max-w-30 {
+    max-width: 30%;
+}
+
 .max-w-600-px {
     max-width: 600px;
+}
+
+.max-w-400-px-95 {
+    display: block;
+    width: 95%;
+    max-width: 400px;
 }
 
 .h-100 {

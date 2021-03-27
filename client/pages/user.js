@@ -15,36 +15,9 @@ Template.user.onCreated(function() {
     
 });
 
+Template.user.onRendered(function () {});
 
-Template.user.onRendered(function () {
-
-    this.autorun(() => {
-        
-        const ready = this.subscriptionsReady();
-
-        if(ready) {
-            const userId = FlowRouter.getParam("userId");
-
-            setTimeout(() => {
-
-
-
-
-            }, 0)
-        }
-        
-        
-    })
-    
-});
-
-
-Template.user.onDestroyed(function() {
-    // console.log("nulaaaaaaaaa");
-    // Session.set('recipeId', null);
-    // Session.set('avgStar', null);
-    // Session.set('checkItFav', null);
-})
+Template.user.onDestroyed(function() {});
 
 Template.user.helpers({
     getUserProfile: () => {
@@ -54,8 +27,14 @@ Template.user.helpers({
     getRecipes: () => {
         return Recipes.find({}, {sort: {createdAt: -1}}).fetch({});
     },
-    getAvatarImg: () => {
-        return Meteor.users.findOne({ username: Session.get('userProfileName') })?.profile?.profilePhotoUrl ?? false;
+    getFriendship: (friendId) => {
+        const activeFriends = Meteor.user().public?.friends?.active;
+        if (activeFriends) {
+            console.log({friendId});
+            console.log(activeFriends.includes(friendId));
+            return activeFriends.includes(friendId);
+        }
+        return false;
     },
 });
 
@@ -69,6 +48,19 @@ Template.user.events({
                     Bert.alert(res.err.reason, 'danger');
                 } else {
                     Bert.alert('Friend request sent to '+ this.username, 'success');
+                }
+            }
+        })
+    },
+    "click .remove-friend-btn"() {
+        Meteor.call('removeFriendship', this._id, (err, res) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                if (res.isError) {
+                    Bert.alert(res.err.reason, 'danger');
+                } else {
+                    Bert.alert('This user is no more in your friends list', 'success');
                 }
             }
         })

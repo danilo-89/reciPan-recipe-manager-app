@@ -80,7 +80,7 @@ Template.receivedFriendRequests.helpers({
         return Meteor.users.findOne({_id: friendId}).username;
     },
     getFriendsAvatar: (friendId) => {
-        return Meteor.users.findOne({_id: friendId}).profile.profilePhotoUrl;
+        return Meteor.users.findOne({_id: friendId}).profile?.profilePhotoUrl;
     },
     // getContactName: (contactObj) => {
     //     return Object.getOwnPropertyNames(contactObj)[0];

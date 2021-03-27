@@ -425,6 +425,18 @@ hr {
     overflow-wrap: break-word;
 }
 
+.helper-container-custom-1 {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fffaf3;
+    border: 2px solid #ffd49e;
+    padding: 11px 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+}
+
 .svg-no-result {
     max-width: 30%;
     float: right;

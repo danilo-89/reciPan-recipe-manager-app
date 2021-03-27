@@ -1,7 +1,7 @@
 <template name="FriendsNav">
     <nav class="friends-navigation mx-auto no-select">
         <ul class="main-navigation-ul friends-navigation-ul mx-auto">
-            <a class="sec-nav-left"></a>
+            <a class="sec-nav-right" id="goToProfileBtn"><i class="fas fa-arrow-left"></i></a>
             <a class="sec-nav-title friends-nav-title">
                 {{#if isEqual whatRoute 'friends'}}
                 Friends
@@ -13,7 +13,7 @@
                 Sent friend requests
                 {{/if}}
             </a>
-            <a class="sec-nav-right" id="goToProfileBtn"><i class="far fa-times-circle"></i></a>
+            <a class="sec-nav-left"></a>
         </ul>
     </nav>
 </template>

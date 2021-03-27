@@ -12,7 +12,7 @@
 
 <template name="MainLayout">
     <div class="main-body-wrapper">
-        {{#if isRegExEqual getRoute 'create-recipe'}}
+        {{#if isRegExEqual getRoute 'create-recipe|edit-recipe'}}
             {{> SecondaryNav}}
         {{/if}}
         {{#if isRegExEqual getRoute 'profile|inbox'}}
