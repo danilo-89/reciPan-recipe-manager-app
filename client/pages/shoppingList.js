@@ -12,31 +12,22 @@ Template.ShoppingList.onCreated(function () {
 });
 
 Template.ShoppingList.onDestroyed(function () {
-    Session.set('recipeTaskMenu', null);
-    Session.set('recipeItemMenu', null);
-    Session.set('recipeMainMenu', null);
+    clearModals();
 });
 
 Template.ShoppingList.onRendered(function () {
 
-    Session.set('recipeTaskMenu', null);
-    Session.set('recipeItemMenu', null);
-    Session.set('recipeMainMenu', null);
+    clearModals();
 
     this.autorun(() => {
         const ready = this.subscriptionsReady();
         if (ready) {
             Session.set("ready", true);
         }
-
         // setTimeout(() => {
-
         //         console.log("swiper loading");
         //         initMySwiper()
-
         // }, 0)
-
-
     });
 
 });
@@ -77,8 +68,11 @@ Template.ShoppingList.helpers({
         }
         result = result.filter(filterIt);
         console.log(recipeId);
-        console.log(result);
+        console.log({result});
         return result;
+    },
+    getRecipesCount: () => {
+        return ShopLists.findOne().recipes.length;
     },
     // getUnfinished: (fs, a) => {
     //     console.log("FULL SH");
@@ -128,7 +122,9 @@ Template.ShoppingList.helpers({
     },
     getConfirmModal: () => {
         return Session.get('confirmModal');
-        Session.set('confirmModal', true);
+    },
+    getConfirmModalTitle: () => {
+        return Session.get('confirmModal')[0];
     }
 });
 
@@ -175,9 +171,121 @@ Template.ShoppingList.events({
         event.stopPropagation();
     },
     "click .delete-task-item"(event) {
-        Session.set('confirmModal', this);
+        Session.set('confirmModal', ['Delete item', this.name, this.recipe, this.checked]);
         // Meteor.call('delete.ingridient', this.name, this.recipe, this.checked);
     },
+    "click .recipe-tasks-menu-wrapper.active #emptyShoplistBtn"() {
+        Session.set('confirmModal', ['Delete shoplist', this.recId]);
+        // Meteor.call('shoplist.deleteList', this.recId)
+    },
+    "click .remove-from-shoplist-btn"() {
+        Session.set('confirmModal', ['Remove recipe from shoplist', this.recId]);
+        // Meteor.call('shoplist.deleteRecipe', this.recId)
+    },
+    "click .remove-finished-from-recipe-btn"() {
+        Session.set('confirmModal', ['Remove finished tasks', this.recId]);
+        // Meteor.call('shoplist.deleteFinishedIngredients', this.recId)
+        // Meteor.call('shoplist.deleteRecipe', this.recId)
+    },
+
+    "click #confirmModalsBtn"(event) {
+        const getThisData = Session.get('confirmModal');
+        console.log(getThisData);
+        if (getThisData[0] === 'Delete item') {
+            const getSLData = ShopLists.findOne({}, {fields: {counter: 1, entries: 1}});
+
+            const checkExisting = getSLData.entries.filter(x => x.recipe===getThisData[2]).length;
+            const checkIt = getSLData.counter[getThisData[2]];
+            if ((checkExisting===1 && checkIt === 1 && !getThisData[3]) || (checkExisting===1 && !checkIt && getThisData[3])) {
+                Meteor.call('shoplist.deleteRecipe', getThisData[2], (err, res) => {
+                    if (err) {
+                        Bert.alert(err.reason, 'danger');
+                    } else {
+                        if (res.isError) {
+                            Bert.alert(res.err.reason, 'danger');
+                        } else {
+                            Bert.alert('Recipe removed succesfully', 'success');
+                        }
+                    }
+                });
+            } else {
+                Meteor.call('delete.ingridient', getThisData[1], getThisData[2], getThisData[3], (err, res) => {
+                    if (err) {
+                        Bert.alert(err.reason, 'danger');
+                    } else {
+                        if (res.isError) {
+                            Bert.alert(res.err.reason, 'danger');
+                        } else {
+                            Bert.alert('Task removed succesfully', 'success');
+                        }
+                    }
+                });
+            }
+
+        } else if (getThisData[0] === 'Delete shoplist') {
+            Meteor.call('shoplist.deleteList', getThisData[1], (err, res) => {
+                if (err) {
+                    Bert.alert(err.reason, 'danger');
+                } else {
+                    if (res.isError) {
+                        Bert.alert(res.err.reason, 'danger');
+                    } else {
+                        Bert.alert('Shopplist deleted', 'success');
+                    }
+                }
+            });
+        } else if (getThisData[0] === 'Remove recipe from shoplist') {
+            Meteor.call('shoplist.deleteRecipe', getThisData[1], (err, res) => {
+                if (err) {
+                    Bert.alert(err.reason, 'danger');
+                } else {
+                    if (res.isError) {
+                        Bert.alert(res.err.reason, 'danger');
+                    } else {
+                        Bert.alert('Recipe removed succesfully', 'success');
+                    }
+                }
+            });
+        } else if (getThisData[0] === 'Remove finished tasks') {
+            const checkIt = ShopLists.findOne({}, {fields: {counter:1}}).counter[getThisData[1]];
+            if (checkIt) {
+            Meteor.call('shoplist.deleteFinishedIngredients', getThisData[1], (err, res) => {
+                if (err) {
+                    Bert.alert(err.reason, 'danger');
+                } else {
+                    if (res.isError) {
+                        Bert.alert(res.err.reason, 'danger');
+                    } else {
+                        Bert.alert('Finished tasks removed succesfully', 'success');
+                    }
+                }
+            });
+            } else {
+                Meteor.call('shoplist.deleteRecipe', getThisData[1], (err, res) => {
+                    if (err) {
+                        Bert.alert(err.reason, 'danger');
+                    } else {
+                        if (res.isError) {
+                            Bert.alert(res.err.reason, 'danger');
+                        } else {
+                            Bert.alert('Finished tasks removed succesfully', 'success');
+                        }
+                    }
+                });
+            }
+        }
+        clearModals();
+    },
+    "click #confirmModal"(event) {
+        // close modal if clicked outside .confirm-modal-inside element
+        if (event.target===event.currentTarget) {
+            clearModals();
+        }
+    },
+    "click #cancelModalsBtn"(event) {
+        clearModals();
+    },
+
     "click .increase-multi-input"(event) {
         event.stopPropagation();
     },
@@ -191,96 +299,32 @@ Template.ShoppingList.events({
     "click .go-to-recipe"() {
         FlowRouter.go(`/single-recipe/${this.recId}`);
     },
-    "click .remove-from-shoplist-btn"() {
-        console.log("deleting shoplist");
-        Meteor.call('shoplist.deleteRecipe', this.recId, (err, res) => {
-            if (err) {
-                Bert.alert(err.reason, 'danger');
-            } else {
-                if (res.isError) {
-                    Bert.alert(res.err.reason, 'danger');
-                } else {
-                    Bert.alert('Deleted', 'success');
-                }
-            }
-        });
-    },
-    "click .remove-finished-from-recipe-btn"() {
-        const checkIt = ShopLists.findOne({}, {fields: {counter:1}}).counter[this.recId];
-        if (checkIt) {
-        Meteor.call('shoplist.deleteFinishedIngredients', this.recId, (err, res) => {
-            if (err) {
-                Bert.alert(err.reason, 'danger');
-            } else {
-                if (res.isError) {
-                    Bert.alert(res.err.reason, 'danger');
-                } else {
-                    Bert.alert('Deleted', 'success');
-                }
-            }
-        });
-        } else {
-            Meteor.call('shoplist.deleteRecipe', this.recId, (err, res) => {
-                if (err) {
-                    Bert.alert(err.reason, 'danger');
-                } else {
-                    if (res.isError) {
-                        Bert.alert(res.err.reason, 'danger');
-                    } else {
-                        Bert.alert('Deleted', 'success');
-                    }
-                }
-            });
-        }
-    },
-    "click .recipe-tasks-menu-wrapper.active #emptyShoplistBtn"() {
-        Meteor.call('shoplist.deleteList', this.recId, (err, res) => {
-            if (err) {
-                Bert.alert(err.reason, 'danger');
-            } else {
-                if (res.isError) {
-                    Bert.alert(res.err.reason, 'danger');
-                } else {
-                    Bert.alert('Shopplist deleted', 'success');
-                }
-            }
-        });
-    },
     "click #switchBtn"() {
         console.log(this);
         if (Session.get('getShoplistMode')===true){
             setTimeout(() => {
                 Session.set('getShoplistMode', null);
             }, 0)
-            // setTimeout(() => {
-            //     initMySwiper();
-            // }, 400)
             console.log('set null');
+            clearModals();
             return true;
         } else {
             setTimeout(() => {
                 Session.set('getShoplistMode', true);
             }, 0)
             console.log('set simple');
+            clearModals();
             return true;
         }
     },
-    "click #confirmModal"(event) {
-        // close modal if clicked outside .confirm-modal-inside element
-        if (event.target===event.currentTarget) {
-            Session.set('recipeTaskMenu', null);
-            Session.set('recipeItemMenu', null);
-            Session.set('recipeMainMenu', null);
-            Session.set('confirmModal', null);
-        }
-    },
-    "click #cancelModalsBtn"(event) {
-        Session.set('recipeTaskMenu', null);
-        Session.set('recipeItemMenu', null);
-        Session.set('recipeMainMenu', null);
-        Session.set('confirmModal', null);
-    },
 });
+
+const clearModals = function() {
+    Session.set('recipeTaskMenu', null);
+    Session.set('recipeItemMenu', null);
+    Session.set('recipeMainMenu', null);
+    Session.set('confirmModal', null);
+}
 
 // function initMySwiper() {
 //     const mySwiper1 = new Swiper('.swiper-container.new-recipes-swiper-container', {
