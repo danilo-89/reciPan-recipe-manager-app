@@ -268,8 +268,17 @@ Template.ShoppingList.events({
     "click #confirmModal"(event) {
         // close modal if clicked outside .confirm-modal-inside element
         if (event.target===event.currentTarget) {
-            Session.set('confirmModal', false);
+            Session.set('recipeTaskMenu', null);
+            Session.set('recipeItemMenu', null);
+            Session.set('recipeMainMenu', null);
+            Session.set('confirmModal', null);
         }
+    },
+    "click #cancelModalsBtn"(event) {
+        Session.set('recipeTaskMenu', null);
+        Session.set('recipeItemMenu', null);
+        Session.set('recipeMainMenu', null);
+        Session.set('confirmModal', null);
     },
 });
 

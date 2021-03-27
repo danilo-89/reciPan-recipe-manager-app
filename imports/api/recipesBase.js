@@ -815,8 +815,7 @@ Meteor.methods({
 
 
           ShopLists.remove(
-            {"owner": this.userId},
-            {}
+            {"owner": this.userId}
           )
 
           return { isError: false };
