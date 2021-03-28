@@ -30,10 +30,8 @@ Template.SingleRecipe.onRendered(function () {
             const checkIfFav = Meteor.users.findOne({["public.favorites." + recipeId]: {$exists: true}});
             if (checkIfFav) {
                 Session.set('checkItFav', true);
-                console.log("imamo favorite ovde")
             } else {
                 Session.set('checkItFav', null);
-                console.log("nemamo favorite ovde")
             };
             setTimeout(() => {
 
@@ -55,7 +53,9 @@ Template.SingleRecipe.onRendered(function () {
 
 
                 const a = Recipes.find().fetch()[0].starRatingByUser;
-                if (a) {
+                if (jQuery.isEmptyObject(a)) {
+                Session.set('avgStar', null);
+                } else if (a) {
                     let sum = 0;
                     let count = 0;
                     for (const key of Object.keys(a)) {
@@ -103,7 +103,6 @@ Template.SingleRecipe.onRendered(function () {
 
 
 Template.SingleRecipe.onDestroyed(function() {
-    console.log("nulaaaaaaaaa");
     Session.set('recipeId', null);
     Session.set('avgStar', null);
     Session.set('checkItFav', null);
@@ -138,11 +137,9 @@ Template.SingleRecipe.helpers({
         return ++a;
     },
     getIfFav: () => {
-        console.log("whats happening?",Session.get('checkItFav'));
         return Session.get('checkItFav')
     },
     getWebAddress: () => {
-        console.log("dsfsfsd");
         return window.location.href;
     },
     getCategoryLink: (categoryName) => {
@@ -244,18 +241,7 @@ Template.SingleRecipe.events({
     "click .share-recipe-btn"(event) {
         Session.set('modalData', {template: "modalShareRecipe", title: "Share recipe", recipeName: this.name, files: [{name: "Share recipe", linkit: window.location.href, date: new Date()}]});
     },
-
-
-    // https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet
-    // mailto:info@example.com?&subject=&body=https://www.websiteplanet.com 
-    // https://twitter.com/intent/tweet?url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet&text=sadrzaj%20neki
-    // https://www.pinterest.com/pin/create/button?url=https://api.whatsapp.com/send.html&media=www.url.doslike&description=naslov%20neki
-    // https://www.linkedin.com/shareArticle?url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet&title=naslov%20neki
-    // https://api.whatsapp.com/send?text=naslov%20neki https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet
-    // whatsapp://send?text=https://api.whatsapp.com/send.html
-    // viber://forward?text=https://api.whatsapp.com/send.html
-
-    "click .p-star"(e) { 
+    "click .p-star:not(.my-star-rank)"(e) { 
         thisUserId = Meteor.userId();
 
         const clicked = $(e.target).closest( "p" );
@@ -285,23 +271,42 @@ Template.SingleRecipe.events({
                 }
             }
         });
+    },
+    "click .p-star.my-star-rank"(e) { 
+        thisUserId = Meteor.userId();
 
-        // $('.stars-wrapper > p').removeClass('active');
-  
-        // console.log(starNum, Session.get('recipeId'));
-        // gets rating by user for this post
-        // console.log(Recipes.find().fetch()[0].starRatingByUser[thisUserId]);
-        // currentStarRating = -currentStarRating;
-        // console.log(currentStarRating);
+        const clicked = $(e.target).closest( "p" ); 
+        const starNum = +clicked.attr('data-star');   
 
-        // console.log(Recipes.find().fetch()[0].starRatingByUser);
-        // const a = Recipes.find().fetch()[0].starRatingByUser;
-        // for (const key of Object.keys(a)) {
-        //     const val = a[key];
-        //     console.log(val);
-        // }
+        Meteor.call('rateRecipe.remove', starNum, Session.get('recipeId'), (err, res) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                if (res.isError) {
+                    Bert.alert(res.err.reason, 'danger');
+                } else {
+                    const a = Recipes.find().fetch()[0].starRatingByUser;
+                    if (jQuery.isEmptyObject(a)) {
+                        Session.set('avgStar', null);
+                    } else if (a) {
+                            let sum = 0;
+                            let count = 0;
+                            for (const key of Object.keys(a)) {
+                                sum = sum + a[key];
+                                count ++;
+                            }
+                            const avgStar = sum / count;
+                            const arrayS = [avgStar, count];
+                            Session.set('avgStar', arrayS);
+                    } else {
+                            Session.set('avgStar', null);
+                    }
 
-
+                    $('.p-star').removeClass("my-star-rank");
+                    Bert.alert( 'Rating removed!', 'success', 'fixed-top', 'fas fa-star' );
+                }
+            }
+        });
     },
     "dblclick .swiper-slide"(e) { 
         var element = document.getElementById("singleRecipeSwiperContainer");
@@ -324,17 +329,17 @@ Template.SingleRecipe.events({
             selectedIngridients.push({
                 "name": $(this).children('span').text(),
                 "amount": $(this).children('strong').text(),
-                "multi": Number(multiNumberV),
+                "multi": Math.abs(Number(multiNumberV)),
                 "recipe": recipeIdNum,
                 "checked": false
             });
         });
 
-        console.log(selectedIngridients);
-        console.log(selectedIngridients.length);
-        console.log(this.images[0]);
-        console.log(this.name);
-        console.log(this._id);
+        // console.log(selectedIngridients);
+        // console.log(selectedIngridients.length);
+        // console.log(this.images[0]);
+        // console.log(this.name);
+        // console.log(this._id);
         
         if (selectedIngridients.length < 1) {
             Bert.alert('Select at least one ingridient', 'danger');

@@ -291,10 +291,10 @@ Template.ShoppingList.events({
     },
     "click .multi-task-item, click .multi-task-item-btn"(event) {
         event.preventDefault();
-        const multiplier = +$( event.currentTarget ).parent().find($(".increase-multi-input")).val()
+        const multiplier = Math.abs(+$( event.currentTarget ).parent().find($(".increase-multi-input")).val());
         console.log(multiplier);
         Meteor.call('change.multi.ingridient', this.name, this.recipe, multiplier);
-        
+        clearModals();
     },
     "click .go-to-recipe"() {
         FlowRouter.go(`/single-recipe/${this.recId}`);

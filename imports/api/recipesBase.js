@@ -449,6 +449,40 @@ Meteor.methods({
     }
   },
 
+
+  "rateRecipe.remove"(star, recipeId) {
+    check(star, Number);
+    try {
+      if (Meteor.userId()) {
+        console.log({ star });
+        console.log({ recipeId });
+        console.log(this);
+        const chechit = Recipes.findOne({
+          ["starRatingByUser." + this.userId]: { $exists: true },
+        });
+        if (chechit) {
+          console.log("true it");
+        } else {
+          console.log("false it");
+        }
+        Recipes.update(
+          { _id: recipeId },
+          {
+            $unset: { ["starRatingByUser." + this.userId]: star },
+          }
+        );
+        return { isError: false };
+      } else {
+        throw new Meteor.Error("not-logged-in", "Log in to rate recipe");
+      }
+    } catch (err) {
+      return { isError: true, err };
+    }
+  },
+
+
+
+
   // if(foundRecipe.privateAllow) {
   //   const inPrivateAllow = (foundRecipe.privateAllow).includes(toUser._id);
   //   console.log("inPrivateAllow: ", inPrivateAllow);
