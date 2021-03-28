@@ -1,10 +1,7 @@
 <template name="modalShareRecipe">
+
     {{#modalBlock title=title}}
         <div class="modal-body">
-            <!-- {{#each files}}
-                {{ name }} –– {{ date}}
-            {{/each}}
-            "AAAAAsfsfdsfdsfssssssssssssssss" -->
             <p class="p-share-text mb10">Show Awesome pie recipe to your friends on reciPan app</p>
             {{#if Template.subscriptionsReady}}
             <div class="xy-center-flex mb20 user-send-input-holder" id="userSendInputHolder">
@@ -22,15 +19,6 @@
             <hr class="mb15">
             <p class="p-share-text mb10">...or share it on other apps and networks</p>
             <div class="soc-share-container xy-center-flex">
-                <!-- {{#each files}}
-                {{link}}
-                {{/each}} -->
-                
-            <!-- {{#each files}}
-                {{ linkit }}
-                {{ name }} –– {{ date}}
-                {{ linkit }}
-            {{/each}} -->
             {{#each files}}
 
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{linkit}}" target="_blank" class="soc-share-btn soc-fb"><i class="fab fa-facebook-f"></i></a>
@@ -53,22 +41,33 @@
 
 <template name="SingleRecipe">
     
-    <!-- {{> templateModal}} -->
-
-
-
-    
-
-
 
     {{#if Template.subscriptionsReady}}
 
         {{#if getSingleRecipe}}
 
+
+        
+    {{#if getConfirmModal}}
+    <div id="confirmModal">
+            <div class="confirm-modal-inside">
+                    <div class="confirm-modal-header">Delete recipe</div>
+                    <div class="confirm-modal-main">
+                            <div class="confirm-modal-content">
+                                    Are you sure?
+                            </div>
+                            <div class="confirm-modal-footer">
+                                    <button class="btn btn-custom-2 mr5" id="cancelModalsBtn">CANCEL</button>
+                                    <button class="btn btn-custom" id="confirmModalsBtn">CONFIRM</button>
+                            </div>
+                    </div>
+            </div>
+    </div>
+    {{/if}}
+
         {{> modal}}
 
-            <!-- quickForm is part of autoform package -->
-            <!-- Single -->
+
         <div class="wrapper bg-color-white-1 h-100">
             <div class="single-recipe-container back-default">
 
@@ -165,23 +164,6 @@
 
                             <p class="color-gray">posted: <span class="color-jet">{{formatDateWithoutTime createdAt}}</span></p>
 
-
-                            <!-- <div class="traderMy-swiper-wrapper">
-                                <div class="picture-swiper-web">
-                                    <div class="swiper-container">
-                                        <div class="swiper-wrapper">
-                                            {{#each images}}
-                                            <div class="swiper-slide">
-                                                <img src="{{this}}" alt="">
-                                            </div>
-                                            {{/each}}
-
-                                        </div>
-                
-                                        <div class="swiper-scrollbar"></div>
-                                    </div>
-                                </div>
-                            </div> -->
 
                             <hr class="mb10">
                         <div id="sRInfo" class="href-effect">

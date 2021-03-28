@@ -5,7 +5,7 @@ import '../../imports/startup/accounts-config.js';
 
 
 Template.CreateRecipe.onRendered(function () {
-    Session.set('formReady', true);
+
 })
 
 Template.CreateRecipe.onDestroyed( function(event) {
@@ -16,9 +16,7 @@ Template.CreateRecipe.onDestroyed( function(event) {
 
 
 Template.CreateRecipe.helpers({
-    getFormReady: () => {
-        return Session.get('formReady');
-    },
+
 });
 
 
@@ -182,13 +180,13 @@ Template.CreateRecipe.events({
     },
     "click .add-direction-fields"() {
         $("#inputsDirections").append(`
-        <div class="tx-div-before"></div>
-        <textarea id="" class="input-directions customInput" name="" rows="7" cols="50" required></textarea>
+        <div class="tx-div-before added-field"></div>
+        <textarea id="" class="input-directions customInput added-field" name="" rows="7" cols="50" required></textarea>
         `);
     },
     "click .add-ingredient-fields"() {
         $("#tableCreateBody").append(`
-        <tr>
+        <tr class="added-field">
         <td></td>
         <td><input type="text"  name="" class="input-create inputIngridient" required></td>
         <td><input type="text" name="" class="input-create inputIngridientAmount" required></td>
@@ -214,13 +212,18 @@ Template.CreateRecipe.events({
 });
 
 const resetForm = function() {
-
-    Session.set('formReady', null);
-    
-    setTimeout(() => {
-        Session.set('formReady', true);
-    }, 0)
-
+    $('#inputRecipeName').val("");
+    $('#inputPrepTimeHours').val("");
+    $('#inputPrepTimeMins').val("");
+    $('#inputRecipeCategory').val("");
+    $('#inputDescription').val("");
+    $('#inputVideo').val("");
+    $('.input-directions').val("");
+    $('.inputIngridient').val("");
+    $('.inputIngridientAmount').val("");
+    $('#inputPrivate').prop( "checked", false );
+    $('.added-field').remove();
+    $('.cr-uploaded-image-figure').html("");
 }
 
 // window.addEventListener('beforeunload', function (e) {

@@ -1011,6 +1011,7 @@ a.profile-nav {
     box-shadow: 0px -5px 6px -5px #dfe1e5;
     border-top: 1px solid #ffffff;
     position: relative;
+    max-height: 53px;
 }
 
 .footer-nav-ul {

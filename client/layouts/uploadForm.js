@@ -47,7 +47,7 @@ Template.uploadForm.events({
         if (error) {
           alert(`Error during upload: ${error}`);
         } else {
-          alert(`File "${fileObj.name}" successfully uploaded`);
+          // alert(`File "${fileObj.name}" successfully uploaded`);
 
           if ($("#crImg1 > .cr-uploaded-image").length === 0) {
             $("#crImg1").html(`

@@ -6,6 +6,9 @@
 {{#if Template.subscriptionsReady}}
 
     {{#if currentUser}}
+
+    {{#if getInboxRecipesCount}}
+
     <div class="wrapper h-100">
 
         <div class="container pt15">
@@ -41,6 +44,15 @@
                 
         </div>
     </div>
+    {{else}}
+    <div class="max-w-400-px-95 mx-auto">
+        <div class="helper-container-custom-1 text-center mt20 mb20">
+            <img class="max-w-30" src="/chef_girl.svg" alt="">
+            <p class="w-100 p10">Nothing here, yet. When someone shares recipe with you, it will appear here.</p>
+        </div>
+    </div>
+    {{/if}}
+
     {{else}}
     <div class="max-w-400-px-95 mx-auto">
         <div class="helper-container-custom-1 text-center mt20 mb20">

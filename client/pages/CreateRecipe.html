@@ -1,9 +1,9 @@
 <template name="CreateRecipe">
-
+    
+    {{#if Template.subscriptionsReady}}
     {{#if currentUser}}
     <div class="wrapper">
         <div class="create-recipe-container">
-            
 
             <div class="helper-container-custom-1 text-center mt20 mb20">
                 <p class="w-100 p5">Here you can publish recipe of your favourite dish. Rewrite your draft notes into recipe form. Once it's published, you can always edit it later.</p>
@@ -157,6 +157,7 @@
             <p class="w-100 p10">Here you can publish recipe of your favourite dish. <br> Please log in to view this content.</p>
         </div>
     </div>
+    {{/if}}
     {{/if}}
 
 </template>

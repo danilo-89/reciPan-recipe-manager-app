@@ -159,7 +159,9 @@ Template.Home.helpers({
         return "/categories/"+ categoryName.replace(/ /g, '_');
     },
     getRaiting: (a) => {
-        if (a) {
+        if (jQuery.isEmptyObject(a)) {
+            return 0;
+        } else if (a) {
             let sum = 0;
             let count = 0;
             for (const key of Object.keys(a)) {

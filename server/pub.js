@@ -287,10 +287,10 @@ Meteor.publish("recipesNew8", function publishRecipesNew() {
 
 });
 
-Meteor.publish('sharedToUser.recipes', function publishSharedToUserRecipes(limit) {
+Meteor.publish('sharedToUser.recipes', function publishSharedToUserRecipes() {
     return SharedRecipes.find(
         { sentTo: this.userId },
-        { fields: { _id: 1, recipeId: 1, recipeName: 1, createdAt: 1, sentTo: 1, sentBy: 1, sentByName: 1, createdAt: 1 }, sort: { createdAt: -1 }, limit: limit});
+        { fields: { _id: 1, recipeId: 1, recipeName: 1, createdAt: 1, sentTo: 1, sentBy: 1, sentByName: 1, createdAt: 1 }, sort: { createdAt: -1 }});
 });
 
 Meteor.publish('userProfile', function publishUserProfile(uName) {

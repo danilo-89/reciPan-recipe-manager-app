@@ -3,11 +3,11 @@ import { SharedRecipes } from '../../imports/api/recipesBase.js';
 
 Template.inbox.onCreated(function () {
 
-    Session.set("limit", 4);
+    // Session.set("limit", 4);
 
     this.autorun(() => {
-        const limit = Session.get("limit");
-        this.subscribe('sharedToUser.recipes', limit);
+        // const limit = Session.get("limit");
+        this.subscribe('sharedToUser.recipes');
     })
     
 
@@ -36,7 +36,7 @@ Template.inbox.onRendered(function () {
                         if (res.isError) {
                             Bert.alert(res.err.reason, 'danger');
                         } else {
-                            Bert.alert('ok', 'success');
+                            // Bert.alert('ok', 'success');
                         }
                     }
                 });
@@ -52,12 +52,12 @@ Template.inbox.helpers({
         return Session.get("ready");
     },
     getInboxRecipes: () => {
-        // return Recipes.find({}, {sort: {createdAt: -1}});
-        // Meteor.user().public.favorites
-        // Session.set("rec", Meteor.user().public.sharedToUser.sharedRecipes);
         return SharedRecipes.find();
-        // return SmartCodes.find({ postId: postId }).fetch()[0].ifOrderable;
     },
+    getInboxRecipesCount: () => {
+        return SharedRecipes.find().count();
+    },
+
 })
 
 Template.inbox.events({

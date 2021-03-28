@@ -1,58 +1,10 @@
 import { Recipes } from '../../imports/api/recipesBase.js';
 
-Template.SingleRecipeNav.onCreated(function () {
-    // $(window).on('scroll', function(e) {
-    //     // ... event processing stuff; 
-    //     // say it produces value 'zoomAmount' ...
-    //     console.log("scrolling mad...");
-    })
+Template.SingleRecipeNav.onCreated(function () {})
 
-    // this.autorun(() => {
 
-        // setTimeout(() => {
-        //     console.log("teteterter");
-        //     $(window).on('scroll', function(e) {
-        //         // ... event processing stuff; 
-        //         // say it produces value 'zoomAmount' ...
-        //         console.log("scrolling mad...");
-        //     })
-        // }, 0)
-        // $('.wrapper').on('scroll', function() {
-        //     console.log("testing scroll detect");
-        //     var scrollTop = $(this).scrollTop();
-        //     if (scrollTop + $(this).innerHeight() >= this.scrollHeight) {
-        //       $('#message').text('end reached');
-        //     } else if (scrollTop <= 0) {
-        //       $('#message').text('Top reached');
-        //     } else {
-        //       $('#message').text('');
-        //     }
-        // });
+Template.SingleRecipeNav.onRendered(function() {})
 
-    // })
-    
-// });
-
-Template.SingleRecipeNav.onRendered(function(){
-    // You can do this multiple times
-    // $(".wrapper").on('scroll', function(e) {
-    //     console.log($('#sRInfo').offset().top - 36, "pozicija");
-    //     console.log($('#sRInfo').outerHeight(), "visina");
-    // })
-    // loadEvents();
-})
-
-// $('.wrapper').on('scroll', function() {
-//     console.log("testing scroll detect");
-//     var scrollTop = $(this).scrollTop();
-//     if (scrollTop + $(this).innerHeight() >= this.scrollHeight) {
-//       $('#message').text('end reached');
-//     } else if (scrollTop <= 0) {
-//       $('#message').text('Top reached');
-//     } else {
-//       $('#message').text('');
-//     }
-// });
 
 Template.SingleRecipeNav.helpers({
     getSingleRecipe: () => {
@@ -62,11 +14,7 @@ Template.SingleRecipeNav.helpers({
 
 
 Template.SingleRecipeNav.events({
-    "click a"(event) {
-
-        // get clicked element
-        // console.log(event.currentTarget);
-        
+    "click a"(event) {   
         event.preventDefault();
 
         const hrefOfClicked = $(event.currentTarget).attr("href");
@@ -98,14 +46,6 @@ Template.SingleRecipeNav.events({
                 error => console.log(error) // doesn't run
             );
         }
-
-
-
-        // scrollFunction('#sRInfo');
-        // $('#sRInfo').removeClass("active");
-        // void document.getElementById("sRInfo").offsetWidth;
-        // $('#sRInfo').addClass("active");
-
 
     },
 })

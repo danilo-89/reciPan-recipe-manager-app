@@ -39,7 +39,7 @@ Template.uploadFormProfile.events({
         if (error) {
           alert(`Error during upload: ${error}`);
         } else {
-          alert(`File "${fileObj.name}" successfully uploaded`);
+          // alert(`File "${fileObj.name}" successfully uploaded`);
 
 
           Meteor.call('setAvatarPicture', getImgLink(fileObj), (err, res) => {

@@ -20,7 +20,7 @@ Template.SingleRecipe.onCreated(function() {
 
 
 Template.SingleRecipe.onRendered(function () {
-
+    clearModals();
     this.autorun(() => {
         
         const ready = this.subscriptionsReady();
@@ -48,9 +48,6 @@ Template.SingleRecipe.onRendered(function () {
                 // mySwiper.init();
                 const mySwiper1 = document.querySelector(".swiper-container").swiper;
                 console.log("swiper", mySwiper);
-
-
-
 
                 const a = Recipes.find().fetch()[0].starRatingByUser;
                 if (jQuery.isEmptyObject(a)) {
@@ -106,6 +103,7 @@ Template.SingleRecipe.onDestroyed(function() {
     Session.set('recipeId', null);
     Session.set('avgStar', null);
     Session.set('checkItFav', null);
+    clearModals();
 })
 
 Template.SingleRecipe.helpers({
@@ -144,6 +142,12 @@ Template.SingleRecipe.helpers({
     },
     getCategoryLink: (categoryName) => {
         return "/categories/"+ categoryName.replace(/ /g, '_');
+    },
+    getConfirmModal: () => {
+        return Session.get('confirmModal');
+    },
+    getConfirmModalTitle: () => {
+        return Session.get('confirmModal')[0];
     },
     // getStarRating: () => {
     //     const starRating = Recipes.find().fetch()[0].starRating;
@@ -215,28 +219,7 @@ Template.SingleRecipe.events({
 
     },
     "click .delete-recipe-btn"() {
-        // console.log(this._id);
-        thisUserId = Meteor.userId();
-
-        Meteor.call('recipes.remove', Session.get('recipeId'), (err, res) => {
-            if (err) {
-                Bert.alert(err.reason, 'danger');
-                console.log(err.reason);
-            } else {
-                FlowRouter.go(`/home`);
-                if (res.isError) {
-                    Bert.alert(res.err.reason, 'danger');
-                    console.log(res.err.reason);
-                } else {
-                    Bert.alert('successfully deleted', 'success');
-                }
-                console.log("what's happening?")
-            }
-        });
-
-        
-        // console.log("edit");
-        // FlowRouter.go(`/edit-recipe/${this._id}`);
+        Session.set('confirmModal', true);
     },
     "click .share-recipe-btn"(event) {
         Session.set('modalData', {template: "modalShareRecipe", title: "Share recipe", recipeName: this.name, files: [{name: "Share recipe", linkit: window.location.href, date: new Date()}]});
@@ -360,11 +343,43 @@ Template.SingleRecipe.events({
         });
 
     },
+    "click #confirmModal"(event) {
+        // close modal if clicked outside .confirm-modal-inside element
+        if (event.target===event.currentTarget) {
+            clearModals();
+        }
+    },
+    "click #cancelModalsBtn"(event) {
+        clearModals();
+    },
+    "click #confirmModalsBtn"(event) {
+        thisUserId = Meteor.userId();
+
+        Meteor.call('recipes.remove', Session.get('recipeId'), (err, res) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+                console.log(err.reason);
+            } else {
+                FlowRouter.go(`/home`);
+                if (res.isError) {
+                    Bert.alert(res.err.reason, 'danger');
+                    console.log(res.err.reason);
+                } else {
+                    Bert.alert('successfully deleted', 'success');
+                }
+                console.log("what's happening?")
+            }
+        });
+    },
 });
 
 const setDOMStar = function(setIt) {
     $('.p-star').removeClass("my-star-rank");
     $('*[data-star=' + setIt + ']').addClass("my-star-rank");
+}
+
+const clearModals = function() {
+    Session.set('confirmModal', null);
 }
 
 
