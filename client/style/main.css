@@ -2557,6 +2557,11 @@ cursor: default;
     border: 1px solid #f5f5f5;
     background-color: #ffffff;
     border-radius: 10px 0 6px 6px;
+    cursor: pointer;
+}
+
+.user-card:hover {
+    box-shadow: 0 3px 6px rgb(0 0 0 / 12%), 0 3px 6px rgb(0 0 0 / 20%);
 }
 
 .user-card-profile-img {

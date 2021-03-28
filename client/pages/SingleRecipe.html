@@ -2,6 +2,7 @@
 
     {{#modalBlock title=title}}
         <div class="modal-body">
+            {{#if currentUser}}
             <p class="p-share-text mb10">Show Awesome pie recipe to your friends on reciPan app</p>
             {{#if Template.subscriptionsReady}}
             <div class="xy-center-flex mb20 user-send-input-holder" id="userSendInputHolder">
@@ -18,6 +19,9 @@
             {{/if}}
             <hr class="mb15">
             <p class="p-share-text mb10">...or share it on other apps and networks</p>
+            {{else}}
+            <p class="p-share-text mb10">Share this recipe it on other apps and networks</p>
+            {{/if}}
             <div class="soc-share-container xy-center-flex">
             {{#each files}}
 
