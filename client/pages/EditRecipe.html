@@ -8,22 +8,23 @@
                 <form action="">
                     
                     <label for="inputRecipeName">Recipe name</label>
-                    <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value={{name}}>
+                    <input class="customInput d-block mb25 w-100" type="text" id="inputRecipeName" name="inputRecipeName" value={{name}} placeholder="E.g. Lasagne alla Bolognese" required>
                     
                     <hr>
 
                     <label>Prep time</label>
                     <div class="mb25 xy-center-flex">
-                        <input type="number" class="input-time customInput w-100" id="inputPrepTimeHours" name="inputPrepTimeHours" value="{{getHours}}" min="0" max="24">
+                        <input type="number" class="input-time customInput w-100" id="inputPrepTimeHours" name="inputPrepTimeHours" value="{{getHours}}" min="0" max="48" placeholder="1">
                         <span class="px10">h</span>
-                        <input type="number" class="input-time customInput w-100" id="inputPrepTimeMins" name="inputPrepTimeMins" value="{{getMinutes}}" min="0" max="59">
+                        <input type="number" class="input-time customInput w-100" id="inputPrepTimeMins" name="inputPrepTimeMins" value="{{getMinutes}}" min="0" max="59" placeholder="30">
                         <span class="px10">min</span>
                     </div>
 
                     <hr>
 
                     <label for="inputRecipeCategory">Recipe category</label>
-                    <select class="customSelect w-100 mb25" name="inputRecipeCategory" id="inputRecipeCategory">
+                    <select class="customSelect w-100 mb25" name="inputRecipeCategory" id="inputRecipeCategory" required>
+                        <option value="" disabled>Select your recipe category</option>
                         <option value="Dressings and Sauces">Dressings and Sauces</option>
                         <option value="Appetizers">Appetizers</option>
                         <option value="Salads and Sandwiches">Salads and Sandwiches</option>
@@ -54,7 +55,7 @@
                     <hr>
 
                     <label for="#inputDescription">Recipe description*</label>
-                    <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50">{{description}}</textarea>
+                    <textarea id="inputDescription" class="input-description customInput mb25" name="" rows="7" cols="50" required placeholder="E.g. One of the most popular traditional Italian recipes. You will enjoy every bite.">{{description}}</textarea>
     
                     <hr>
 
@@ -64,7 +65,7 @@
                             {{#unless isEqual @index 0}}
                             <div class="tx-div-before"></div>
                             {{/unless}}
-                            <textarea id="" class="input-directions customInput" name="" rows="7" cols="50">{{this}}</textarea>
+                            <textarea id="" class="input-directions customInput" name="" rows="7" cols="50" required placeholder="E.g. Mix zucchini, mushrooms, onions, and garlic with tomato sauce and seasonings in a saucepan. Cover; cook 15 minutes and set aside.">{{this}}</textarea>
                         {{/each}}
                     </div>
                     <button type="button" class="add-direction-fields btn-plus-create mt10 mb50">+</button>
@@ -83,8 +84,8 @@
                             {{ #each ingridients }}
                             <tr>
                             <td></td>
-                            <td><input type="text" name="" class="input-create inputIngridient" value="{{ this.[0] }}" required></td>
-                            <td><input type="text" name="" class="input-create inputIngridientAmount" value="{{ this.[1] }}" required></td>
+                            <td><input type="text" name="" class="input-create inputIngridient" value="{{ this.[0] }}" required placeholder="E.g. olive oil"></td>
+                            <td><input type="text" name="" class="input-create inputIngridientAmount" value="{{ this.[1] }}" required placeholder="E.g. 2 tbsp"></td>
                             {{#if isEqual @index 0}}
                             <td></td>
                             {{else}}
@@ -115,7 +116,8 @@
                     <hr>
 
                     <label for="inputVideo">Recipe video (YouTube link only)</label>
-                    <input class="customInput w-100 mb25" type="url" id="inputVideo" value="{{video}}">
+                    <input class="customInput w-100 mb25" type="url" id="inputVideo" value="{{video}}" 
+                    placeholder="E.g. https://www.youtube.com/watch?v=NpEaa2P7qZI">
     
                     <hr>
 

@@ -25,7 +25,7 @@ Meteor.methods({
       private,
       video
   ) {
-      
+
       check(name, String);
       check(category, String);
       check(description, String);
@@ -110,6 +110,10 @@ Meteor.methods({
         video
     ) {
         
+      if (Recipes.findOne({ _id: editId } ).owner !== this.userId) {
+        throw new Meteor.Error("bad-user", "Trying to edit others user recipe");
+      }
+
         check(name, String);
         check(category, String);
         check(description, String);
@@ -201,16 +205,6 @@ Meteor.methods({
       }
   },
   
-  // sendVerificationLink() {
-  // Email.send({
-  //   to: "p.kostic@aol.com",
-  //   from: "p.kostic@aol.com",
-  //   subject: "Example Email",
-  //   text: "The contents of our email in plain text.",
-  // });
-  // console.log(Accounts.sendVerificationEmail( userId ));
-  // return Accounts.sendVerificationEmail( userId );
-  
 
   postsTotal: function () {
     return Recipes.find({ $or: [ { private: { $ne: true } }, { owner: this.userId } ] }).count();
@@ -236,7 +230,6 @@ Meteor.methods({
   },
 
   getUserFavoritesCount: () => {
-    // return Meteor.users.find({ _id: Meteor.userId() }).fetch()[0].public.favorites.count();
     if (Meteor.userId()) {
       return Meteor.user().public?.favorites;
     }
@@ -281,17 +274,13 @@ Meteor.methods({
       });
       console.log(catObj);
       return catObj;
-      // return Recipes.findOne( {category:"Meat"}, {} );
     }
   },
 
   getRandomRecipe() {
-    // return Meteor.users.find({ _id: Meteor.userId() }).fetch()[0].public.favorites.count();
-    // if(Meteor.userId()) {
     const countIt = Recipes.find({ private: { $ne: true } }).count();
     const skip = Math.floor(Math.random() * countIt);
     return Recipes.findOne({ private: { $ne: true } }, { skip: skip });
-    // }
   },
 
 
@@ -305,17 +294,11 @@ Meteor.methods({
         Meteor.users.update(
           { _id: this.userId },
           { $set: { ["public.favorites." + recipeId]: true } }
-          // this will push (or create) into object "public" create (or update) array "favorites" with value
-          // { $push: { "public": { test: 89 } } }
-          // this will push (or create) array "public"
         );
         Recipes.update(
           { _id: recipeId },
           {
             $inc: { favorite: 1 },
-            // $inc: { starRating: -20 },
-            // avgQuantity: { $avg: "$starRatingByUser" },
-            //  $inc: { "starRating": star }
           }
         );
         return { isError: false };
@@ -326,14 +309,6 @@ Meteor.methods({
       return { isError: true, err };
     }
 
-    // const recipe = Recipes.findOne(recipeId);
-
-    // Meteor.users.update({ _id: Meteor.userId() }, {
-    //    $set: { "public.favorites": recipeId }
-    // })
-    // Meteor.users.public.favorites.insert({
-    //   recipeId
-    // });
   },
   "remove.from.favorites"(recipeId) {
     console.log("working");
@@ -349,9 +324,6 @@ Meteor.methods({
           { _id: recipeId },
           {
             $inc: { favorite: -1 },
-            // $inc: { starRating: -20 },
-            // avgQuantity: { $avg: "$starRatingByUser" },
-            //  $inc: { "starRating": star }
           }
         );
         return { isError: false };
@@ -362,52 +334,15 @@ Meteor.methods({
       return { isError: true, err };
     }
   },
-  // 'rateRecipe.insert'(star, recipeId) {
 
-  //   check(star, Number);
-
-  //   // Make sure the user is logged in before inserting a task
-  //   if (! this.userId) {
-  //     throw new Meteor.Error('not-authorized');
-  //   }
-
-  //   Meteor.users.update({ _id: Meteor.userId() }, {
-  //      $set: { ["public.starRating." + recipeId]: star }
-  //   })
-  // },
-
-  //   if (type === 'clubPost') {
-  //     Meteor.users.update(
-  //         { _id: Meteor.userId() },
-  //         {
-  //             $push: {
-  //                 'public.love.posts.clubPosts.list': postId
-  //             },
-  //             $inc: { 'public.love.posts.clubPosts.counter': 1 }
-  //         }
-  //     );
-  // }
 
   "rateRecipe.insert"(star, recipeId) {
     check(star, Number);
-
-    // Posts.update(
-    //   {
-    //     _id: "abcdef123",
-    //     myField: {$exists: false, },
-    //   },
-    //   {
-    //     $set: {
-    //       myField: "myValue...",
-    //     },
-    //   }
-    // );
 
     try {
       if (Meteor.userId()) {
         console.log({ star });
         console.log({ recipeId });
-        // console.log(currentStarRating, "from method current star rating");
         let thisaUserId = this.userId;
         console.log(this);
         let currentStarRating = 0;
@@ -418,26 +353,14 @@ Meteor.methods({
         });
         if (chechit) {
           console.log("true it");
-          // currentStarRating = this.starRatingByUser[thisaUserId];
         } else {
           console.log("false it");
         }
-
-        // currentStarRating = this.starRatingByUser[thisUserId];
-
-        // const a = Recipes.find().fetch()[0].starRatingByUser;
-        // for (const key of Object.keys(a)) {
-        //     const val = a[key];
-        //     console.log(val);
-        // }
 
         Recipes.update(
           { _id: recipeId },
           {
             $set: { ["starRatingByUser." + this.userId]: star },
-            // $inc: { starRating: -20 },
-            // avgQuantity: { $avg: "$starRatingByUser" },
-            //  $inc: { "starRating": star }
           }
         );
         return { isError: false };
@@ -480,49 +403,12 @@ Meteor.methods({
     }
   },
 
-
-
-
-  // if(foundRecipe.privateAllow) {
-  //   const inPrivateAllow = (foundRecipe.privateAllow).includes(toUser._id);
-  //   console.log("inPrivateAllow: ", inPrivateAllow);
-  // } else {
-  //   const inPrivateAllow = false;
-  //   console.log("nothing here");
-  // }
-
-  // const inPrivateAllow = Recipes.findOne(
-  //   {$and: [
-  //     { _id: recipeId },
-  //     { privateAllow: { $in: ["dfdsfdsf"] }}
-  //   ] }
-  // ).privateAllow;
-
-  // console.log(inPrivateAllow,"- is in p owner");
-  // const sentDate = Date.now();
-
   "share.recipe"(recipeId, recipeName, username) {
-    // (Meteor.userId()) {
-    //   Meteor.users.update(
-    //     { _id: this.userId },
-
-    // try {
-    //   if(Meteor.userId()) {
-    //     if (Meteor.users.find( { _id: this.userId, "public.friends.sent": { $in: [ toUserId ] }  } ).count() > 0 ) {
-    //       throw new Meteor.Error('not-logged-in', 'Already sent friend request')
-    //     } else if (Meteor.users.find( { _id: this.userId, "public.friends.received": { $in: [ toUserId ] }  } ).count() > 0 ) {
-    //       throw new Meteor.Error('not-logged-in', 'This user sent you a friend request')
-    //     } else if (Meteor.users.find( { _id: this.userId, "public.friends.active": { $in: [ toUserId ] }  } ).count() > 0 ) {
-    //       throw new Meteor.Error('not-logged-in', 'This user is already your friend')
-    //     }
 
     console.log("working");
     check(recipeId, String);
     check(username, String);
     check(recipeName, String);
-
-    // console.log(Meteor.userId());
-
     try {
       if (Meteor.userId()) {
         const foundRecipe = Recipes.findOne({ _id: recipeId });
@@ -789,23 +675,6 @@ Meteor.methods({
         throw new Meteor.Error("already-in", "This recipe is already in your shoplist");
       }
 
-      // { $set: { ["public.sharedToUser.recipes." + sentDate]: {
-      //   "recipeId" : recipeId,
-      //   "sentBy" : this.userId,
-      //   "sentByName" : Meteor.user().username,
-      //   "dateSent" : sentDate
-      // } }}
-
-
-      // { _id: 1, colors: "blue,green,red" }
-      // The following $addToSet operation on the non-array field colors fails:
-      
-      // db.foo.update(
-      //    { _id: 1 },
-      //    { $addToSet: { colors: "c" } }
-      // )
-
-
       try {
         if (Meteor.userId()) {
           ShopLists.update(
@@ -835,9 +704,6 @@ Meteor.methods({
       } catch (err) {
         return { isError: true, err };
       }
-
-
-    
   },
 
 
@@ -931,45 +797,6 @@ Meteor.methods({
           { $set: { 'entries.$.checked' : checked }, $inc: { ['counter.' + recipeId]: 1 }}
         )
       }
-
-        // ShopLists.update(
-        //   { owner: this.userId, entries: {$elemMatch: {name: ingridentName, recipe: recipeId}}, recipes: {$elemMatch: {recId: recipeId}}},
-        //   { $set: { 'entries.$.checked' : checked },
-        //   $inc: { 'recipes.$.size': 1 } }
-        // )
-
-
-
-
-  //    db.inventory.aggregate([
-  //     {
-  //        $project: {
-  //           item: 1,
-  //           numberOfColors: { $cond: { if: { $isArray: "$colors" }, then: { $size: "$colors" }, else: "NA"} }
-  //        }
-  //     }
-  //  ] )
-
-
-  //    db.collection.update(
-  //     { <array>: value ... },
-  //     { <update operator>: { "<array>.$" : value } }
-  //  )
-   
-
-      // console.log(ingridient);
-      // try {
-      //     if (recipe.owner === this.userId) {
-      //         Recipes.remove(recipeId);
-      //     } else {
-      //         throw new Meteor.Error(
-      //             "not-owner",
-      //             "You are not author of this recipe or not logged in"
-      //         );
-      //     }
-      // } catch (err) {
-      //     return { isError: true, err };
-      // }
   },
   "delete.ingridient"(ingridentName, recipeId, checked) {
     check(ingridentName, String);
@@ -1079,37 +906,7 @@ Meteor.methods({
     }
   },
 
-  // getUserModalList: function () {
-  //   if (Meteor.userId()) {
-  //     console.log("inside method");
-  //     return Meteor.user().public?.friends?.active;
-  //   }
-  // },
-
-
-
 });
 
 
 }
-
-// Meteor.users.update(
-//   { _id: toUser._id },
-//   { $push: { "public.sharedToUser.sharedRecipes":
-    
-//       {
-//         "recipeId" : recipeId,
-//         "recipeName": recipeName,
-//         "sentBy" : this.userId,
-//         "sentByName" : Meteor.user().username,
-//         "dateSent" : sentDate
-//       }
-    
-//   }}
-//   // { $push: { "public.sharedToUser.recipes":  recipeId  } }
-
-//   // { $set: { ["public.favorites." + recipeId]: true }}
-//   // this will push (or create) into object "public" create (or update) array "favorites" with value
-//   // { $push: { "public": { test: 89 } } }
-//   // this will push (or create) array "public"
-// );

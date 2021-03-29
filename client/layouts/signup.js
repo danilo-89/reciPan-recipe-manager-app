@@ -4,7 +4,7 @@ Template.signup.events({
       
       let user = {
         username: template.find( '[name="userName"]' ).value,
-        email: template.find( '[name="emailAddress"]' ).value,
+        // email: template.find( '[name="emailAddress"]' ).value,
         password: template.find( '[name="password"]' ).value
       };
   
@@ -12,13 +12,10 @@ Template.signup.events({
         if ( error ) {
           Bert.alert( error.reason, 'danger' );
         } else {
-          Meteor.call( 'sendVerificationLink', ( error, response ) => {
-            if ( error ) {
-              Bert.alert( error.reason, 'danger' );
-            } else {
-              Bert.alert( 'Welcome!', 'success' );
-            }
-          });
+          Accounts.createUser({
+            username: username,
+            password: password
+        });
         }
       });
     },

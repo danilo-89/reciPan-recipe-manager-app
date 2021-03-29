@@ -548,6 +548,10 @@ margin-bottom: 2px;
     max-width: 600px;
 }
 
+.max-w-300-px {
+    max-width: 300px;
+}
+
 .max-w-400-px-95 {
     display: block;
     width: 95%;

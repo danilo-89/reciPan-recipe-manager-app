@@ -1,25 +1,23 @@
 <template name="signup">
-  <button>test</button>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <h4 class="page-header">Sign Up</h4>
-        <form id="signup" class="signup">
-          <div class="form-group">
-            <label for="userName">Email Address</label>
-            <input type="text" name="userName" class="form-control" placeholder="User Name">
-          </div>
-          <div class="form-group">
-            <label for="emailAddress">Email Address</label>
-            <input type="email" name="emailAddress" class="form-control" placeholder="Email Address">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-success" value="Sign Up">
-          </div>
-        </form>
-      </div>
+
+
+  <form id="signup" class="signup max-w-300-px mx-auto p10 sign-up-in-form">
+    <div class="form-group">
+      <label for="userName">User name*</label>
+      <input type="text" name="userName" class="customInput d-block mb25 w-100" placeholder="User Name" required>
     </div>
-  </template>
+    <div class="form-group">
+      <label for="password">Password*</label>
+      <input type="password" name="password" class="customInput d-block mb25 w-100" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword">Repeat Password*</label>
+      <input type="password" name="repeatPassword" class="customInput d-block mb25 w-100"
+        id="exampleRepeatPassword" placeholder="Repeat your password" required>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-custom d-block fs-16px mx-auto mb20" value="Sign Up">
+    </div>
+  </form>
+
+</template>

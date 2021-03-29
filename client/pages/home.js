@@ -219,6 +219,7 @@ Template.Home.events({
             FlowRouter.go(`/search`);
     },
     "click .home-logo-img"() {
+            console.log("you are at home :)");
             FlowRouter.go(`/home`);
     },
     'focusout .home-search-btn' () {

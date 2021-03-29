@@ -1,4 +1,5 @@
 <template name="ProfileNav">
+    {{#if currentUser}}
     <nav class="profile-navigation mx-auto no-select">
         <ul class="main-navigation-ul profile-navigation-ul mx-auto">
             <a class="profile-nav profile-nav-info {{isActiveRoute 'profile'}}">
@@ -15,4 +16,5 @@
             </a> -->
         </ul>
     </nav>
+    {{/if}}
 </template>
