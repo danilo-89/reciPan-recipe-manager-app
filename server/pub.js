@@ -20,6 +20,17 @@ Meteor.publish('recipes', function recipesPublication() {
 
 Meteor.publish("recipesForCategory", function publishRecipesCategory(categoryName, limit, skip, searchArray) {
     check(skip, Number);
+
+    if (searchArray) {
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+        if (!checkStringMaxLength(searchArray.join(''), 25)) {
+            throw new Meteor.Error(
+                "too-long",
+                "Too long search term"
+            );
+        }
+    }
+
     categoryName = categoryName.replace(/_/g, ' ');
     if(searchArray == false) {
         return Recipes.find(
@@ -129,6 +140,17 @@ Meteor.publish('users.friendsActive', function() {
 Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArray) {
     check(skip, Number);
     check(limit, Number);
+
+    if (searchArray) {
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+        if (!checkStringMaxLength(searchArray.join(''), 25)) {
+            throw new Meteor.Error(
+                "too-long",
+                "Too long search term"
+            );
+        }
+    }
+
     if(searchArray == false) {
         return Recipes.find(
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
@@ -149,6 +171,17 @@ Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArra
 Meteor.publish("recipesMy", function publishRecipesHome(limit, skip, searchArray) {
     check(skip, Number);
     check(limit, Number);
+
+    if (searchArray) {
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+        if (!checkStringMaxLength(searchArray.join(''), 25)) {
+            throw new Meteor.Error(
+                "too-long",
+                "Too long search term"
+            );
+        }
+    }
+
     if(searchArray == false) {
         return Recipes.find(
             // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
@@ -188,6 +221,16 @@ Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip,
     check(limit, Number);
     check(currUser, String);
 
+    if (searchArray) {
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+        if (!checkStringMaxLength(searchArray.join(''), 25)) {
+            throw new Meteor.Error(
+                "too-long",
+                "Too long search term"
+            );
+        }
+    }
+
     const profileUser = Meteor.users.find({ username: currUser }).fetch()[0];
     if(searchArray == false) {
         return Recipes.find(
@@ -225,6 +268,16 @@ Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip,
 Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
 
     check(limit, Number);
+
+    if (searchArray) {
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+        if (!checkStringMaxLength(searchArray.join(''), 25)) {
+            throw new Meteor.Error(
+                "too-long",
+                "Too long search term"
+            );
+        }
+    }
     
     const favorited = Meteor.users.find({ _id: this.userId }).fetch()[0].public.favorites;
     if(favorited===false) {

@@ -13,11 +13,17 @@ Template.signup.events({
           Bert.alert( error.reason, 'danger' );
         } else {
           Accounts.createUser({
-            username: username,
-            password: password
+            username,
+            password
         });
         }
       });
+    },
+    'keyup #inputPassword' ( event, template ) {
+      validatePassword()
+    },
+    'keyup #inputRepeatPassword' ( event, template ) {
+      validatePassword()
     },
     'click button' ( event, template ) {
       event.preventDefault();
@@ -31,3 +37,14 @@ Template.signup.events({
           });
     }
   });
+
+
+  function validatePassword(){
+    var password = document.getElementById("inputPassword")
+  , confirm_password = document.getElementById("inputRepeatPassword");
+    if(password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }

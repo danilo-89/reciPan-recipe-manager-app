@@ -96,7 +96,7 @@ Template.Search.onRendered(function () {
                 }
 
             }
-            console.log("posts curently visible: ", Recipes.find().count());
+            // console.log("posts curently visible: ", Recipes.find().count());
 
     })
 
@@ -203,12 +203,12 @@ Template.Search.events({
             var cleanArray = inputValue.filter(function(x) {
                 return x.length > 2
             });
-            if(inputValue.length > 2) {
+            if (inputValue.length > 2) {
                 Session.set("limit", 12);
                 Session.set("skip", 0);
                 $('.wrapper').animate({scrollTop: 0}, 100);
                 $(window).scrollTop();
-            }
+            } 
             Session.set("searchArray", cleanArray);
             $('.wrapper').animate({scrollTop: 0}, 0);
             console.log(cleanArray);
