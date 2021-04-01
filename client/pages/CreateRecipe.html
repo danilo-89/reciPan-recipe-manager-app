@@ -151,11 +151,14 @@
     </div>
 
     {{else}}
-    <div class="max-w-400-px-95 mx-auto">
-        <div class="helper-container-custom-1 text-center mt20 mb20">
-            <img class="max-w-30" src="/chef_girl.svg" alt="">
-            <p class="w-100 p10">Here you can publish recipe of your favourite dish. <br> Please log in to view this content.</p>
+    <div class="wrapper">
+        <div class="max-w-400-px-95 mx-auto">
+            <div class="helper-container-custom-1 text-center mt20 mb20">
+                <img class="max-w-30" src="/chef_girl.svg" alt="">
+                <p class="w-100 p10">Here you can publish recipe of your favourite dish. <br> Please log in to view this content.</p>
+            </div>
         </div>
+        {{> signInUp}}
     </div>
     {{/if}}
     {{/if}}

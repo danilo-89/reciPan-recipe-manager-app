@@ -93,8 +93,8 @@ Template.Home.onRendered(function () {
 
     $(".wrapper").on('scroll', function(e) {
         // console.log(topPos, "element position");
-         // console.log($('.behind-search-header').outerHeight(), "element height");
-         
+        // console.log($('.behind-search-header').outerHeight(), "element height");
+        
         topPos = headerElem.offset().top;
 
         if (topPos < (-15)) {
@@ -203,17 +203,7 @@ Template.Home.events({
         FlowRouter.go(`/favorites`);
     },
     "click .home-top-btn"() {
-        Session.set("limit", 12);
-        Session.set("skip", 0);
         $(".wrapper").animate({scrollTop: 0}, 1000);
-    },
-    'click .icon-clear-search' () {
-        console.log("wiiiiiiiiiiiiiiiiiiii")
-        $('.home-header-search').val("");
-        Session.set("limit", 12);
-        Session.set("skip", 0);
-        $('.wrapper').animate({scrollTop: 0}, 100);
-        $('.home-header-search').trigger('keyup');
     },
     "click .go-to-search"() {
             FlowRouter.go(`/search`);
@@ -228,42 +218,7 @@ Template.Home.events({
     'click .home-recipe-category' (event) {
         event.stopPropagation();
     },
-    'click .btn-clear-search' () {
-        $('.home-header-search').val("");
-        Session.set("limit", 12);
-        Session.set("skip", 0);
-        $('.wrapper').animate({scrollTop: 0}, 100);
-        $('.home-header-search').trigger('keyup');
-    },
-    'keyup .home-header-search' (event) {
-        if (event.keyCode !== 32) {
-            const inputValue = $(event.currentTarget).val().toLowerCase().split(" ");
-            var cleanArray = inputValue.filter(function(x) {
-                return x.length > 2
-            });
-
-            // cleanArray = cleanArray.map( function( val ){ 
-            //     return new RegExp(val); 
-            // });
-            if(inputValue.length > 2) {
-                Session.set("limit", 12);
-                Session.set("skip", 0);
-                $('.wrapper').animate({scrollTop: 0}, 100);
-                $(window).scrollTop();
-            }
-
-
-            Session.set("searchArray", cleanArray);
-            $('.wrapper').animate({scrollTop: 0}, 0);
-            // Session.set("noSearchResults", true);
-            console.log(cleanArray);
-        }
-    },
 });
-
-// "click .on-club-post"() {
-//     FlowRouter.go(`/clubMy/${this._id}`);
-// },
 
 function getRandomRecipe() {
     Meteor.call('getRandomRecipe', (err, res) => {
