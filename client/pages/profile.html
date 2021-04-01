@@ -4,16 +4,18 @@
     <div class="wrapper h-100 back-secondary">
 
 
-        {{> signup}}
+        
 
 
         {{#if Template.subscriptionsReady}}
         <div class="container mv-576 info-profile-container">
+            {{#if currentUser}}
             <div class="xy-center-flex flex-column">
+                
                 <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
-                {{#if currentUser}}
+                
                 {{> uploadFormProfile}}
-                {{/if}}
+                
                 
                 <div class="info-profile-name mt10">
                     <span>{{> loginButtons}}</span>
@@ -21,7 +23,7 @@
                 </div>
             </div>
 
-            {{#if currentUser}}
+            
             <hr class="my15">
             <div class="xy-center-flex space-around">
                 <div class="xy-center-flex flex-column profile-3-colums">
@@ -52,6 +54,9 @@
                 </a>
                 {{/each}}
             </div>
+
+            {{else}}
+                {{> signInUp}}
             {{/if}}
 
         </div>

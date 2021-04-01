@@ -14,3 +14,5 @@ DDPRateLimiter.addRule(getDDPRateLimiterMatcher('shoplist.deleteFinishedIngredie
 DDPRateLimiter.addRule(getDDPRateLimiterMatcher('recipes.insert'), 1, 10000);
 DDPRateLimiter.addRule(getDDPRateLimiterMatcher('shoplist.insert'), 3, 10000);
 DDPRateLimiter.addRule(getDDPRateLimiterMatcher('read.inbox'), 3, 10000);
+DDPRateLimiter.addRule(getDDPRateLimiterMatcher('createUser'), 7, 60000);
+DDPRateLimiter.addRule(getDDPRateLimiterMatcher('login'), 5, 60000);

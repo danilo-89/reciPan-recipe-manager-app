@@ -1,22 +1,22 @@
 <template name="signup">
 
 
-  <form id="signup" class="signup max-w-300-px mx-auto p10 sign-up-in-form">
+  <form id="signup" class="signup">
     <div class="form-group">
       <label for="userName">User name*</label>
       <input type="text" name="userName" class="customInput d-block mb25 w-100" placeholder="User Name" required>
     </div>
     <div class="form-group">
       <label for="inputPassword">Password*</label>
-      <input type="password" name="password" class="customInput d-block mb25 w-100" placeholder="Password" id="inputPassword" required>
+      <input type="password" name="password" class="customInput d-block mb25 w-100" placeholder="Password" id="inputPassword" autocomplete="on" required>
     </div>
     <div class="form-group">
       <label for="inputRepeatPassword">Repeat Password*</label>
       <input type="password" name="repeatPassword" class="customInput d-block mb25 w-100"
-        id="inputRepeatPassword" placeholder="Repeat your password" required>
+        id="inputRepeatPassword" placeholder="Repeat your password" autocomplete="on" required>
     </div>
     <div class="form-group">
-      <input type="submit" class="btn btn-custom d-block fs-16px mx-auto mb20" value="Sign Up">
+      <input type="submit" class="btn btn-custom d-block fs-16px mx-auto mb30" value="Register">
     </div>
   </form>
 

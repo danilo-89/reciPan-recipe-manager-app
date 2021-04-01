@@ -135,7 +135,7 @@ Template.Home.helpers({
     },
     // BlogPosts.find({}, {sort: {date: -1}, limit: 10});
     getUserFavorites: () => {
-        if (Meteor.user().public.favorites) {
+        if (Meteor.user()?.public?.favorites) {
             return Meteor.users.find().fetch()[0].public.favorites;
         } else {
             return {};

@@ -1,0 +1,21 @@
+<template name="signInUp">
+    {{#if isRegister}}
+        <div class="sign-up-in-form max-w-300-px mx-auto p10">
+            <img class="mx-auto mb2 d-block" src="/logo-simple-orange.svg" alt="reciPan logo">
+            <p class="form-logo-text mb30">reciPan</p>
+            {{> signup}}
+            <div class="text-center">
+                <span id="logInLink" class="sign-in-up-links go">Already have an account? LOG IN</span>
+            </div>
+        </div>
+    {{else}}
+        <div class="sign-up-in-form max-w-300-px mx-auto p10">
+            <img class="mx-auto mb2 d-block" src="/logo-simple-orange.svg" alt="reciPan logo">
+            <p class="form-logo-text mb30">reciPan</p>
+            {{> signin}}
+            <div class="text-center">
+                <span id="registerLink" class="sign-in-up-links go">Don't have an account? REGISTER</span>
+            </div>
+        </div>
+    {{/if}}
+</template>

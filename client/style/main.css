@@ -154,6 +154,14 @@ hr {
     z-index: 1;
 }
 
+.form-logo-text {
+    text-align: center;
+    color: #373737;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+}
+
 /* MODAL */
 
 #myModal {
@@ -870,8 +878,13 @@ a.section-title-view-all {
 }
 
 .sign-up-in-form {
-    border: 2px solid #939495;
+    border: 2px solid #dad4d5;
     border-radius: 10px;
+}
+
+.sign-in-up-links {
+    cursor: pointer;
+    color: #5386e4;
 }
 
 /* Nav */

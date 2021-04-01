@@ -25,17 +25,17 @@ Template.signup.events({
     'keyup #inputRepeatPassword' ( event, template ) {
       validatePassword()
     },
-    'click button' ( event, template ) {
-      event.preventDefault();
+    // 'click button' ( event, template ) {
+    //   event.preventDefault();
       
-          Meteor.call( 'sendVerificationLink', ( error, response ) => {
-            if ( error ) {
-              Bert.alert( error.reason, 'danger' );
-            } else {
-              Bert.alert( 'Welcome!', 'success' );
-            }
-          });
-    }
+    //       Meteor.call( 'sendVerificationLink', ( error, response ) => {
+    //         if ( error ) {
+    //           Bert.alert( error.reason, 'danger' );
+    //         } else {
+    //           Bert.alert( 'Welcome!', 'success' );
+    //         }
+    //       });
+    // }
   });
 
 
