@@ -209,6 +209,9 @@ Template.CreateRecipe.events({
         event.preventDefault();
         resetForm();
     },
+    "click #uploadPhoto"(event) {
+        $("#fileInput").click();
+    },
 });
 
 const resetForm = function() {

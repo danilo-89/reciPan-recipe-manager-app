@@ -12,15 +12,15 @@
             {{#if currentUser}}
             <div class="xy-center-flex flex-column">
                 
-                <div class="info-profile-img mb10" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
+                <div class="info-profile-img mb10 cursor-pointer" id="changeAvatar" style="{{#if getAvatarImg}}background-image: url('{{getAvatarImg}}'){{/if}}"></div>
                 
                 {{> uploadFormProfile}}
                 
                 
-                <div class="info-profile-name mt10">
-                    <span>{{> loginButtons}}</span>
-                    <!-- <span><i class="far fa-edit"></i></span> -->
+                <div class="info-profile-name mt10 mb10">
+                    <span class="text-bold">{{currentUser.username}}</span>
                 </div>
+                <button class="btn btn-custom mx-auto" id="logoutBtn">LOG OUT</button>
             </div>
 
             

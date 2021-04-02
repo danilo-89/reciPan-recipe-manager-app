@@ -210,6 +210,22 @@ Meteor.methods({
     return Recipes.find({ $or: [ { private: { $ne: true } }, { owner: this.userId } ] }).count();
   },
 
+  postsOtherUserTotal: function (currUser) {
+    const profileUser = Meteor.users.find({ username: currUser }).fetch()[0];
+    return Recipes.find(
+      {$and: [
+        { owner: profileUser._id },
+        { $or: [ 
+            { private: { $ne: true } },
+            {$and: [ 
+                {privateAllow: {$exists: true}},
+                {privateAllow: { $in: [this.userId] }} 
+            ]} 
+        ]}
+      ]}
+    ).count();
+  },
+
   postsMyTotal: function () {
     return Recipes.find({ owner: this.userId } ).count();
   },

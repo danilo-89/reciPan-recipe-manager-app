@@ -627,9 +627,14 @@ margin-bottom: 2px;
     cursor: pointer;
 }
 
+.cursor-default {
+    cursor: default !important;
+}
+
 .btn-custom {
     padding: 10px 20px;
     border-radius: 50px;
+    font-weight: 600;
     border: none;
     background-color: #aba8b2;
     color: #ffffff;
@@ -1011,6 +1016,18 @@ btn.active, .btn-standard.active:focus, .btn-standard.focus, .btn-standard:activ
     color: rgb(212, 212, 212);
 }
 
+/* For non-natively-focusable elements. For natively focusable elements */
+/* Use .visually-hidden:not(:focus):not(:active) */
+.visually-hidden {
+    border-width: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+}
 
 
 

@@ -59,7 +59,7 @@ Template.userRecipes.onRendered(function () {
     let countTotal = 0;
     let countDiscovered = 0;
 
-    Meteor.call('postsTotal', function(error, result){
+    Meteor.call('postsOtherUserTotal', FlowRouter.getParam("userProfileName"), function(error, result){
         console.log("REAL total posts:", result);
         countTotal = result;
     });
@@ -107,7 +107,7 @@ Template.userRecipes.onRendered(function () {
                 }
 
             }
-            console.log("posts curently visible: ", Recipes.find().count());
+            // console.log("posts curently visible: ", Recipes.find().count());
 
     })
 
@@ -154,7 +154,9 @@ Template.userRecipes.helpers({
         return hours + " " + mins;
     },
     getRaiting: (a) => {
-        if (a) {
+        if (jQuery.isEmptyObject(a)) {
+            return 0;
+        } else if (a) {
             let sum = 0;
             let count = 0;
             for (const key of Object.keys(a)) {
@@ -183,7 +185,7 @@ Template.userRecipes.events({
     },
     "click .home-fav-btn"() {
         // console.log(this._id);
-        FlowRouter.go(`/favorites`);
+        // FlowRouter.go(`/favorites`);
     },
     "click .home-top-btn"() {
         Session.set("limit", 12);

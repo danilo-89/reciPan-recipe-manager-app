@@ -140,7 +140,9 @@ Template.myRecipes.helpers({
         return hours + " " + mins;
     },
     getRaiting: (a) => {
-        if (a) {
+        if (jQuery.isEmptyObject(a)) {
+            return 0;
+        } else if (a) {
             let sum = 0;
             let count = 0;
             for (const key of Object.keys(a)) {
@@ -167,7 +169,7 @@ Template.myRecipes.events({
     },
     "click .home-fav-btn"() {
         // console.log(this._id);
-        FlowRouter.go(`/favorites`);
+        // FlowRouter.go(`/favorites`);
     },
     "click .home-top-btn"() {
         Session.set("limit", 12);

@@ -10,7 +10,8 @@
                             <i class="fas fa-search"></i>
                             <input type="text" placeholder="broccoli soup pepper" class="home-header-search">
                         </span>
-                        <span class="home-header-btn home-fav-btn"><i class="fas fa-heart"></i></span>
+                        <span class="home-header-btn home-fav-btn cursor-default {{#if getSearchVal}}hide{{/if}}"><i class=""></i></span>
+                        <span class="icon-clear-search {{#if getSearchVal}}show{{/if}}"><i class="fas fa-times-circle"></i></span>
                 </div>
             </div>            
         </div>
@@ -78,7 +79,7 @@
                             <div class="home-recipe-title">
                                 <p class="p-title">{{name}}</p>
                                 <div class="home-recipe-container-bottom">
-                                    <p class="home-recipe-category go">{{category}}</p>
+                                    <a href="{{getCategoryLink category}}" class="home-recipe-category go">{{category}}</a>
 
                                 </div>
                             </div>
