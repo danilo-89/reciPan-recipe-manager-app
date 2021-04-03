@@ -68,13 +68,17 @@ Template.CreateRecipe.events({
         if (directions < 1) {
             Bert.alert('Please add at least one recipe direction!', 'danger');
             throw new Meteor.Error("error-ingridient", "At least one direction required!");
-        } else if (directions > 25) {
-            Bert.alert('Please add no more than 25 recipe directions!', 'danger');
-            throw new Meteor.Error("error-ingridient", "No more than 25 directions allowed!");
+        } else if (directions > 20) {
+            Bert.alert('Please add no more than 20 recipe directions!', 'danger');
+            throw new Meteor.Error("error-ingridient", "No more than 20 directions allowed!");
         }
 
         // GET VIDEO LINK
         let video = $( "#inputVideo" ).val().replace(/\s+/g, '');
+        if (checkStringLength(video, 0, 150)) {} else {
+            Bert.alert('Recipe video link must be between 0 and 150 characters', 'danger');
+            throw new Meteor.Error("bad-link","Invalid video link");
+        }
         function getVidId(url) {
             var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             var match = url.match(regExp);
@@ -130,10 +134,10 @@ Template.CreateRecipe.events({
         const ingridientsAmountAll = $(".inputIngridientAmount");
         $(inputIngridientNames).each(function(index, element){
             // push all ingridients with their amount into the array
-            if ( checkStringAndNotEmpty( element ) && checkStringAndNotEmpty( $(ingridientsAmountAll).eq(index).val() ) ) {
+            if ( checkStringAndNotEmpty( element ) && checkStringAndNotEmpty( $(ingridientsAmountAll).eq(index).val()) && checkStringLength(element, 2, 30) && checkStringLength($(ingridientsAmountAll).eq(index).val(), 2, 30) ) {
                 ingridients.push([element, $(ingridientsAmountAll).eq(index).val()]);
             } else {
-                Bert.alert('Ingridient names and quantity must not be empty!', 'danger');
+                Bert.alert('Ingridient names and quantity must not be empty and must be between 2 and 30 characters!', 'danger');
                 throw new Meteor.Error("error-ingridient", "Ingridient must have value");
             }
         });
@@ -179,12 +183,17 @@ Template.CreateRecipe.events({
         // target.text.value = '';
     },
     "click .add-direction-fields"() {
-        $("#inputsDirections").append(`
-        <div class="tx-div-before added-field"></div>
-        <textarea id="" class="input-directions customInput added-field" name="" rows="7" cols="50" required></textarea>
-        `);
+        if ($(".input-directions").length < 20) {
+            $("#inputsDirections").append(`
+            <div class="tx-div-before added-field"></div>
+            <textarea id="" class="input-directions customInput added-field" name="" rows="7" cols="50" required></textarea>
+            `);
+        } else {
+            Bert.alert('Maximum 20 directions per recipe allowed', 'danger');
+        };
     },
     "click .add-ingredient-fields"() {
+        if ($(".inputIngridient").length < 25) {
         $("#tableCreateBody").append(`
         <tr class="added-field">
         <td></td>
@@ -193,6 +202,9 @@ Template.CreateRecipe.events({
         <td class="delete-row">&#10006;</td>
         </tr>
         `);
+        } else {
+            Bert.alert('Maximum 25 ingridients per recipe allowed', 'danger');
+        };
     },
     "click .delete-row"(e) {
         $( e.target ).parent().remove();
@@ -208,6 +220,7 @@ Template.CreateRecipe.events({
     "click #resetForm"(event) {
         event.preventDefault();
         resetForm();
+        $( ".wrapper" ).scrollTop( 0 );
     },
     "click #uploadPhoto"(event) {
         $("#fileInput").click();
