@@ -31,8 +31,11 @@ Template.Search.onRendered(function () {
         const ready = this.subscriptionsReady();
         if (ready) {
             Session.set("ready", true);
+            Meteor.call('postsTotal', Session.get("searchArray"), function(error, result){
+                console.log("REAL total posts:", result);
+                Session.set('countTotal', result);
+            });
         }
-
     });
 
 
@@ -45,13 +48,7 @@ Template.Search.onRendered(function () {
         }
     }, 0)
 
-    let countTotal = 0;
     let countDiscovered = 0;
-
-    Meteor.call('postsTotal', function(error, result){
-        console.log("REAL total posts:", result);
-        countTotal = result;
-    });
 
     $(".wrapper").on('scroll', function(e) {
 
@@ -72,7 +69,7 @@ Template.Search.onRendered(function () {
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
 
                 countDiscovered =  Session.get("limit") + Session.get("skip");
-                if (countDiscovered<countTotal) {
+                if ( countDiscovered < Session.get('countTotal') ) {
                     Session.set("scrollOn", true);
                     console.log("trigger");
                     // Session.set("limit", Session.get("limit") + 4);

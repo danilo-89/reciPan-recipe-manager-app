@@ -6,7 +6,7 @@
     <div class="container pt25">  
       <div class=""> 
         <div class="user-cards-container">
-        
+          {{#if getFriendsCount}}
           {{#each getFriends}}
           <div class="user-card-wrapper userNameLink">
             <div class="user-card">
@@ -22,10 +22,19 @@
             </div>
           </div>
           {{/each}}
-
+          {{else}}
+            <div class="max-w-400-px-95 mx-auto">
+                <div class="helper-container-custom-1 text-center mt20 mb20">
+                    <img class="max-w-30" src="/chef_girl.svg" alt="">
+                    <p class="w-100 p10">Your friends will appear here.</p>
+                </div>
+            </div>
+          {{/if}}
         </div>
       </div>
     </div>
   </div>
+{{else}}
+  <div class="post-loader"></div>
 {{/if}}
 </template>

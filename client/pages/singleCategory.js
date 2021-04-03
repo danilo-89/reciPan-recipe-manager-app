@@ -33,26 +33,24 @@ Template.SingleCategory.onRendered(function () {
         const ready = this.subscriptionsReady();
         if (ready) {
             Session.set("ready", true);
+            Meteor.call('postsCategoryTotal', FlowRouter.getParam("categoryName"), Session.get("searchArray"), function(error, result){
+                console.log("REAL total posts:", result);
+                Session.set('countTotal', result);
+            });
         }
-
     });
+
 
 
     setTimeout(() => {
         // $(".home-search-btn").trigger("click");
     }, 0)
 
-    let countTotal = 0;
+
     let countDiscovered = 0;
 
-    Meteor.call('postsCategoryTotal', FlowRouter.getParam("categoryName"), function(error, result){
-        console.log("REAL total posts:", result);
-        countTotal = result;
-    });
 
     $(".wrapper").on('scroll', function(e) {
-        // console.log(topPos, "element position");
-         // console.log($('.behind-search-header').outerHeight(), "element height");
         
         topPos = headerElem.offset().top;
 
@@ -67,31 +65,12 @@ Template.SingleCategory.onRendered(function () {
             }
         };
 
-
-            // console.log("position:", $(".wrapper").scrollTop());
-            // console.log("height:", $(".wrapper").outerHeight(true));
-            // console.log("total:", $(".wrapper").prop('scrollHeight'));
-
-            // console.log(
-            //     (
-            //         $(".wrapper").prop('scrollHeight')
-            //     ), 
-            //     (
-            //         $(".wrapper").scrollTop() + $(".wrapper").outerHeight(true)
-            //     )
-            // );
-
             if($(".wrapper").scrollTop() + $(".wrapper").outerHeight(true) > ($(".wrapper").prop('scrollHeight')-200)) {
 
-                
-
-
                 countDiscovered =  Session.get("limit") + Session.get("skip");
-                if (countDiscovered<countTotal) {
+                if ( countDiscovered < Session.get('countTotal') ) {
                     Session.set("scrollOn", true);
                     console.log("trigger");
-                    // Session.set("limit", Session.get("limit") + 4);
-                    // Session.set("limit", 12);
                     Session.set("skip", Session.get("skip") + 4);
     
                     console.log("limit+skip=", Session.get("limit")+Session.get("skip"));

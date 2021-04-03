@@ -85,7 +85,7 @@ Template.profile.events({
         FlowRouter.go(`/friends`);
     },
     "click .go-to-favorites-btn"() {
-        // FlowRouter.go(`/favorites`);
+        FlowRouter.go(`/favorites`);
     },
     "click #changeAvatar"() {
         $("#fileInput").click();

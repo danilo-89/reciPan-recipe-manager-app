@@ -206,12 +206,47 @@ Meteor.methods({
   },
   
 
-  postsTotal: function () {
+  postsTotal: function (searchArray) {
+
+    if (searchArray) {
+      const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+      if (!checkStringMaxLength(searchArray.join(''), 25)) {
+          throw new Meteor.Error(
+              "too-long",
+              "Too long search term"
+          );
+      }
+    }
+
+    if(searchArray == false) {
+
     return Recipes.find({ $or: [ { private: { $ne: true } }, { owner: this.userId } ] }).count();
+
+    } else {
+
+    return Recipes.find({$and: [
+      { searchIndex: { $all: searchArray } },
+      { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
+  ]}).count();
+
+    }
+
   },
 
-  postsOtherUserTotal: function (currUser) {
+  postsOtherUserTotal: function (currUser, searchArray) {
     const profileUser = Meteor.users.find({ username: currUser }).fetch()[0];
+
+    if (searchArray) {
+      const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+      if (!checkStringMaxLength(searchArray.join(''), 25)) {
+          throw new Meteor.Error(
+              "too-long",
+              "Too long search term"
+            );
+      }
+    }
+
+    if(searchArray == false) {
     return Recipes.find(
       {$and: [
         { owner: profileUser._id },
@@ -224,19 +259,75 @@ Meteor.methods({
         ]}
       ]}
     ).count();
+    } else {
+      return Recipes.find(
+        {$and: [
+          { searchIndex: { $all: searchArray } },
+          { owner: profileUser._id },
+          { $or: [ 
+              { private: { $ne: true } },
+              {$and: [ 
+                  {privateAllow: {$exists: true}},
+                  {privateAllow: { $in: [this.userId] }} 
+              ]} 
+          ]}
+      ]}
+      ).count();
+    }
   },
 
-  postsMyTotal: function () {
-    return Recipes.find({ owner: this.userId } ).count();
+  postsMyTotal: function (searchArray) {
+
+    if (searchArray) {
+      const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+      if (!checkStringMaxLength(searchArray.join(''), 25)) {
+          throw new Meteor.Error(
+              "too-long",
+              "Too long search term"
+            );
+      }
+    }
+
+    if(searchArray == false) {
+      return Recipes.find({ owner: this.userId } ).count();
+    } else {
+      return Recipes.find({$and: [
+        { searchIndex: { $all: searchArray } },
+        { owner: this.userId }
+    ]}).count();
+    }
+
   },
 
-  postsCategoryTotal: function (categoryName) {
+  postsCategoryTotal: function (categoryName, searchArray) {
+
+
+    categoryName = categoryName.replace(/_/g, ' ');
+
+    if (searchArray) {
+      const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
+      if (!checkStringMaxLength(searchArray.join(''), 25)) {
+          throw new Meteor.Error(
+              "too-long",
+              "Too long search term"
+          );
+      }
+    }
+
+    if (searchArray == false) {
     return Recipes.find(
       {$and: [
         { category: categoryName },
         { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
-      ]}
-    ).count();
+    ]}).count();
+    } else {
+      return Recipes.find(
+        {$and: [
+          { searchIndex: { $all: searchArray } },
+          { category: categoryName },
+          { $or: [ { private: { $ne: true } }, { owner: this.userId } ] }
+      ]}).count();
+    }
   },
 
   getUserPostsTotal: function () {

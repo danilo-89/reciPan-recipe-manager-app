@@ -66,7 +66,7 @@ Template.inbox.events({
     },
     "click .userNameLink"(event) {
         const userProfileName = $(event.currentTarget).find( ".spanGoName" ).text();
-        if (Meteor.user().username === userProfileName) {
+        if (Meteor.user()?.username === userProfileName) {
             FlowRouter.go('/profile');
         } else {
             FlowRouter.go(`/user/${userProfileName}`);

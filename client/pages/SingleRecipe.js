@@ -180,7 +180,7 @@ Template.SingleRecipe.events({
     },
     "click .userNameLink"(event) {
         const userProfileName = event.currentTarget.textContent;
-        if (Meteor.user().username === userProfileName) {
+        if (Meteor.user()?.username === userProfileName) {
             FlowRouter.go('/profile');
         } else {
             FlowRouter.go(`/user/${userProfileName}`);

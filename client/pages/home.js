@@ -110,10 +110,7 @@ Template.Home.onRendered(function () {
             // console.log("posts curently visible: ", Recipes.find().count());
     })
 
-
 });
-
-
 
 
 
@@ -177,7 +174,6 @@ Template.Home.helpers({
 
 });
 
-
 Template.Home.events({
     'click .random-recipe-ribbon' (event) {
         event.stopPropagation();
@@ -187,7 +183,7 @@ Template.Home.events({
     "click .userNameLink"(event) {
         event.stopPropagation();
         const userProfileName = event.currentTarget.textContent;
-        if (Meteor.user().username === userProfileName) {
+        if (Meteor.user()?.username === userProfileName) {
             FlowRouter.go('/profile');
         } else {
             FlowRouter.go(`/user/${userProfileName}`);

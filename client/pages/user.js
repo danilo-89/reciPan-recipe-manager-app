@@ -28,7 +28,7 @@ Template.user.helpers({
         return Recipes.find({}, {sort: {createdAt: -1}}).fetch({});
     },
     getFriendship: (friendId) => {
-        const activeFriends = Meteor.user().public?.friends?.active;
+        const activeFriends = Meteor.user()?.public?.friends?.active;
         if (activeFriends) {
             console.log({friendId});
             console.log(activeFriends.includes(friendId));
