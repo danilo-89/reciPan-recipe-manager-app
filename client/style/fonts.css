@@ -1,33 +1,33 @@
 @font-face {
     font-family: Lora;
-    src: url(fonts/Lora-MediumItalic.ttf);
+    src: url('fonts/Lora-MediumItalic.ttf');
     font-weight: 500;
     font-style: italic;
 }
 @font-face {
     font-family: Lora;
-    src: url(fonts/Lora-SemiBoldItalic.ttf);
+    src: url('fonts/Lora-SemiBoldItalic.ttf');
     font-weight: 600;
     font-style: italic;
 }
 
 @font-face {
     font-family: Nunito;
-    src: url(fonts/Nunito-Light.ttf);
+    src: url('fonts/Nunito-Light.ttf');
     font-weight: 400;
 }
 @font-face {
     font-family: Nunito;
-    src: url(fonts/Nunito-Regular.ttf);
+    src: url('fonts/Nunito-Regular.ttf');
     font-weight: 500;
 }
 @font-face {
     font-family: Nunito;
-    src: url(fonts/Nunito-SemiBold.ttf);
+    src: url('fonts/Nunito-SemiBold.ttf');
     font-weight: 600;
 }
 @font-face {
     font-family: Nunito;
-    src: url(fonts/Nunito-Bold.ttf);
+    src: url('fonts/Nunito-Bold.ttf');
     font-weight: 700;
 }

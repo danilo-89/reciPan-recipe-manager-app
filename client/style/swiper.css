@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 5 version
+*/
+
 .single-recipe-swiper-container .swiper-button-next, .single-recipe-swiper-container .swiper-container-rtl .swiper-button-prev {
     background-image: none;
     right: 10px;
@@ -14,14 +21,16 @@
     display: none;
     color: rgba(255, 255, 255, 0.6);
     font-size: 26px;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));  
+    -webkit-filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));  
 }
 
 .single-recipe-swiper-container > .swiper-button-next {
     display: none;
     color: rgba(255, 255, 255, 0.6);
     font-size: 26px;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));  
+    -webkit-filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));  
 }
 
 .single-recipe-swiper-container:hover > .swiper-button-prev {
@@ -49,6 +58,7 @@
     border-radius: 10px;
     left: 0;
     top: 0;
+    cursor: -webkit-grabbing;
     cursor: grabbing;
 }
 
