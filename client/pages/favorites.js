@@ -96,10 +96,12 @@ Template.Favorites.helpers({
     getRecipes: () => {
         return Recipes.find({}, {sort: {createdAt: -1}});
     },
-    getSearchCount: function() {
+    getSearchCount: () => {
         const countIt = Recipes.find().count();
-        if (countIt===0) {
+        if (countIt===0 && Session.get("searchArray").length > 0) {
             Session.set("noSearchResults", true);
+        } else if (countIt===0 && Session.get("searchArray").length < 1) {
+            Session.set("noSearchResults", false);
         } else {
             Session.set("noSearchResults", false);
         }
@@ -185,7 +187,7 @@ Template.Favorites.events({
             var cleanArray = inputValue.filter(function(x) {
                 return x.length > 2
             });
-            if(inputValue.length > 2) {
+            if(inputValue.length > 2 && Meteor.user()) {
                 Session.set("limit", 12);
                 Session.set("skip", 0);
                 $('.wrapper').animate({scrollTop: 0}, 100);

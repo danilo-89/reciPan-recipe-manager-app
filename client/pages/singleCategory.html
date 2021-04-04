@@ -7,11 +7,14 @@
                 <div class="d-flex space-between mx-auto pl10 pr10">
                     <!-- <input class="home-header-search" type="text"> -->
                         <span class="home-top-btn"><i class="far fa-arrow-alt-circle-up"></i></span>
-
+                        {{#if currentUser}}
                         <span class="home-header-btn home-search-btn">
                             <i class="fas fa-search btn-icon"></i>
                             <input type="text" placeholder="broccoli soup pepper" class="home-header-search">
                         </span>
+                        {{else}}
+                        <span class="home-header-btn cursor-default home-header-btn-log-in">Log in to search</span>
+                        {{/if}}
 
                         <span class="home-header-btn home-fav-btn cursor-default {{#if getSearchVal}}hide{{/if}}"><i class=""></i></span>
                         <span class="icon-clear-search {{#if getSearchVal}}show{{/if}}"><i class="fas fa-times-circle"></i></span>
@@ -99,13 +102,7 @@
                         </div>
                     
                     </div>
-                    <!-- <img src="{{images}}" alt=""> -->
                 {{ /each }}
-                <!-- <div class="home-recipe-container-wrapper ghostFiller" >
-                    <div class="home-recipe-container">
-                        <h3 class="home-recipe-title"></h3>
-                    </div>
-                </div> -->
             </div>
             
 

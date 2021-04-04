@@ -208,6 +208,10 @@ Meteor.methods({
 
   postsTotal: function (searchArray) {
 
+    if (!Meteor.userId()) {
+      searchArray = false;
+    }
+
     if (searchArray) {
       const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
       if (!checkStringMaxLength(searchArray.join(''), 25)) {
@@ -235,6 +239,10 @@ Meteor.methods({
 
   postsOtherUserTotal: function (currUser, searchArray) {
     const profileUser = Meteor.users.find({ username: currUser }).fetch()[0];
+
+    if (!Meteor.userId()) {
+      searchArray = false;
+    }
 
     if (searchArray) {
       const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
@@ -301,7 +309,10 @@ Meteor.methods({
 
   postsCategoryTotal: function (categoryName, searchArray) {
 
-
+    if (!Meteor.userId()) {
+      searchArray = false;
+    }
+    
     categoryName = categoryName.replace(/_/g, ' ');
 
     if (searchArray) {

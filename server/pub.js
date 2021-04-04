@@ -21,6 +21,10 @@ Meteor.publish('recipes', function recipesPublication() {
 Meteor.publish("recipesForCategory", function publishRecipesCategory(categoryName, limit, skip, searchArray) {
     check(skip, Number);
 
+    if (!Meteor.userId()) {
+        searchArray = false;
+    }
+
     if (searchArray) {
         const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
         if (!checkStringMaxLength(searchArray.join(''), 25)) {
@@ -132,14 +136,14 @@ Meteor.publish('users.friendsActive', function() {
         }
     });
 });
-// Meteor.publish("postsForClubSingle", function publishPostsForClubSingle(postId) {
-//     return Posts.find({ _id: postId });
-// });
-
 
 Meteor.publish("recipesAll", function publishRecipesHome(limit, skip, searchArray) {
     check(skip, Number);
     check(limit, Number);
+
+    if (!Meteor.userId()) {
+        searchArray = false;
+    }
 
     if (searchArray) {
         const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
@@ -220,6 +224,11 @@ Meteor.publish("recipesUser", function publishRecipesHome(currUser, limit, skip,
     check(skip, Number);
     check(limit, Number);
     check(currUser, String);
+
+
+    if (!Meteor.userId()) {
+        searchArray = false;
+    }
 
     if (searchArray) {
         const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
@@ -323,7 +332,6 @@ Meteor.publish("recipesFav", function publishRecipesFav(limit, searchArray) {
 Meteor.publish("recipesFav12", function publishRecipesFav() {
 
     return Recipes.find(
-        // { private: 'active', postType: 'clubPost', vendorGroup: clubName }, 
         { $or: [ { private: { $ne: true } }, { owner: this.userId } ] },
         { fields: { _id: 1, private: 1, name: 1, category: 1, description: 1, ingridients: 1, images: 1, time: 1, favorite: 1, starRatingByUser: 1, createdAt: 1 }, sort: { favorite: -1 }, limit: 12}
     );
@@ -398,21 +406,3 @@ Meteor.publish('shopListPersonal', function() {
             'counter': 1
         }});
 });
-
-
-
-
-
-// [/^salad/]
-// db.getCollection('recipes').find(
-//     { searchIndex: { $all: ["test"] } }
-//     ).explain("executionStats");
-
-
-
-
-// Meteor.publish('users.sharedToUser.recipes', function publishSharedToUserRecipes() {
-//     return Meteor.users.find(this.userId, 
-//         {fields: { _id: 1, 'public.sharedToUser.sharedRecipes': 1}, sort: { recipeName: -1 }, limit: 3}
-//         );
-// });

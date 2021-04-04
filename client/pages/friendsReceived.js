@@ -29,7 +29,6 @@ Template.receivedFriendRequests.onRendered(function () {
 Template.receivedFriendRequests.events({
     "click .accept-friend-request-btn"(event) {
         event.stopPropagation();
-        console.log(this);
         // FlowRouter.go(`/edit-recipe/${this._id}`);
         Meteor.call('acceptFriendRequest', this.valueOf(), (err, res) => {
             if (err) {

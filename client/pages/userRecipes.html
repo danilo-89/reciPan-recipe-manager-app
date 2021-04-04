@@ -5,10 +5,14 @@
                 <div class="d-flex space-between mx-auto pl10 pr10">
                     <!-- <input class="home-header-search" type="text"> -->
                         <span class="home-top-btn"><i class="far fa-arrow-alt-circle-up"></i></span>
+                        {{#if currentUser}}
                         <span class="home-header-btn home-search-btn">
                             <i class="fas fa-search btn-icon"></i>
                             <input type="text" placeholder="broccoli soup pepper" class="home-header-search" id="homeHeaderSearch">
                         </span>
+                        {{else}}
+                        <span class="home-header-btn cursor-default home-header-btn-log-in">Log in to search</span>
+                        {{/if}}
                         <span class="home-header-btn home-fav-btn cursor-default {{#if getSearchVal}}hide{{/if}}"><i class=""></i></span>
                         <span class="icon-clear-search {{#if getSearchVal}}show{{/if}}"><i class="fas fa-times-circle"></i></span>
                 </div>
@@ -38,6 +42,13 @@
     
             <div class="text-center">
                 <div class="btn-standard btn-clear-search"><span>Clear search</span></div>
+            </div>
+            {{else}}
+            <div class="max-w-400-px-95 mx-auto">
+                <div class="helper-container-custom-1 text-center mt20 mb20">
+                    <img class="max-w-30" src="/chef_girl.svg" alt="">
+                    <p class="w-100 p10">No recipes here currently</p>
+                </div>
             </div>
             {{/if}}
         {{/unless}}

@@ -2,6 +2,7 @@
 
 
     <div class="wrapper">
+        {{#if currentUser}}
         <div class="home-header-container xy-center-flex">
             <div class="home-header-wrapper width-default">
                 <div class="d-flex space-between mx-auto pl10 pr10">
@@ -38,30 +39,18 @@
         <div class="text-center">
             <div class="btn-standard btn-clear-search"><span>Clear search</span></div>
         </div>
-
+        {{else}}
+        <div class="max-w-400-px-95 mx-auto">
+            <div class="helper-container-custom-1 text-center mt20 mb20">
+                <img class="max-w-30" src="/chef_girl.svg" alt="">
+                <p class="w-100 p10">No recipes here currently</p>
+            </div>
+        </div>
         {{/if}}
         {{/unless}}
 
         <div class="new-recipe-container container">
-
-            
-            <!-- <div>favorites</div>
-            {{getUserFavoritesCount}}
-            <div>search</div>
-            {{getSearchCount}} -->
-            
-            {{#unless getSearchVal}}
-                {{#unless getSearchCount}}
-                <div class="max-w-400-px-95 mx-auto">
-                    <div class="helper-container-custom-1 text-center mt20 mb20">
-                        <img class="max-w-30" src="/chef_girl.svg" alt="">
-                        <p class="w-100 p10">No recipes here currently</p>
-                    </div>
-                </div>
-                {{/unless}}
-            {{/unless}}
-
-
+ 
 
             <div class="home-recipes-container">
                 {{ #each getRecipes }}
@@ -94,7 +83,16 @@
         {{else}}
         <div class="post-loader"></div>
         {{/if}}
-
+    
+    {{else}}
+        <div class="max-w-400-px-95 mx-auto">
+                <div class="helper-container-custom-1 text-center mt20 mb20">
+                <img class="max-w-30" src="/chef_girl.svg" alt="">
+                <p class="w-100 p10">Your favorite recipes section. <br> Please log in to view this content.</p>
+                </div>
+        </div>
+        {{> signInUp}}
+    {{/if}}
     </div>
 
 

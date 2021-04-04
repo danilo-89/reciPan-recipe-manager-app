@@ -237,7 +237,7 @@ Template.SingleCategory.events({
             // cleanArray = cleanArray.map( function( val ){ 
             //     return new RegExp(val); 
             // });
-            if(inputValue.length > 2) {
+            if(inputValue.length > 2 && Meteor.user()) {
                 Session.set("limit", 12);
                 Session.set("skip", 0);
                 $('.wrapper').animate({scrollTop: 0}, 100);

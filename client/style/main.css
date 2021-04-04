@@ -1407,11 +1407,13 @@ a.profile-nav {
             justify-content: center;
     font-size: 20px;
     cursor: pointer;
-    /* background: linear-gradient(to bottom, rgb(208 148 47 / 20%), rgb(224 89 89 / 40%), #ce424208); */
+}
 
-    /* text-shadow: 0 -1px 1px rgb(9 9 9); */
-    /* background-image: linear-gradient(to right bottom,rgba(255, 157, 26, 0.4), rgba(255, 172, 13, 0.5), rgba(255, 187, 0, 0.6)); */
-    /* background-image: linear-gradient(to right bottom, #fe7f2d, #ff8e24, #ff9d1a, #ffac0d, #ffbb00); */
+.home-header-btn-log-in {
+    font-size: 15px;
+    width: 110px;
+    -webkit-filter: drop-shadow(0 2px 1px rgba(0,0,0,.2));
+    filter: drop-shadow(0 2px 1px rgba(0,0,0,.2));
 }
 
 .home-fav-btn {

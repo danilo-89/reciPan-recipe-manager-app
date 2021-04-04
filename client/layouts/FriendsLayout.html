@@ -1,7 +1,13 @@
 <template name="FriendsLayout">
     <div class="main-body-wrapper">
-        {{> FriendsNav}}
-        {{> Template.dynamic template=content}}
-        {{> Footer}}
+        {{#if currentUser}}
+            {{> FriendsNav}}
+            {{> Template.dynamic template=content}}
+        {{else}}
+        <div class="wrapper pt10">
+            {{> signInUp}}
+        </div>
+        {{/if}}
+            {{> Footer}}
     </div>
 </template>

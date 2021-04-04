@@ -37,8 +37,6 @@ Template.friendsActive.helpers({
     return Meteor.user().public?.friends?.active.length;
   },
   getFriendsNames: (friendId) => {
-    console.log({ friendId });
-    console.log(Meteor.users.findOne({ _id: friendId }));
     return Meteor.users.findOne({ _id: friendId }).username;
   },
   getFriendsAvatar: (friendId) => {
