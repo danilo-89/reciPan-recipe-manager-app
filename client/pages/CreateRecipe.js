@@ -9,9 +9,7 @@ Template.CreateRecipe.onRendered(function () {
 })
 
 Template.CreateRecipe.onDestroyed( function(event) {
-    // confirm("54645654");
-    // event.preventDefault();
-    
+
 });
 
 
@@ -174,6 +172,8 @@ Template.CreateRecipe.events({
                     Bert.alert(res.err.reason, 'danger');
                 } else {
                     Bert.alert('Recipe posted successfully', 'success');
+                    resetForm();
+                    FlowRouter.go('/myRecipes');
                 }
             }
         });
@@ -241,8 +241,4 @@ const resetForm = function() {
     $('.added-field').remove();
     $('.cr-uploaded-image-figure').html("");
 }
-
-// window.addEventListener('beforeunload', function (e) {
-//     alert("test");
-// })
 

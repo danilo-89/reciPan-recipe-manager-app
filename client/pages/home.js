@@ -124,6 +124,9 @@ Template.Home.helpers({
     getRandomRecipe: () => {
         return Session.get("randomRecipe");
     },
+    getRecipesCount: () => {
+        return Recipes.find().count();
+    },
     getRecipes: () => {
         return Recipes.find({}, { sort: { favorite: -1 }, limit: 12 });
     },
