@@ -3,17 +3,21 @@
 
   <form id="signup" class="signup">
     <div class="form-group">
-      <label class="d-i-block mb5" for="userName">User name*</label>
-      <input type="text" name="userName" class="customInput d-block mb25 w-100" placeholder="User Name" required>
+      <label class="d-i-block mb5" for="userName">User name</label>
+      <input type="text" name="userName" class="customInput d-block mb25 w-100" placeholder="E.g. Johnny" required>
     </div>
     <div class="form-group">
-      <label class="d-i-block mb5" for="inputPassword">Password*</label>
-      <input type="password" name="password" class="customInput d-block mb25 w-100" placeholder="Password" id="inputPassword" autocomplete="on" required>
+      <label class="d-i-block mb5" for="inputPassword">Password</label>
+      <input type="password" name="password" class="customInput d-block mb25 w-100" placeholder="******" id="inputPassword" autocomplete="on" required>
     </div>
     <div class="form-group">
-      <label class="d-i-block mb5" for="inputRepeatPassword">Repeat Password*</label>
+      <label class="d-i-block mb5" for="inputRepeatPassword">Repeat Password</label>
       <input type="password" name="repeatPassword" class="customInput d-block mb25 w-100"
-        id="inputRepeatPassword" placeholder="Repeat your password" autocomplete="on" required>
+        id="inputRepeatPassword" placeholder="******" autocomplete="on" required>
+    </div>
+    <div class="form-group text-center mb30">
+      <input type="checkbox" id="termsCheck" name="termsCheck" value="Terms">
+      <label for="termsCheck"> I have read and I agree with <a class="go d-i-block" style="color: #fe7f2d !important; font-weight: bold;" href="/terms.txt" target="_blank">the terms</a></label><br>
     </div>
     <div class="form-group">
       <input type="submit" class="btn btn-custom d-block fs-16px mx-auto mb30" value="Register">

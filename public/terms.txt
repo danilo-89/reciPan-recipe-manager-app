@@ -1,0 +1,6 @@
+"reciPan" is not a commercial application. It's just a concept app made in MeteorJS framework for purpose of learning to code in it and for showing in my portfolio.
+By registering and using this app "reciPan" you agree that you are responsible for compliance with any applicable local laws.
+You're responsible for making sure that your posted content complies with all applicable laws and regulations. You agree that you will not use this app or any data or services provided through the app for, or to encourage, any unlawful purpose.
+Don't enter any personal data when using "reciPan" application.
+
+https://github.com/danilo-89.
