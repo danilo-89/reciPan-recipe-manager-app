@@ -154,7 +154,7 @@ hr {
 }
 
 .bert-alert {
-    z-index: 99999;
+    z-index: 999999;
 }
 
 .header-recipes-back-btn {
@@ -579,7 +579,6 @@ hr {
     height: 300px;
     width: 100%;
     background-image: url("/logo-img-holder.svg");
-    /* border-radius: 0 0 20px 20px; */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -595,7 +594,6 @@ hr {
     background: -webkit-gradient(linear, left bottom, left top, color-stop(-30%, rgba(55, 55, 55, 0.5)),to(transparent));
     background: -o-linear-gradient(bottom, rgba(55, 55, 55, 0.5) -30%,transparent 100%);
     background: linear-gradient(to top, rgba(55, 55, 55, 0.5) -30%,transparent 100%);
-    /* border-radius: 0 0 20px 20px; */
 }
 
 .random-recipe-bottom {
@@ -623,7 +621,7 @@ hr {
 
 .random-recipe-ribbon {
     position: absolute;
-    background-color: #3737378a;
+    background-color: rgba(55, 55, 55, 0.5);
     border-radius: 25px;
     top: 18px;
     color: white;
@@ -631,8 +629,7 @@ hr {
     cursor: pointer;
     width: 50px;
     height: 50px;
-    -webkit-filter: drop-shadow(0 2px 5px rgba(156, 243, 144, 0.4));
-    filter: drop-shadow(0 2px 5px rgba(156, 243, 144, 0.4));
+    border: 2px solid #fe7f2d;
 }
 
 .random-recipe-ribbon:hover {

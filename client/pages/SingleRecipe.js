@@ -364,19 +364,24 @@ Template.SingleRecipe.events({
     },
     "click #reportModalsBtn"(event) {
         event.preventDefault();
+        const checkStringLength = (str, min, max) => typeof str === 'string' && str.length >= min && str.length <= max;
         const reportReason = $('#inputDescription').val();
-        Meteor.call('recipe.report', reportReason, FlowRouter.getParam("recipeId"), (err, res) => {
-            if (err) {
-                Bert.alert(err.reason, 'danger');
-            } else {
-                if (res.isError) {
-                    Bert.alert(res.err.reason, 'danger');
+        if (checkStringLength(reportReason, 4, 300)) {
+            Meteor.call('recipe.report', reportReason, FlowRouter.getParam("recipeId"), (err, res) => {
+                if (err) {
+                    Bert.alert(err.reason, 'danger');
                 } else {
-                    Bert.alert('Recipe reported', 'success');
+                    if (res.isError) {
+                        Bert.alert(res.err.reason, 'danger');
+                    } else {
+                        Bert.alert('Recipe reported', 'success');
+                    }
                 }
-            }
-        });
-        clearModals();
+            });
+            clearModals();
+        } else {
+            Bert.alert('Report reason must be between 4 and 300 characters', 'danger');
+        }
     },
     "click #confirmModalsBtn"(event) {
         thisUserId = Meteor.userId();
