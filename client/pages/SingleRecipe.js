@@ -44,6 +44,8 @@ Template.SingleRecipe.onRendered(function () {
                         nextEl: '.swiper-button-next',
                         prevEl: '.swiper-button-prev',
                     },
+                    observer: true,
+                    observeParents: true
                 });
                 // mySwiper.init();
                 const mySwiper1 = document.querySelector(".swiper-container").swiper;
@@ -81,6 +83,11 @@ Template.SingleRecipe.onRendered(function () {
                 // const checkIfFav = Meteor.users.findOne({["starRatingByUser." + myId]: {$exists: true}});
                 
                 
+                if($(".slider .slide").length == 1) {
+                    $('.swiper-wrapper').addClass( "disabled" );
+                    $('.swiper-pagination').addClass( "disabled" );
+                }
+
                 // Check if video element exists
                 if (!$('#sRVideo').length) {
                     $('.a-nav-video').addClass('link-no-video');
@@ -219,7 +226,10 @@ Template.SingleRecipe.events({
 
     },
     "click .delete-recipe-btn"() {
-        Session.set('confirmModal', true);
+        Session.set('confirmModal', 'delete');
+    },
+    "click .report-recipe-btn"() {
+        Session.set('confirmModal', 'report');
     },
     "click .share-recipe-btn"(event) {
         Session.set('modalData', {template: "modalShareRecipe", title: "Share recipe", recipeName: this.name, files: [{name: "Share recipe", linkit: window.location.href, date: new Date()}]});
@@ -352,9 +362,24 @@ Template.SingleRecipe.events({
     "click #cancelModalsBtn"(event) {
         clearModals();
     },
+    "click #reportModalsBtn"(event) {
+        event.preventDefault();
+        const reportReason = $('#inputDescription').val();
+        Meteor.call('recipe.report', reportReason, FlowRouter.getParam("recipeId"), (err, res) => {
+            if (err) {
+                Bert.alert(err.reason, 'danger');
+            } else {
+                if (res.isError) {
+                    Bert.alert(res.err.reason, 'danger');
+                } else {
+                    Bert.alert('Recipe reported', 'success');
+                }
+            }
+        });
+        clearModals();
+    },
     "click #confirmModalsBtn"(event) {
         thisUserId = Meteor.userId();
-
         Meteor.call('recipes.remove', Session.get('recipeId'), (err, res) => {
             if (err) {
                 Bert.alert(err.reason, 'danger');
@@ -367,7 +392,6 @@ Template.SingleRecipe.events({
                 } else {
                     Bert.alert('successfully deleted', 'success');
                 }
-                console.log("what's happening?")
             }
         });
     },

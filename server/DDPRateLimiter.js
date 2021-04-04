@@ -4,6 +4,7 @@ const getDDPRateLimiterMatcher = (name) => {
     return { type: 'method', name: name }
 }
 
+DDPRateLimiter.addRule(getDDPRateLimiterMatcher('recipe.report'), 1, 30000);
 DDPRateLimiter.addRule(getDDPRateLimiterMatcher('rateRecipe.insert'), 3, 10000);
 DDPRateLimiter.addRule(getDDPRateLimiterMatcher('add.to.favorites'), 3, 10000);
 DDPRateLimiter.addRule(getDDPRateLimiterMatcher('getRandomRecipe'), 50, 60000);

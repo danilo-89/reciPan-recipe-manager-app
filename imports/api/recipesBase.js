@@ -8,10 +8,39 @@ import { check } from "meteor/check";
 export const Recipes = new Mongo.Collection("recipes");
 export const SharedRecipes = new Mongo.Collection("sharedRecipes");
 export const ShopLists = new Mongo.Collection("shopLists");
+export const ReportedRecipes = new Mongo.Collection("reportedRecipes");
 
 if (Meteor.isServer){
 
 Meteor.methods({
+
+    // REPORT RECIPE
+    "recipe.report"(reportReason, recipeId) {
+      check(reportReason, String);
+      check(recipeId, String);
+      try {
+        if (Meteor.userId()) {
+          ReportedRecipes.insert({
+              reason: reportReason,
+              recipe: recipeId,
+              createdAt: new Date(), // current time
+              owner: Meteor.userId(),
+              username: Meteor.user().username
+          });
+          return { isError: false };
+        } else {
+          ReportedRecipes.insert({
+            reason: reportReason,
+            recipe: recipeId,
+            createdAt: new Date(), // current time
+            owner: false,
+            username: false
+        });
+        }
+      } catch (err) {
+        return { isError: true, err };
+      }
+    },
 
     // CREATE NEW RECIPE
     "recipes.insert"(
@@ -312,7 +341,7 @@ Meteor.methods({
     if (!Meteor.userId()) {
       searchArray = false;
     }
-    
+
     categoryName = categoryName.replace(/_/g, ' ');
 
     if (searchArray) {
@@ -398,7 +427,15 @@ Meteor.methods({
   getRandomRecipe() {
     const countIt = Recipes.find({ private: { $ne: true } }).count();
     const skip = Math.floor(Math.random() * countIt);
-    return Recipes.findOne({ private: { $ne: true } }, { skip: skip });
+    try {
+      if (countIt) {
+        return Recipes.findOne({ private: { $ne: true } }, { skip: skip });
+      } else {
+        throw new Meteor.Error("no-recipes", "There are no recipes");
+      }
+    } catch (err) {
+      return { isError: true, err };
+    }
   },
 
 

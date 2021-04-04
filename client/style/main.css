@@ -631,10 +631,14 @@ hr {
     cursor: pointer;
     width: 50px;
     height: 50px;
+    -webkit-filter: drop-shadow(0 2px 5px rgba(156, 243, 144, 0.4));
+    filter: drop-shadow(0 2px 5px rgba(156, 243, 144, 0.4));
 }
 
 .random-recipe-ribbon:hover {
     background-color:  #fe7f2d;
+    -webkit-filter: drop-shadow(0 2px 5px rgba(225,255,0,0.8));
+    filter: drop-shadow(0 2px 5px rgba(225,255,0,0.8));
 }
 
 .random-recipe-ribbon > svg {
@@ -2436,18 +2440,18 @@ a.profile-nav {
             justify-content: center;
     padding: 5px 8px;
     border-radius: 40px;
-    color: #dad7d7;
+    color: #ffffff;
     text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
     cursor: pointer;
-    border: 2px solid #d7d4d4;
+    border: 2px solid #ffffff;
     -webkit-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
 .shop-list-settings-btn:hover {
-    color: #aba8b2;
-    border-color: #aba8b2;
+    color: #fbfbfb;
+    border-color: #fbfbfb;
 }
 
 .shop-list-card {
@@ -2469,7 +2473,11 @@ a.profile-nav {
     border-radius: 10px 10px 0 0;
     padding: 10px;
     border-bottom: 1px solid rgb(158 158 158 / 14%);
-    background-color: #f7f7f7;
+    background-color: #fe7f2d;
+    background-image: -webkit-gradient(linear, left top, right bottom, from(#fe7f2d), color-stop(#fe7f2d), color-stop(#ff951f), color-stop(#ffa017), to(#ffab0e));
+    background-image: -o-linear-gradient(left top, #fe7f2d, #fe7f2d, #ff951f, #ffa017, #ffab0e);
+    background-image: linear-gradient(to right bottom, #fe7f2d, #fe7f2d, #ff951f, #ffa017, #ffab0e);
+    color: #ffffff;
 }
 
 .shop-list-card-content {

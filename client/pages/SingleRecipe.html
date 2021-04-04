@@ -55,16 +55,37 @@
     {{#if getConfirmModal}}
     <div id="confirmModal">
             <div class="confirm-modal-inside">
+
+                {{#if isEqual getConfirmModal 'delete'}}
                     <div class="confirm-modal-header">Delete recipe</div>
                     <div class="confirm-modal-main">
                             <div class="confirm-modal-content">
                                     Are you sure?
                             </div>
                             <div class="confirm-modal-footer">
-                                    <button class="btn btn-custom-2 mr5" id="cancelModalsBtn">CANCEL</button>
+                                    <button class="btn btn-custom-2 mr5" id="cancelModalsBtn">CANCEL</button> 
                                     <button class="btn btn-custom" id="confirmModalsBtn">CONFIRM</button>
                             </div>
                     </div>
+                {{/if}}
+
+                {{#if isEqual getConfirmModal 'report'}}
+                <div class="confirm-modal-header">Report recipe</div>
+                <form class="confirm-modal-main">
+                        <div class="confirm-modal-content">
+
+                            <label class="d-block text-left w-95 mx-auto" for="#inputDescription">REPORT REASON</label>
+                            <textarea id="inputDescription" class="input-description customInput" style="width: 95%; max-width: 300px; min-width: 200px;" name="" rows="7" cols="50" required="" placeholder="E.g. This recipe has a inappropriate content"></textarea>
+                            <p class="text-right label-input">4 - 300 characters</p>
+
+                        </div>
+                        <div class="confirm-modal-footer text-center">
+                                <button type="button" class="btn btn-custom-2 mr5" id="cancelModalsBtn">CANCEL</button>
+                                <button type="submit" class="btn btn-custom" id="reportModalsBtn">REPORT</button>
+                        </div>
+                </form>
+                {{/if}}
+
             </div>
     </div>
     {{/if}}
@@ -91,7 +112,7 @@
                                         <li class="edit-recipe-btn"><span class="span-1"><i class="fas fa-edit"></i></span><span class="span-2">Edit</span></li>
                                         <li class="delete-recipe-btn"><span class="span-1"><i class="far fa-trash-alt"></i></span><span class="span-2">Delete</span></li>
                                         {{ /if }}
-                                        <li class=""><span class="span-1"><i class="far fa-flag"></i></span><span class="span-2">Report</span></li>
+                                        <li class="report-recipe-btn"><span class="span-1"><i class="far fa-flag"></i></span><span class="span-2">Report</span></li>
                                     </ul>
                                 </div>
                             </div>        
@@ -99,19 +120,28 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            {{#each images}}
-                            <div class="swiper-slide" style="background-image: url('{{this}}');">
-                                <!-- <img src="{{this}}" alt=""> -->
-                                <!-- <img src="/logo-img-holder.svg" alt=""> -->
-                            </div>
-                            {{/each}}
+                            {{#if isLengthEqual images 1}}
+                                <div class="swiper-slide" style="background-image: url('{{images.[0]}}');">
+                                    <!-- <img src="{{this}}" alt=""> -->
+                                    <!-- <img src="/logo-img-holder.svg" alt=""> -->
+                                </div>
+                            {{else}}
+                                {{#each images}}
+                                <div class="swiper-slide" style="background-image: url('{{this}}');">
+                                    <!-- <img src="{{this}}" alt=""> -->
+                                    <!-- <img src="/logo-img-holder.svg" alt=""> -->
+                                </div>
+                                {{/each}}
+                            {{/if}}
                         </div>
                         <!-- If we need pagination -->
                         <!-- <div class="swiper-pagination"></div> -->
                     
                         <!-- If we need navigation buttons -->
+                        {{#if isLengthNotEqual images 1}}
                         <div class="swiper-button-prev ml5"><i class="fas fa-chevron-circle-left"></i></div>
                         <div class="swiper-button-next mr5"><i class="fas fa-chevron-circle-right"></i></div>
+                        {{/if}}
                     
                         <!-- If we need scrollbar -->
                         <!-- <div class="swiper-scrollbar"></div> -->

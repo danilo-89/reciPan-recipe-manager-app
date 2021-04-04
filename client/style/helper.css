@@ -488,6 +488,10 @@ margin-bottom: 2px;
     text-align: right;
 }
 
+.text-left {
+    text-align: left;
+}
+
 .text-bold {
     font-family: Nunito;
     font-weight: 700;

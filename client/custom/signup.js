@@ -8,16 +8,21 @@ Template.signup.events({
         password: template.find( '[name="password"]' ).value
       };
   
-      Accounts.createUser( user, ( error ) => {
-        if ( error ) {
-          Bert.alert( error.reason, 'danger' );
-        } else {
-          Accounts.createUser({
-            username,
-            password
+      if($("#termsCheck").is(':checked')){
+        Accounts.createUser( user, ( error ) => {
+          if ( error ) {
+            Bert.alert( error.reason, 'danger' );
+          } else {
+            Accounts.createUser({
+              username,
+              password
+          });
+          }
         });
-        }
-      });
+      } else {
+        Bert.alert("You must agree to the terms", 'danger');
+        return false;
+      }
     },
     'keyup #inputPassword' ( event, template ) {
       validatePassword()
