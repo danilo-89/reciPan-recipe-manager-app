@@ -138,10 +138,10 @@ Template.EditRecipe.events({
             directions.push(sanitiseString(directionEntry));
         });
 
-        if (directions < 1) {
+        if (directions.length < 1) {
             Bert.alert('Please add at least one recipe direction!', 'danger');
             throw new Meteor.Error("error-ingridient", "At least one direction required!");
-        } else if (directions > 20) {
+        } else if (directions.length > 20) {
             Bert.alert('Please add no more than 20 recipe directions!', 'danger');
             throw new Meteor.Error("error-ingridient", "No more than 20 directions allowed!");
         }
