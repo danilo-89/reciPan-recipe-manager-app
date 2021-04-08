@@ -1,5 +1,10 @@
 # reciPan - a recipe managment app (MeteorJS)
 
+### See it live [reciPan app](https://recipan.herokuapp.com/)
+-------------
+
+### About
+-------------
 - recipes creation (private or public) and editing
 - view recipes created by other users
 - search recipes by category, name and ingridients
