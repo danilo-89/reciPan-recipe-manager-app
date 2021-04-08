@@ -1,5 +1,7 @@
 # reciPan - a recipe managment app (MeteorJS)
 
+![](public/screen.jpg)
+
 ### See it live [reciPan app](https://recipan.herokuapp.com/)
 -------------
 
