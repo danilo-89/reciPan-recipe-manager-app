@@ -30,8 +30,8 @@ Template.user.helpers({
     getFriendship: (friendId) => {
         const activeFriends = Meteor.user()?.public?.friends?.active;
         if (activeFriends) {
-            console.log({friendId});
-            console.log(activeFriends.includes(friendId));
+            // console.log({friendId});
+            // console.log(activeFriends.includes(friendId));
             return activeFriends.includes(friendId);
         }
         return false;

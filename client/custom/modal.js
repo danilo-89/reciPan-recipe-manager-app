@@ -30,7 +30,7 @@ Template.modal.events({
         Bert.alert( 'Recipe link copied to clipboard', 'success', 'fixed-top', 'fas fa-link' );
     },
     "click .share-in-app-btn"(event) {
-        console.log( Session.get('recipeId') + "_" + Date.now() + "_" + Meteor.userId());
+        // console.log( Session.get('recipeId') + "_" + Date.now() + "_" + Meteor.userId());
         const userName = document.getElementById('friendUsernameInput').value;
         if(!userName) {
             Bert.alert("Please enter a valid username!", 'danger');

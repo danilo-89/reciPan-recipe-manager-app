@@ -35,7 +35,7 @@ Template.Home.onRendered(function () {
                 !document.querySelector(".swiper-container.new-recipes-swiper-container").mySwiper1
             ) {
       
-                console.log("swiper loading");
+                // console.log("swiper loading");
                 const mySwiper1 = new Swiper('.swiper-container.new-recipes-swiper-container', {
                     // slidesPerView: 2,
                     // spaceBetween: 5,
@@ -208,7 +208,7 @@ Template.Home.events({
             FlowRouter.go(`/search`);
     },
     "click .home-logo-img"() {
-            console.log("you are at home :)");
+            // console.log("you are at home :)");
             FlowRouter.go(`/home`);
     },
     'focusout .home-search-btn' () {

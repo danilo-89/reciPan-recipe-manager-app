@@ -34,7 +34,7 @@ Template.SingleCategory.onRendered(function () {
         if (ready) {
             Session.set("ready", true);
             Meteor.call('postsCategoryTotal', FlowRouter.getParam("categoryName"), Session.get("searchArray"), function(error, result){
-                console.log("REAL total posts:", result);
+                // console.log("REAL total posts:", result);
                 Session.set('countTotal', result);
             });
         }
@@ -56,7 +56,7 @@ Template.SingleCategory.onRendered(function () {
 
         if (topPos < (-25)) {
             if (!targetElem.hasClass( "home-header-effect" )) {
-                console.log("set it");
+                // console.log("set it");
                 targetElem.addClass("home-header-effect");
             }
         } else {
@@ -70,10 +70,10 @@ Template.SingleCategory.onRendered(function () {
                 countDiscovered =  Session.get("limit") + Session.get("skip");
                 if ( countDiscovered < Session.get('countTotal') ) {
                     Session.set("scrollOn", true);
-                    console.log("trigger");
+                    // console.log("trigger");
                     Session.set("skip", Session.get("skip") + 4);
     
-                    console.log("limit+skip=", Session.get("limit")+Session.get("skip"));
+                    // console.log("limit+skip=", Session.get("limit")+Session.get("skip"));
                 }
 
 
@@ -90,7 +90,7 @@ Template.SingleCategory.onRendered(function () {
                 }
 
             }
-            console.log("posts curently visible: ", Recipes.find().count());
+            // console.log("posts curently visible: ", Recipes.find().count());
             // if($(".wrapper").scrollTop() + $(".wrapper").height() == window.innerHeight-200) {
             //     alert("bottom!");
             // }
@@ -200,7 +200,6 @@ Template.SingleCategory.events({
         $(".wrapper").animate({scrollTop: 0}, 1000);
     },
     'click .icon-clear-search' () {
-        console.log("wiiiiiiiiiiiiiiiiiiii")
         $('.home-header-search').val("");
         Session.set("limit", 12);
         Session.set("skip", 0);
@@ -248,7 +247,7 @@ Template.SingleCategory.events({
             Session.set("searchArray", cleanArray);
             $('.wrapper').animate({scrollTop: 0}, 0);
             // Session.set("noSearchResults", true);
-            console.log(cleanArray);
+            // console.log(cleanArray);
         }
     },
 });

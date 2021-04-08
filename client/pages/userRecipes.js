@@ -38,7 +38,7 @@ Template.userRecipes.onRendered(function () {
         if(ready) {
             const userId = FlowRouter.getParam("userId");
             Meteor.call('postsOtherUserTotal', FlowRouter.getParam("userProfileName"), Session.get("searchArray"), function(error, result){
-                console.log("REAL total posts:", result);
+                // console.log("REAL total posts:", result);
                 Session.set('countTotal', result);
             });
 
@@ -69,7 +69,6 @@ Template.userRecipes.onRendered(function () {
 
         if (topPos < (-25)) {
             if (!targetElem.hasClass( "home-header-effect" )) {
-                console.log("set it");
                 targetElem.addClass("home-header-effect");
             }
         } else {
@@ -83,12 +82,12 @@ Template.userRecipes.onRendered(function () {
                 countDiscovered =  Session.get("limit") + Session.get("skip");
                 if (countDiscovered < Session.get('countTotal')) {
                     Session.set("scrollOn", true);
-                    console.log("trigger");
+                    // console.log("trigger");
                     // Session.set("limit", Session.get("limit") + 4);
                     // Session.set("limit", 12);
                     Session.set("skip", Session.get("skip") + 4);
     
-                    console.log("limit+skip=", Session.get("limit")+Session.get("skip"));
+                    // console.log("limit+skip=", Session.get("limit")+Session.get("skip"));
                 }
 
 
@@ -170,7 +169,7 @@ Template.userRecipes.helpers({
         }
     },
     getUserProfile: () => {
-        console.log(Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0]);
+        // console.log(Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0]);
         return Meteor.users.find({ username: Session.get('userProfileName') }).fetch()[0];
     },
     getCategoryLink: (categoryName) => {
@@ -230,7 +229,7 @@ Template.userRecipes.events({
             }
             Session.set("searchArray", cleanArray);
             $('.wrapper').animate({scrollTop: 0}, 0);
-            console.log(cleanArray);
+            // console.log(cleanArray);
         }
     },
 });

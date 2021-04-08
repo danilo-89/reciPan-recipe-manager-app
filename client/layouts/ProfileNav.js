@@ -30,7 +30,7 @@ Template.ProfileNav.helpers({
         return Session.get("ready");
     },
     getInboxNotice: () => {
-        console.log("check inbox notice");
+        // console.log("check inbox notice");
         return Meteor.user()?.notice?.inbox ?? false;
     },
 });

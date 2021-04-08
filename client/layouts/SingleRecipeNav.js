@@ -41,7 +41,7 @@ Template.SingleRecipeNav.events({
                     $(hrefOfClicked).removeClass("active");
                     void document.getElementById(idTarget).offsetWidth;
                     $(hrefOfClicked).addClass("active");
-                    console.log("slide success");
+                    // console.log("slide success");
                 },
                 error => console.log(error) // doesn't run
             );

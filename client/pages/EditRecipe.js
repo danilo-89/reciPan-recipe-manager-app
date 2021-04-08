@@ -4,7 +4,7 @@ Template.EditRecipe.onCreated(function() {
     Session.set("ready", false);
     const recipeId = FlowRouter.getParam("recipeId");
     this.subscribe("recipesSingle", recipeId);
-    console.log(recipeId);
+    // console.log(recipeId);
 });
 
 Template.EditRecipe.onRendered(function () {
@@ -26,7 +26,7 @@ Template.EditRecipe.helpers({
         return Recipes.find().fetch()[0].owner===Meteor.userId();
     },
     getSingleRecipe: () => {
-        console.log("test");
+        // console.log("test");
         return Recipes.find().fetch()[0];
     },
     getInputCategory: (category) => {
@@ -63,7 +63,7 @@ Template.EditRecipe.events({
             <tr>
             <td></td>
             <td><input type="text"  name="" class="input-create inputIngridient" required></td>
-            <td><input type="text" name="" class="input-create inputIngridientAmount" required></td>
+            <td><input type="text" name="" class="input-create inputIngridientAmount"></td>
             <td class="delete-row">&#10006;</td>
             </tr>
             `);
@@ -76,7 +76,7 @@ Template.EditRecipe.events({
     },
     "click .cr-clear-image-btn"(e) {
         $( e.target ).parent().html("");
-        console.log($( e.target ).parent())
+        // console.log($( e.target ).parent())
     },
     "click .tx-div-before"(e) {
         $( e.target ).next(".input-directions").remove();
@@ -91,7 +91,7 @@ Template.EditRecipe.events({
         if (+($( "#inputPrepTimeMins" ).val()) || "") {
             mins = " " + $( "#inputPrepTimeMins" ).val() + " min";
         }
-        console.log(hours + mins);
+        // console.log(hours + mins);
 
     },
     'submit'(event) {
@@ -106,6 +106,7 @@ Template.EditRecipe.events({
         const checkNegative = value => typeof value === 'number' && value === value && value <  0;
         const checkMinMax = (value, min, max) => typeof value === 'number' && value === value && value >= min && value <= max;
         const checkStringLength = (str, min, max) => typeof str === 'string' && str.length >= min && str.length <= max;
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
         const regexSanitiser = /<script(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/script>/gi;
         const sanitiseString = value => value.replace(regexSanitiser, ' ');
 
@@ -207,10 +208,10 @@ Template.EditRecipe.events({
         const ingridientsAmountAll = $(".inputIngridientAmount");
         $(inputIngridientNames).each(function(index, element){
             // push all ingridients with their amount into the array
-            if ( checkStringAndNotEmpty( element ) && checkStringAndNotEmpty( $(ingridientsAmountAll).eq(index).val()) && checkStringLength(element, 2, 30) && checkStringLength($(ingridientsAmountAll).eq(index).val(), 2, 30) ) {
+            if ( checkStringAndNotEmpty( element ) && checkStringLength(element, 2, 30) && checkStringMaxLength($(ingridientsAmountAll).eq(index).val(), 30) ) {
                 ingridients.push([element, $(ingridientsAmountAll).eq(index).val()]);
             } else {
-                Bert.alert('Ingridient names and quantity must not be empty and must be between 2 and 30 characters!', 'danger');
+                Bert.alert('Ingridient names and quantity must not be empty and must be between 2 and 30 characters! Check Ingridient NO. ' + (+index + 1), 'danger');
                 throw new Meteor.Error("error-ingridient", "Ingridient must have value");
             }
         });
@@ -224,7 +225,7 @@ Template.EditRecipe.events({
             throw new Meteor.Error("error-ingridient", "No more than 25 ingridients allowed!");
         }
 
-        console.log(ingridients);
+        // console.log(ingridients);
 
         // GET RECIPE IMAGES
         const images = [];

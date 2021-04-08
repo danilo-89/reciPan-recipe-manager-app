@@ -28,7 +28,7 @@ Template.Footer.helpers({
         return Session.get("ready");
     },
     getNotice: () => {
-        console.log('check notice');
+        // console.log('check notice');
         const noticeObj = Meteor.user().notice;
         for (const property in noticeObj) {
             if(noticeObj[property]) {

@@ -3,7 +3,7 @@
     {{#modalBlock title=title}}
         <div class="modal-body">
             {{#if currentUser}}
-            <p class="p-share-text mb10">Show Awesome pie recipe to your friends on reciPan app</p>
+            <p class="p-share-text mb10">Show <span class="f-bold">{{this.recipeName}}</span> recipe to your friends on reciPan app</p>
             {{#if Template.subscriptionsReady}}
             <div class="xy-center-flex mb20 user-send-input-holder" id="userSendInputHolder">
                 <input class="customInput share-in-app-input w-100" id="friendUsernameInput" list="friendUsernameInputs" placeholder="your friend's user name" autocomplete="off">

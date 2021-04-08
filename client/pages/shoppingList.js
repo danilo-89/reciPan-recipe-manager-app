@@ -52,7 +52,7 @@ Template.ShoppingList.helpers({
             return 0;
         }
         result.sort(compareIt);
-        console.log(result);
+        // console.log(result);
         return result;
     },
     getFullShopList: () => {
@@ -67,8 +67,8 @@ Template.ShoppingList.helpers({
             return false;
         }
         result = result.filter(filterIt);
-        console.log(recipeId);
-        console.log({result});
+        // console.log(recipeId);
+        // console.log({result});
         return result;
     },
     getRecipesCount: () => {
@@ -139,7 +139,7 @@ Template.ShoppingList.events({
     
         const hrefOfClicked = $(event.currentTarget).attr("href");
         idTarget = hrefOfClicked.substring(1);
-        console.log(idTarget);
+        // console.log(idTarget);
     
         // Smooth scrolling inside elementusing jQuery easing
         let scrollFunction = function(idstring) {
@@ -190,7 +190,7 @@ Template.ShoppingList.events({
 
     "click #confirmModalsBtn"(event) {
         const getThisData = Session.get('confirmModal');
-        console.log(getThisData);
+        // console.log(getThisData);
         if (getThisData[0] === 'Delete item') {
             const getSLData = ShopLists.findOne({}, {fields: {counter: 1, entries: 1}});
 
@@ -292,7 +292,7 @@ Template.ShoppingList.events({
     "click .multi-task-item, click .multi-task-item-btn"(event) {
         event.preventDefault();
         const multiplier = Math.abs(+$( event.currentTarget ).parent().find($(".increase-multi-input")).val());
-        console.log(multiplier);
+        // console.log(multiplier);
         Meteor.call('change.multi.ingridient', this.name, this.recipe, multiplier);
         clearModals();
     },
@@ -300,19 +300,19 @@ Template.ShoppingList.events({
         FlowRouter.go(`/single-recipe/${this.recId}`);
     },
     "click #switchBtn"() {
-        console.log(this);
+        // console.log(this);
         if (Session.get('getShoplistMode')===true){
             setTimeout(() => {
                 Session.set('getShoplistMode', null);
             }, 0)
-            console.log('set null');
+            // console.log('set null');
             clearModals();
             return true;
         } else {
             setTimeout(() => {
                 Session.set('getShoplistMode', true);
             }, 0)
-            console.log('set simple');
+            // console.log('set simple');
             clearModals();
             return true;
         }

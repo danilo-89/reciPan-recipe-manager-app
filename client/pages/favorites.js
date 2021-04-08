@@ -55,7 +55,7 @@ Template.Favorites.onRendered(function () {
 
         if (topPos < (-25)) {
             if (!targetElem.hasClass( "home-header-effect" )) {
-                console.log("set it");
+                // console.log("set it");
                 targetElem.addClass("home-header-effect");
             }
         } else {
@@ -73,7 +73,7 @@ Template.Favorites.onRendered(function () {
                 }
             } 
             
-            console.log("posts curently visible: ", Recipes.find().count());
+            // console.log("posts curently visible: ", Recipes.find().count());
 
 
 
@@ -195,7 +195,7 @@ Template.Favorites.events({
             }
             Session.set("searchArray", cleanArray);
             $('.wrapper').animate({scrollTop: 0}, 0);
-            console.log(cleanArray);
+            // console.log(cleanArray);
         }
     },
 });

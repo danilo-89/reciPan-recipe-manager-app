@@ -88,7 +88,7 @@
                             <tr>
                             <td></td>
                             <td><input type="text" name="" class="input-create inputIngridient" value="{{ this.[0] }}" required placeholder="E.g. olive oil"></td>
-                            <td><input type="text" name="" class="input-create inputIngridientAmount" value="{{ this.[1] }}" required placeholder="E.g. 2 tbsp"></td>
+                            <td><input type="text" name="" class="input-create inputIngridientAmount" value="{{ this.[1] }}" placeholder="E.g. 2 tbsp"></td>
                             {{#if isEqual @index 0}}
                             <td></td>
                             {{else}}
@@ -99,7 +99,7 @@
                             {{ /each }}
                         </tbody>
                         </table>
-                        <p class="mb25 text-right label-input">1 - 25 ingridients, 2 - 30 char. per name/quantity</p>
+                        <p class="mb25 text-right label-input">1 - 25 ingridients, 2 - 30 char. per name</p>
 
                         <button type="button" class="add-ingredient-fields btn-plus-create mt20 mb50">+</button>
 

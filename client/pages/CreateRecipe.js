@@ -31,6 +31,7 @@ Template.CreateRecipe.events({
         const checkNegative = value => typeof value === 'number' && value === value && value <  0;
         const checkMinMax = (value, min, max) => typeof value === 'number' && value === value && value >= min && value <= max;
         const checkStringLength = (str, min, max) => typeof str === 'string' && str.length >= min && str.length <= max;
+        const checkStringMaxLength = (str, max) => typeof str === 'string' && str.length <= max;
         const regexSanitiser = /<script(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/script>/gi;
         const sanitiseString = value => value.replace(regexSanitiser, ' ');
 
@@ -132,10 +133,10 @@ Template.CreateRecipe.events({
         const ingridientsAmountAll = $(".inputIngridientAmount");
         $(inputIngridientNames).each(function(index, element){
             // push all ingridients with their amount into the array
-            if ( checkStringAndNotEmpty( element ) && checkStringAndNotEmpty( $(ingridientsAmountAll).eq(index).val()) && checkStringLength(element, 2, 30) && checkStringLength($(ingridientsAmountAll).eq(index).val(), 2, 30) ) {
+            if ( checkStringAndNotEmpty( element ) && checkStringLength(element, 2, 30) && checkStringMaxLength($(ingridientsAmountAll).eq(index).val(), 30) ) {
                 ingridients.push([element, $(ingridientsAmountAll).eq(index).val()]);
             } else {
-                Bert.alert('Ingridient names and quantity must not be empty and must be between 2 and 30 characters!', 'danger');
+                Bert.alert('Ingridient names and quantity must not be empty and must be between 2 and 30 characters! Check Ingridient NO. ' + (+index + 1), 'danger');
                 throw new Meteor.Error("error-ingridient", "Ingridient must have value");
             }
         });
@@ -149,7 +150,7 @@ Template.CreateRecipe.events({
             throw new Meteor.Error("error-ingridient", "No more than 25 ingridients allowed!");
         }
 
-        console.log(ingridients);
+        // console.log(ingridients);
 
         // GET RECIPE IMAGES
         const images = [];
@@ -178,7 +179,7 @@ Template.CreateRecipe.events({
             }
         });
 
-        console.log("posting successful")
+        // console.log("posting successful")
         // Clear form
         // target.text.value = '';
     },
@@ -198,7 +199,7 @@ Template.CreateRecipe.events({
         <tr class="added-field">
         <td></td>
         <td><input type="text"  name="" class="input-create inputIngridient" required></td>
-        <td><input type="text" name="" class="input-create inputIngridientAmount" required></td>
+        <td><input type="text" name="" class="input-create inputIngridientAmount"></td>
         <td class="delete-row">&#10006;</td>
         </tr>
         `);
@@ -211,7 +212,6 @@ Template.CreateRecipe.events({
     },
     "click .cr-clear-image-btn"(e) {
         $( e.target ).parent().html("");
-        console.log($( e.target ).parent())
     },
     "click .tx-div-before"(e) {
         $( e.target ).next(".input-directions").remove();

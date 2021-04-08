@@ -69,7 +69,7 @@ Template.profile.helpers({
         return Meteor.user().notice.inbox;
     },
     getFriendNotice: () => {
-        console.log("check friend notice");
+        // console.log("check friend notice");
         return (Meteor.user()?.notice?.friendAccept) || (Meteor.user()?.notice?.friendRequest);
     },
     getRecipes: () => {

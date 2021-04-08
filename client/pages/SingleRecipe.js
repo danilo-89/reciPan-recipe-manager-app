@@ -12,8 +12,7 @@ Template.SingleRecipe.onCreated(function() {
         this.subscribe("users.user");
         // this.subscribe('shopListPersonal');
         Session.set('recipeId', recipeId);
-        console.log(recipeId);
-        
+        // console.log(recipeId);
     })
     
 });
@@ -22,7 +21,7 @@ Template.SingleRecipe.onCreated(function() {
 Template.SingleRecipe.onRendered(function () {
     clearModals();
     this.autorun(() => {
-        
+        // console.log("ok");
         const ready = this.subscriptionsReady();
 
         if(ready) {
@@ -49,7 +48,7 @@ Template.SingleRecipe.onRendered(function () {
                 });
                 // mySwiper.init();
                 const mySwiper1 = document.querySelector(".swiper-container").swiper;
-                console.log("swiper", mySwiper);
+                // console.log("swiper", mySwiper);
 
                 const a = Recipes.find().fetch()[0].starRatingByUser;
                 if (jQuery.isEmptyObject(a)) {
@@ -74,11 +73,11 @@ Template.SingleRecipe.onRendered(function () {
 
                 const checkIfStar = Recipes.findOne({["starRatingByUser." + myId]: {$exists: true}});
                 if (checkIfStar) {
-                  console.log("true it");
+                //   console.log("true it");
                   const getMyStarRating = Recipes.find().fetch()[0].starRatingByUser[myId];
                   setDOMStar(getMyStarRating);
                 } else {
-                  console.log("false it");
+                //   console.log("false it");
                 }
                 // const checkIfFav = Meteor.users.findOne({["starRatingByUser." + myId]: {$exists: true}});
                 
@@ -131,7 +130,7 @@ Template.SingleRecipe.helpers({
         return Session.get('avgStar');
     },
     checkStar: (a, b) => {
-        console.log(a, b);
+        // console.log(a, b);
         if (a===b) {
             return "active";
         } else {
@@ -171,7 +170,7 @@ Template.modalShareRecipe.onCreated(function () {
 
 Template.modalShareRecipe.helpers({
     getFriends: () => {
-        console.log("inside");
+        // console.log("inside");
         return Meteor.user().public?.friends?.active;
     },
     getFriendsNames: (friendId) => {
@@ -182,7 +181,7 @@ Template.modalShareRecipe.helpers({
 Template.SingleRecipe.events({
     "click .edit-recipe-btn"() {
         // console.log(this._id);
-        console.log("edit");
+        // console.log("edit");
         FlowRouter.go(`/edit-recipe/${this._id}`);
     },
     "click .userNameLink"(event) {
@@ -195,7 +194,7 @@ Template.SingleRecipe.events({
     },
     "click .single-recipe-fav"() {
         // console.log(this._id);
-        console.log("favorite");
+        // console.log("favorite");
 
         if (Session.get('checkItFav')) {
             Meteor.call('remove.from.favorites', Session.get('recipeId'), (err, res) => {
