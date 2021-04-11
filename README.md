@@ -4,7 +4,7 @@
 
 ### See it live [reciPan app](https://recipan.herokuapp.com/)
 -------------
-Notice! First start delay is about 20 seconds because of Heroku hosting cold start on the free packet, sorry.
+Notice! First start delay is about 20 seconds because of Heroku hosting cold start on the free packet.
 
 ### About
 -------------
