@@ -8,7 +8,7 @@ Notice! First start delay is about 20 seconds because of Heroku hosting cold sta
 
 ### About
 -------------
-- built with Meteor, using Blaze linrary on the front end
+- built with Meteor, using Blaze library on the front end
 - recipes creation (private or public) and editing
 - view recipes created by other users
 - search recipes by category, name and ingridients
